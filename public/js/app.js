@@ -6,9 +6,9 @@ $(document).ready(function() {
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 60, // Creates a dropdown of 15 years to control year,
     today: 'Today',
+    format: 'yyyy-mm-dd',
     clear: 'Clear',
-    close: 'Ok',
-    // closeOnSelect: false // Close upon selecting a date,
+    // close: 'Ok',
   });
 });
 

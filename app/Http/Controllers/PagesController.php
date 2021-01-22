@@ -11,6 +11,16 @@ class PagesController extends Controller
   	return view('pages.index');
   }
 
+  public function profile()
+  {
+    return view('pages.profile');
+  }
+
+  public function settings()
+  {
+    return view('pages.settings');
+  }
+
   public function rent()
   {
 
