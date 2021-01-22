@@ -27,3 +27,16 @@ $(document).ready(function(){
     minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
   });
 });
+
+function logout() {
+  swal({
+    title: "Are you sure ?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then((willLogout) => {
+    if (willLogout) {
+      $('#logout-form').submit();
+    }/* if user clicks delete */
+  });
+}

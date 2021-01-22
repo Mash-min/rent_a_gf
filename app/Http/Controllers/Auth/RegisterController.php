@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class RegisterController extends Controller
@@ -33,14 +35,21 @@ class RegisterController extends Controller
     return redirect()->route('index');
   }
 
-  public function update(Request $request)
+  public function update(UserUpdateValidation $request)
   {
     $user = User::find(auth()->user()->id);
-    $user->update($request->except('image') + [
-      'image' => 'no-image.jpg'
-    ]);
-
+    $user->update($request->all());
     return redirect()->route('profile');
+  }
+
+  public function updateImage(Request $request)
+  {
+    $image = $request->image;
+    $imageName = "profile".time()."_".auth()->user()->username.$image->getClientOriginalName();
+    Storage::delete('public/images/profiles/'.auth()->user()->image);
+    $path = $image->storeAs('public/images/profiles/', $imageName);
+    auth()->user()->update(['image' => $imageName]);
+    return response()->json($imageName);
   }
 
 }

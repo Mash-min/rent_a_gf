@@ -21,9 +21,14 @@ class PagesController extends Controller
     return view('pages.settings');
   }
 
+  public function girlfriend()
+  {
+    return view('pages.girlfriend');
+  }
+
   public function rent()
   {
-
+    
   }
 
   public function tags()

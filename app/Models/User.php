@@ -21,13 +21,15 @@ class User extends Authenticatable
         'lastname',
         'contact',
         'image',
+        'bio',
         'birthdate',
         'email',
         'password',
     ];
 
     protected $attributes = [
-      'image' => 'no-image.jpg'
+      'image' => 'no-image.jpg',
+      'bio' => 'not set'
     ];
 
     /**

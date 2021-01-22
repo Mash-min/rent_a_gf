@@ -12,17 +12,17 @@
 <div class="row body-components-container">
   <div class="col l4 m5 s10 offset-s1">
     <div class="profile-image-container">
-      <img src="images/avatar.jpg">
-      <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light">
-        <i class="fa fa-camera"></i>
-      </button>
+      @if(auth()->user()->image == 'no-image.jpg')
+        <img src="images/avatar.jpg" class="profile-image">
+      @else
+        <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+      @endif
+      <a href="{{ route('settings') }}" class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light">
+        <i class="fa fa-gear"></i>
+      </a>
     </div>
     <hr>
-    <p class="profile-bio">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    </p>
+    <p class="profile-bio">{{ auth()->user()->bio }}</p>
   </div>
   <div class="col l8 m7 s12">
     <ul class="collection with-header">

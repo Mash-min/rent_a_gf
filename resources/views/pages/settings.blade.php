@@ -12,7 +12,11 @@
 <div class="row body-components-container">
   <div class="col l4 m5 s10 offset-s1">
     <div class="profile-image-container">
-      <img src="images/avatar.jpg">
+      @if(auth()->user()->image == 'no-image.jpg')
+        <img src="images/avatar.jpg" class="profile-image">
+      @else
+        <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+      @endif
       <a class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger"  href="#edit-profile-image-modal">
         <i class="fa fa-camera"></i>
       </a>
@@ -20,17 +24,21 @@
   </div>
 
   <div id="edit-profile-image-modal" class="modal modal-fixed-footer">
-    <form>
+    <form id="updateImageForm">
       {{ @csrf_field() }}
       <div class="modal-content">
         <h4 class="center">Change profile image</h4>
         <div class="edit-image-container center">
-          <img src="images/avatar.jpg">
+          @if(auth()->user()->image == 'no-image.jpg')
+            <img src="images/avatar.jpg" class="profile-image">
+          @else
+            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+          @endif
         </div>
         <div class="file-field input-field">
           <div class="btn btn-flat waves-effect waves-light blue lighten-1 white-text">
             <span>Image</span>
-            <input type="file">
+            <input type="file" name="image">
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
@@ -38,9 +46,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-light btn-flat green white-text save-changes">
+        <button class="waves-effect waves-light btn-flat green white-text save-changes">
           Save changes
-        </a>
+        </button>
       </div>  
     </form>
   </div>
@@ -53,18 +61,33 @@
           <h4>Settings</h4>
         </li>
         <li class="collection-item">
+          @error('firstname')
+          <div class="chip red darken-1 white-text">
+            {{ $message }}
+          </div>
+          @enderror
           <div class="input-field">
             <label>Firstname</label>
             <input type="text" name="firstname" value="{{ auth()->user()->firstname }}">
           </div>
         </li>
         <li class="collection-item">
+          @error('lastname')
+          <div class="chip red darken-1 white-text">
+            {{ $message }}
+          </div>
+          @enderror
           <div class="input-field">
             <label>Lastname</label>
             <input type="text" name="lastname" value="{{ auth()->user()->lastname }}">
           </div>
         </li>
         <li class="collection-item">
+          @error('email')
+          <div class="chip red darken-1 white-text">
+            {{ $message }}
+          </div>
+          @enderror
           <div class="input-field">
             <label>Email</label>
             <input type="email" name="email"  value="{{ auth()->user()->email }}">
@@ -72,12 +95,16 @@
         </li>
         <li class="collection-item">
           <div class="input-field">
-            <textarea id="bio" class="materialize-textarea" name="bio">rem Ipsum ay ginagamit na modelo ng industriya ng pagpriprint at pagtytypeset. Ang Lorem Ipsum ang naging regular na modelo simula pa noong 1500s, noong may isang di kilalang manlilimbag and kumuha ng galley ng type at ginulo ang pagkaka-ayos nito upang
-            </textarea>
+            <textarea id="bio" class="materialize-textarea" name="bio">{{ auth()->user()->bio }}</textarea>
             <label for="bio">Bio</label>
           </div>
         </li>
         <li class="collection-item">
+          @error('contact')
+          <div class="chip red darken-1 white-text">
+            {{ $message }}
+          </div>
+          @enderror
           <div class="input-field">
             <label>Contact</label>
             <input type="number" name="contact" value="{{ auth()->user()->contact }}">
@@ -86,7 +113,7 @@
         <li class="collection-item">
           <div class="input-field">
             <label>Birthdate</label>
-            <input type="text" class="datepicker" value="{{ auth()->user()->birthdate }}">
+            <input type="text" class="datepicker" value="{{ auth()->user()->birthdate }}" name="birthdate">
           </div>
         </li>
         <li>
@@ -98,4 +125,8 @@
     </form>
   </div>
 </div><!-- body-components-container -->
+@endsection
+
+@section('scripts')
+  <script type="text/javascript" src="{{ asset('js/updateImage.js') }}"></script>
 @endsection

@@ -32,8 +32,8 @@
             <ul>
               <li><a href="{{ route('profile') }}">Profile <i class="fa fa-user black-text"></i></a></li>
               <li><a href="{{ route('settings') }}">Settings<i class="fa fa-gear black-text"></i></a></li>
-              <li><a href="helpers.html">My girlfriend <i class="fa fa-heart black-text"></i></a></li>
-              <li><a onclick="logout()">Logout <i class="fa fa-sign-out"></i></a></li>
+              <li><a href="{{ route('girlfriend') }}">My girlfriend <i class="fa fa-heart black-text"></i></a></li>
+              <li><a href="#!" onclick="logout()">Logout <i class="fa fa-sign-out"></i></a></li>
               <form id="logout-form" action="{{ route('logout-user') }}" method="POST" style="display: none;">
                 @csrf
               </form>
@@ -50,6 +50,9 @@
               <li><a href="{{ route('rent') }}">Rent <i class="fa fa-heart black-text"></i></a></li>
               <li><a href="{{ route('tags') }}">Tags <i class="fa fa-list black-text"></i></a></li>
               <li><a href="{{ route('search') }}">Search Girlfriend <i class="fa fa-search black-text"></i></a></li>
+              @auth
+              <li><a href="/">Apply as a girlfriend <i class="fa fa-sign-in"></i></a></li>
+              @endauth
             </ul>
           </div>
         </li>
@@ -62,7 +65,6 @@
             <ul>
               <li><a href="{{ route('register') }}">Register <i class="fa fa-sign-in"></i></a></li>
               <li><a href="{{ route('login') }}">Login <i class="fa fa-sign-in"></i></a></li>
-              <li><a href="/">Apply as girlfriend <i class="fa fa-sign-in"></i></a></li>
             </ul>
           </div>
         </li>
@@ -79,18 +81,5 @@
 	<script src="/js/materialize.min.js"></script>
   <script src="/js/sweetalert.min.js"></script>
 	<script src="/js/app.js"></script>
-  <script type="text/javascript">
-    function logout() {
-      swal({
-        title: "Are you sure ?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-      }).then((willLogout) => {
-        if (willLogout) {
-          $('#logout-form').submit();
-        }/* if user clicks delete */
-      });
-    }
-  </script>
+  @yield('scripts')
 </html>

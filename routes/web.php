@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -11,8 +11,9 @@ Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/rent', [PagesController::class, 'rent'])->name('rent');
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
-Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
-Route::get('/settings', [PagesController::class, 'settings'])->name('settings');
+Route::get('/profile', [PagesController::class, 'profile'])->name('profile')->middleware('auth');
+Route::get('/settings', [PagesController::class, 'settings'])->name('settings')->middleware('auth');
+Route::get('/girlfriend', [PagesController::class, 'girlfriend'])->name('girlfriend')->middleware('auth');
 
 Route::prefix('/user')->group(function() {
 	Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -22,5 +23,6 @@ Route::prefix('/user')->group(function() {
 	Route::post('/login', [LoginController::class, 'create'])->name('login-user');
 	Route::post('/logout', [LogoutController::class, 'create'])->name('logout-user');
 
-	Route::post('/update', [RegisterController::class, 'update'])->name('update-user');
+	Route::post('/update', [RegisterController::class, 'update'])->name('update-user')->middleware('auth');
+	Route::post('/update/image', [RegisterController::class, 'updateImage'])->middleware('auth');
 });
