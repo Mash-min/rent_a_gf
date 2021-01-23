@@ -29,7 +29,7 @@
       <li class="collection-header">
         <h4 class="profile-header">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</h4>
       </li>
-      <li class="collection-item">Address <br> <b>San Jose del Monte Bulcan</b></li>
+      <li class="collection-item">Address <br> <b>{{ auth()->user()->address }}</b></li>
       <li class="collection-item">Age <br> <b>22 Years Old</b></li>
       <li class="collection-item">Email <br> <b>{{ auth()->user()->email }}</b></li>
       <li class="collection-item">Contact <br> <b>#{{ auth()->user()->contact }}</b></li>

@@ -34,6 +34,10 @@
               <label for="email">Email</label>
             </div>
             <div class="input-field col s12">
+            <input type="text" class="validate" name="address">
+              <label for="address">Address</label>
+            </div>
+            <div class="input-field col s12">
             <input type="text" class="datepicker" name="birthdate">
               <label for="birthdate">Birthdate</label>
             </div>

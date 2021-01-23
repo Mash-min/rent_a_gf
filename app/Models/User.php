@@ -20,6 +20,7 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'contact',
+        'address',
         'image',
         'bio',
         'birthdate',
@@ -29,7 +30,8 @@ class User extends Authenticatable
 
     protected $attributes = [
       'image' => 'no-image.jpg',
-      'bio' => 'not set'
+      'bio' => ' ~ ',
+      'role' => 'user'
     ];
 
     /**

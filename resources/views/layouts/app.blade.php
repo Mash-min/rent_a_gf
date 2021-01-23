@@ -24,6 +24,11 @@
       		 <a href="{{ route('index') }}"><i class="fa fa-home fa-3"></i> Home</a>
       	</li>
       	@auth
+          @if(auth()->user()->role == 'admin')
+            <li>
+               <a href="{{ route('dashboard') }}"><i class="fa fa-list fa-3"></i> Dashboard</a>
+            </li>
+          @endif
       	<li class="bold">
       		<a class="collapsible-header waves-effect waves-teal">
       		  <i class="fa fa-sort-desc"></i>Account

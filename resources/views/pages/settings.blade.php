@@ -100,6 +100,17 @@
           </div>
         </li>
         <li class="collection-item">
+          @error('address')
+          <div class="chip red darken-1 white-text">
+            {{ $message }}
+          </div>
+          @enderror
+          <div class="input-field">
+            <label>Address</label>
+            <input type="text" name="address" value="{{ auth()->user()->address }}">
+          </div>
+        </li>
+        <li class="collection-item">
           @error('contact')
           <div class="chip red darken-1 white-text">
             {{ $message }}
