@@ -44,7 +44,7 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="{{ route('addgirlfriend') }}">Add Girlfriend <i class="fa fa-plus black-text"></i></a></li>
-                <li><a href="helpers.html">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="{{route('girlfriendlist')}}">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
                 <li><a href="grid.html">Girlfriend Requests <i class="fa fa-list black-text"></i></a></li>
               </ul>
             </div>

@@ -36,7 +36,7 @@ class User extends Authenticatable
 
     public function girlfriend()
     {
-      return $this->hasOne('App\Models\Girlfriend'); 
+      return $this->hasOne('App\Models\Girlfriend', 'user_id'); 
     }
 
     /**

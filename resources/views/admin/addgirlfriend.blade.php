@@ -20,9 +20,11 @@
           <textarea id="description" class="materialize-textarea" name="description"></textarea>
         </div>  
         <div class="input-field col s12">
-          <input type="text" id="girlfriend" class="autocomplete" name="user_id">
-          <!-- <input type="hidden" name="user_id"> -->
-          <label for="girlfriend">Choose User</label>
+          <input type="text" id="girlfriend">
+          <input type="hidden" name="user_id" id="user_id" value="">
+          <label for="girlfriend"><i class="fa fa-search"></i> Please search a User</label>
+        </div>
+        <div class="collection" id="user-results">
         </div>
         <div class="input-field col s12">
           <label class="active">Tags</label>

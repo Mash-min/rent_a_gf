@@ -12,7 +12,9 @@ class GirlfriendController extends Controller
   {
   	$user = User::find($request->user_id);
   	$girlfriend = $user->girlfriend()->create($request->all());
-  	return response()->json($girlfriend);
+  	return response()->json([
+      'girlfriend' => $girlfriend
+    ]);
   }
 
   public function acceptRequest($id)

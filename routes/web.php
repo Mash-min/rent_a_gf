@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\GirlfriendController;
+use App\Http\Controllers\TagsController;
 
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
@@ -33,6 +34,12 @@ Route::prefix('/admin')->group(function() {
 	Route::get('/dashboard', [AdminPagesController::class, 'dashboard'])->name('dashboard');
 	Route::get('/accountlist', [AdminPagesController::class, 'accountlist'])->name('accountlist');
 	Route::get('/addgirlfriend', [AdminPagesController::class, 'addgirlfriend'])->name('addgirlfriend');
+	Route::get('/girlfriendlist', [AdminPagesController::class, 'girlfriendlist'])->name('girlfriendlist');
+	Route::get('/girlfriendlist/json', [AdminPagesController::class, 'girlfriendlistJSON']);
+	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseuser']);
 
 	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
+	Route::post('/girlfriend/accept?id={id}', [GirlfriendController::class, 'acceptRequest']);
+	Route::post('/girlfriend/decline?id={id}', [GirlfriendController::class, 'declineRequest']);
+	Route::post('/girlfriend/create/tag', [TagsController::class, 'create']);
 });
