@@ -17,6 +17,11 @@
           {{ @csrf_field() }}
           <h4 class="header-font">Login</h4>
           <div class="row">
+            @if(session('status'))
+              <div class="chip red darken-1 white-text">
+                {{ session('status') }}
+              </div>
+            @endif
             <div class="input-field col s12">
               <i class="fa fa-envelope prefix"></i>
               <input id="email" type="email" class="validate" name="email">
@@ -34,8 +39,8 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text">
-            Submit
+          <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" style="width:100%">
+            Login
           </button>
         </div> 
       </form>

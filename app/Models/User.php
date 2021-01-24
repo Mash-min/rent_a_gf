@@ -34,6 +34,11 @@ class User extends Authenticatable
       'role' => 'user'
     ];
 
+    public function girlfriend()
+    {
+      return $this->hasOne('App\Models\Girlfriend'); 
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -72,6 +72,5 @@
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.min.js"></script>
   <script src="/js/sweetalert.min.js"></script>
-  <script src="/js/admin.js"></script>
   @yield('scripts')
 </html>

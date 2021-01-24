@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminPagesController;
+use App\Http\Controllers\GirlfriendController;
 
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
@@ -32,4 +33,6 @@ Route::prefix('/admin')->group(function() {
 	Route::get('/dashboard', [AdminPagesController::class, 'dashboard'])->name('dashboard');
 	Route::get('/accountlist', [AdminPagesController::class, 'accountlist'])->name('accountlist');
 	Route::get('/addgirlfriend', [AdminPagesController::class, 'addgirlfriend'])->name('addgirlfriend');
+
+	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
 });

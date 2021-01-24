@@ -10,13 +10,3 @@ function logout() {
     }/* if user clicks delete */
   });
 }
-$('.chips').material_chip();
-$('input.autocomplete').autocomplete({
-  data: {
-    
-  },
-  limit: 20,
-  onAutocomplete: function(val) {
-  },
-  minLength: 1,
-});
