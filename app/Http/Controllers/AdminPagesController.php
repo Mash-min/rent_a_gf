@@ -33,13 +33,15 @@ class AdminPagesController extends Controller
 
 	public function girlfriendlistJSON()
 	{
-		$girlfriends = Girlfriend::orderBy('created_at','DESC')->with('user')->get();
+		$girlfriends = Girlfriend::orderBy('username','DESC')
+															->with('user')
+															->paginate(10);
 		return response()->json([
 			'girlfriends' => $girlfriends
 		]);
 	}
 
-	public function chooseuser($user)
+	public function chooseUser($user)
   {
     $user = User::where('firstname', 'like', '%'.$user.'%')
     							->orWhere('lastname', 'like', '%'.$user.'%')
@@ -48,6 +50,16 @@ class AdminPagesController extends Controller
     return response()->json([
       'user' => $user
     ]);
+  }
+
+  public function searchGirlfriend($girlfriend)
+  {
+  	$girlfriend = Girlfriend::where('username', 'like', '%'.$girlfriend.'%')
+  								->with('user')
+    							->paginate(20);
+  	return response()->json([
+  		'girlfriends' => $girlfriend
+  	]);
   }
 
 }

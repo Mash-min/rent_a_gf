@@ -1,32 +1,51 @@
 @extends('layouts.admin')
 
 @section('content')
-<style type="text/css">
-  body {
-    background-color: white;
-  }
-</style>
-<div class="table-container">
-  <table id="table_id" class="display">
+<div class="table-container dashboard-card-table">
+  <h4 style="margin-left:10px;">Girlfriend List</h4>
+  <!-- <div class="input-field">
+    <label for="girlfriend"><i class="fa fa-search"></i> Search username</label>
+    <input type="text" name="search" id="search-gf-input">
+  </div>
+  <table class="bordered striped centered highlight responsive-table hidden" id="searched-table">
     <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Username</th>
-          <th>Status</th>
-        </tr>
+      <tr>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Rate</th>
+        <th>Options</th>
+      </tr>
     </thead>
-    <tbody>
-      
+    <tbody id="searched-girlfriend-tb">
     </tbody>
-  </table>  
+  </table> -->
+  <table class="bordered striped centered highlight responsive-table" id="girlfriend-list-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Rate</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody id="girlfriend-tb">
+    </tbody>
+  </table>
+  <div class="view-more-btn-container">
+    <button class="btn btn-flat waves-effect waves-light blue lighten-1 white-text" id="view-more-gf-btn">
+      View more
+    </button>
+  </div>
 </div>
 @endsection
 
 @section('scripts')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script src="/js/admin/girlfriend.js"></script>
 <script src="/js/admin/girlfriendlist.js"></script>
 @endsection

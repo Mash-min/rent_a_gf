@@ -85,6 +85,9 @@ nav {
 .form-container {
 	margin-top: 50px;
 }
+.hidden {
+	display: none;
+}
 ::-webkit-scrollbar {
   width: 13px;
 }

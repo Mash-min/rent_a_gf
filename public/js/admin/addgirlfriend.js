@@ -55,7 +55,7 @@ $(document).ready(function() {
 })
 
 $(document).ready(function(){
-
+	/*============== GET request for USER LIST ===============*/
 	$('#girlfriend').on('input', function() {
 		let searchUser = $(this).val();
 		$.ajax({
@@ -79,6 +79,7 @@ $(document).ready(function(){
 			console.log(err)
 		})
 	});
+	/*============== GET request for USER LIST ===============*/
 });
 
 function setUserId(id, fullname) {
