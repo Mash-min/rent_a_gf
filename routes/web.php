@@ -38,6 +38,7 @@ Route::prefix('/admin')->group(function() {
 	Route::get('/girlfriendlist/json', [AdminPagesController::class, 'girlfriendlistJSON']);
 	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseUser']);
 	Route::get('/search/{girlfriend}', [AdminPagesController::class, 'searchgirlfriend']);
+	Route::get('/girlfriend/find/{id}', [AdminPagesController::class, 'findGirlfriend']);
 
 	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
 	Route::post('/girlfriend/accept?id={id}', [GirlfriendController::class, 'acceptRequest']);

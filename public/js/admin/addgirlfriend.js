@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 $(document).ready(function(){
 	/*============== GET request for USER LIST ===============*/
-	$('#girlfriend').on('input', function() {
+	$('#girlfriend').on('keyup', function() {
 		let searchUser = $(this).val();
 		$.ajax({
 			type:'GET',

@@ -1,4 +1,5 @@
 const url = location.protocol +'//'+location.host;
+$('.modal').modal();
 
 $(document).ready(function() {
   let pageNumber = 1;
@@ -14,7 +15,7 @@ $(document).ready(function() {
     }).done(res => {
       swal.close();
       pageNumber = pageNumber + 1;
-      // console.log(res)
+      console.log(res)
       for(var x in res.girlfriends.data) {
         let girlfriend1 = new Girlfriend(
           res.girlfriends.data[x].id,
@@ -73,38 +74,39 @@ $(document).ready(function() {
   })
   // ===================== GET request for VIEW MORE ======================
 
-  // $('#search-gf-input').on('input', function() {
-  //   let searchedGirlfriend = $('#search-gf-input').val();
-  //   $.ajax({
-  //     type:'GET',
-  //     url:`${url}/admin/search/${searchedGirlfriend}`
-  //   }).done(res => {
-  //     $('#girlfriend-list-table').hide()
-  //     if (res.girlfriends.data.length == 0) {
-  //       Materialize.toast("Username not found",2000);
-  //       $('#searched-table').hide()
-  //       $('#girlfriend-list-table').show()
-  //     }
-  //     $('#searched-table').removeClass('hidden');
-  //     $('.searched-girlfriend-table-row').remove()
-  //     // console.log(res.girlfriends.data)
-  //     for(var x in res.girlfriends.data) {
-  //       let girlfriend3 = new Girlfriend(
-  //         res.girlfriends.data[x].id,
-  //         res.girlfriends.data[x].user.firstname, 
-  //         res.girlfriends.data[x].user.lastname, 
-  //         res.girlfriends.data[x].username, 
-  //         res.girlfriends.data[x].rate, 
-  //         res.girlfriends.data[x].user.email, 
-  //         res.girlfriends.data[x].user.contact, 
-  //         res.girlfriends.data[x].image, 
-  //         res.girlfriends.data[x].status, 
-  //         res.girlfriends.data[x].availability
-  //       )
-  //       $('#searched-girlfriend-tb').append(girlfriend3.searchedGirlfriendTableRow())
-  //     }
-  //   }).fail(err => {
-  //     console.log(err)
-  //   })
-  // });
+  $('#search-girlfriend-form').on('submit', function(e) {
+    e.preventDefault();
+    let searchData = $('#search-gf-input').val()
+    swal("Searching...",{
+      buttons:false,
+      closeOnClickOutside:false,
+      icon:"info"
+    });
+    $.ajax({
+      type:'GET',
+      url:`${url}/admin/search/${searchData}`
+    }).done(res => {
+      swal.close();
+      let girlfriendData = res.girlfriends.data
+      if(girlfriendData.length == 0) { Materialize.toast("No results found..", 2000) }
+      $('.searched-girlfriend-table-row').remove()
+      for(var x in girlfriendData) {
+        let girlfriend2 = new Girlfriend(
+          girlfriendData[x].id,
+          girlfriendData[x].user.firstname, 
+          girlfriendData[x].user.lastname, 
+          girlfriendData[x].username, 
+          girlfriendData[x].rate, 
+          girlfriendData[x].user.email, 
+          girlfriendData[x].user.contact, 
+          girlfriendData[x].image, 
+          girlfriendData[x].status, 
+          girlfriendData[x].availability
+        )
+        $('#searched-girlfriend-list-table').prepend(girlfriend2.searchedGirlfriendTableRow())
+      }
+    }).fail(err => {
+      console.log(err)
+    })
+  })
 });

@@ -20,9 +20,9 @@ class Girlfriend {
         <td>${this.lastname}</td>
         <td>${this.email}</td>
         <td>${this.contact}</td>
-        <td>$${this.rate}.00</td>
+        <td><b>$${this.rate}.00</b></td>
         <td>
-          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text">
+          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
             <i class="fa fa-pencil"></i>
           </button>
           <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
@@ -41,9 +41,9 @@ class Girlfriend {
         <td>${this.lastname}</td>
         <td>${this.email}</td>
         <td>${this.contact}</td>
-        <td>$${this.rate}.00</td>
+        <td><b>$${this.rate}.00</b></td>
         <td>
-          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text">
+          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
             <i class="fa fa-pencil"></i>
           </button>
           <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
@@ -54,4 +54,44 @@ class Girlfriend {
     `
   }
 
+}
+
+class Pagination {
+  constructor(active, label, url) {
+    this.active = (active == true) ? "disabled" : "active";
+    this.label = label;
+    this.url = url;
+  }
+
+  paginationLinks() {
+    return `
+      <li class="waves-effect ${this.active}"><a href="#!">${this.label}</a></li>
+    `;
+  }
+}
+
+function findGirlfriendData(id) {
+  $.ajax({
+    type:'GET',
+    url:`${url}/admin/girlfriend/find/${id}`
+  }).done(res => {
+    console.log(res);
+    $('#username').val(res.girlfriend.username);
+    $('#rate').val(res.girlfriend.rate);
+    $('#description').val(res.girlfriend.description);
+    $('#username').val(res.girlfriend.username);
+    $('#girlfriend').val(res.user.firstname + " "+ res.user.lastname);
+    $('#user_id').val(res.user.id);
+    var tagsArray = [];
+    for(var x in res.tags) {
+      tagsArray.push({
+        tag:res.tags[x].tag
+      });
+    }
+    $('.tag-chips').material_chip({
+      data:tagsArray
+    });
+  }).fail(err => {  
+    console.log(err)
+  })
 }

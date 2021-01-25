@@ -4,7 +4,6 @@ body p{
 .body-container {
   margin-left: 300px;	
 }
-
 .body-components-container {
 	padding: 10px 35px 10px 35px;
 }
@@ -87,6 +86,12 @@ nav {
 }
 .hidden {
 	display: none;
+}
+.tabs .tab a:hover {
+  color: #656565;
+}
+.tabs .tab a, .tabs .tab a.active {
+	color: #000
 }
 ::-webkit-scrollbar {
   width: 13px;

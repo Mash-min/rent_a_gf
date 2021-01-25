@@ -30,7 +30,7 @@
     <div class="card dashboard-card">
       <div class="card-content row">
         <div class="col s6 user-count">
-          <span>100</span> <br>Girlfriends
+          <span>{{ $girlfriends->count() }}</span> <br>Girlfriends
         </div>
         <div class="col s6">
           <i class="fa fa-female fa-3x"></i>

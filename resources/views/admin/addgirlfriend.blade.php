@@ -8,8 +8,8 @@
     	{{ @csrf_field() }}
       <div class="row">
         <div class="input-field col s6">
-          <input id="username" type="text" class="validate" name="username">
-          <label for="username">Username</label>
+          <label for="username" class="active">Username</label>
+          <input id="username" type="text" class="validate" name="username" placeholder="Enter Username">
         </div>
         <div class="input-field col s6">
           <input id="rate" type="number" class="validate" name="rate">
@@ -20,9 +20,9 @@
           <textarea id="description" class="materialize-textarea" name="description"></textarea>
         </div>  
         <div class="input-field col s12">
+          <label class="active" for="girlfriend"><i class="fa fa-search"></i> Please search a User</label>
           <input type="text" id="girlfriend">
           <input type="hidden" name="user_id" id="user_id" value="">
-          <label for="girlfriend"><i class="fa fa-search"></i> Please search a User</label>
         </div>
         <div class="collection" id="user-results">
         </div>
