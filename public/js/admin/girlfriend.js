@@ -54,6 +54,54 @@ class Girlfriend {
     `
   }
 
+  girlfriendRequestRow() {
+    return `
+      <tr class="girlfriend-request-table-row" id="tr-${this.id}">
+        <td>
+          <button class="btn btn-flat blue lighten-1 waves-light waves-effect white-text">
+            <i class="fa fa-eye"></i>
+          </button>
+        </td>
+        <td>${this.firstname}</td>
+        <td>${this.lastname}</td>
+        <td>${this.email}</td>
+        <td>#${this.contact}</td>
+        <td>${this.username}</td>
+        <td>
+          <button class="btn btn-flat green lighten-1 waves-light waves-effect white-text" onclick="acceptRequest('${this.id}')">
+            <i class="fa fa-check"></i>
+          </button>
+          <button class="btn btn-flat red lighten-1 waves-light waves-effect white-text" onclick="declineRequest('${this.id}')">
+            <i class="fa fa-times"></i>
+          </button>
+        </td>
+      </tr>
+    `
+  }
+
+  girlfriendCard() {
+    return `
+      <div class="col l3 s6 searched-card">
+        <div class="card rent-card">
+          <div class="card-content">
+            <div class="rent-image">
+              <img src="/storage/images/profiles/${this.image}">
+            </div>
+            <span class="card-title rent-card-title">
+              ${this.username} <br>
+              <b>$ ${this.rate}.00</b>
+            </span>
+          </div>
+          <div class="card-action">
+            <a href="rent/girlfriend/${this.username}" class="btn btn-flat blue lighten-1 waves-effect waves-light white-text view-rent-btn" target="_blank">
+              view
+            </a>
+          </div>
+        </div>
+      </div> 
+    `
+  }
+
 }
 
 class Pagination {

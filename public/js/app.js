@@ -10,7 +10,7 @@ $(document).ready(function() {
     today: 'Today',
     format: 'yyyy-mm-dd',
     clear: 'Clear',
-    // close: 'Ok',
+    close: 'Ok',
   });
 });
 

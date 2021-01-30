@@ -1,12 +1,3 @@
-tinymce.init({
-  selector:'textarea',
-  height:250,
-  width:'100%',
-  theme:'modern',
-  resize:false,
-  plugins: "link image code fullscreen paste",
-});
-
 $(document).ready(function() {
 	$('.tag-chips').material_chip();
 	$('#add-girlfriend-form').on('submit', function(e) {
@@ -48,7 +39,10 @@ $(document).ready(function() {
 			$('.chip').remove();
 			tinymce.activeEditor.setContent('');
 		}).fail(err => {
-			console.log(err);
+			Materialize.Toast.removeAll();
+			for(var x in err.responseJSON.errors) {
+				Materialize.toast(err.responseJSON.errors[x], 10000 ,'red')
+			}
 		})
 		/*============== post request for girlfriend ===============*/
 	});

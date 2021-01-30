@@ -43,36 +43,14 @@
       <div class="card-content row" style="padding:5px">
         <ul class="collection with-header">
           <li class="collection-header"><h4>Top Girlfriends</h4></li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
-          <li class="collection-item"><b>Alvin Eclair</b>
-            <span class="new badge blue lighten-1" data-badge-caption="rents">
-              400
-            </span>
-          </li>
+          @foreach($topGirlfriends as $topGirlfriend)
+            <li class="collection-item">
+              <b>{{$topGirlfriend->username}}</b> - ({{ $topGirlfriend->user->firstname }} {{ $topGirlfriend->user->lastname }})
+              <span class="new badge blue lighten-1" data-badge-caption="rents">
+                {{ $topGirlfriend->rents->count() }}
+              </span>
+            </li>
+          @endforeach
         </ul>
       </div>
     </div>

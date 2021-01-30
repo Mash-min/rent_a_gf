@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -32,12 +33,22 @@ class RegisterController extends Controller
     	'password' => Hash::make($request->password)
     ]);
     auth()->attempt($request->only('email', 'password'));
-    return redirect()->route('index');
+    return redirect()->route('profile');
   }
 
   public function update(UserUpdateValidation $request)
   {
     $user = User::find(auth()->user()->id);
+    $this->validate($request, [
+      'email' => [
+        'required',
+        Rule::unique('users')->ignore($user->id),
+      ],
+      'contact' => [
+        'required',
+        Rule::unique('users')->ignore($user->id),
+      ]    
+    ]);
     $user->update($request->all());
     return redirect()->route('profile');
   }

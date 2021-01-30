@@ -22,7 +22,9 @@
       </a>
     </div>
     <hr>
-    <p class="profile-bio">{{ auth()->user()->bio }}</p>
+    <p class="profile-bio">
+      <i>"{{ auth()->user()->bio }}"</i>
+    </p>
   </div>
   <div class="col l8 m7 s12">
     <ul class="collection with-header">
@@ -33,6 +35,7 @@
       <li class="collection-item">Age <br> <b>22 Years Old</b></li>
       <li class="collection-item">Email <br> <b>{{ auth()->user()->email }}</b></li>
       <li class="collection-item">Contact <br> <b>#{{ auth()->user()->contact }}</b></li>
+      <li class="collection-item">Total Rents <br> <b>{{ auth()->user()->girlfriend()->count() }} rents</b></li>
     </ul>
   </div>
 </div><!-- body-components-container -->

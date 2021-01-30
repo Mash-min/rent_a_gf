@@ -26,7 +26,7 @@
       	@auth
           @if(auth()->user()->role == 'admin')
             <li>
-               <a href="{{ route('dashboard') }}"><i class="fa fa-list fa-3"></i> Dashboard</a>
+               <a href="{{ route('dashboard') }}"><i class="fa fa-list fa-3"></i> Admin Panel</a>
             </li>
           @endif
       	<li class="bold">
@@ -52,11 +52,11 @@
       		</a>
           <div class="collapsible-body">
             <ul>
-              <li><a href="{{ route('rent') }}">Rent <i class="fa fa-heart black-text"></i></a></li>
-              <li><a href="{{ route('tags') }}">Tags <i class="fa fa-list black-text"></i></a></li>
+              <li><a href="{{ route('rent') }}">Rent <i class="fa fa-money black-text"></i></a></li>
+              <li><a href="{{ route('tags') }}">Tags <i class="fa fa-tag black-text"></i></a></li>
               <li><a href="{{ route('search') }}">Search Girlfriend <i class="fa fa-search black-text"></i></a></li>
               @auth
-              <li><a href="/">Apply as a girlfriend <i class="fa fa-sign-in"></i></a></li>
+              <li><a href="{{ route('apply') }}">Apply as a girlfriend <i class="fa fa-sign-in"></i></a></li>
               @endauth
             </ul>
           </div>

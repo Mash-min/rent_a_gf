@@ -12,7 +12,7 @@
 <div class="row body-components-container">
   <div class="row center">
     <div class="card col s12 l8 offset-l2 m12 form-container">
-      <form method="POST" action="{{ route('register-user') }}">
+      <form method="POST" action="{{ route('register-user') }}" autocomplete="off">
         {{ @csrf_field() }}
         <div class="card-content">
           <h4 class="header-font">Register</h4>

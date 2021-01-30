@@ -1,6 +1,7 @@
 	<?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -8,15 +9,21 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\GirlfriendController;
 use App\Http\Controllers\TagsController;
-
+use App\Http\Controllers\RentController;
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/rent', [PagesController::class, 'rent'])->name('rent');
+Route::get('/rent/girlfriend/JSON', [PagesController::class, 'rentgirlfriendJSON']);
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
 Route::get('/profile', [PagesController::class, 'profile'])->name('profile')->middleware('auth');
 Route::get('/settings', [PagesController::class, 'settings'])->name('settings')->middleware('auth');
+Route::get('/apply-as-girlfriend', [PagesController::class, 'apply'])->name('apply')->middleware('auth');
 Route::get('/girlfriend', [PagesController::class, 'girlfriend'])->name('girlfriend')->middleware('auth');
+Route::get('/girlfriend/json/{username}', [PagesController::class, 'searchgirlfriendJSON']);
+
+Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfriend']);
+Route::post('/apply-as-girlfriend-tags', [TagsController::class, 'create']);
 
 Route::prefix('/user')->group(function() {
 	Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -33,15 +40,26 @@ Route::prefix('/user')->group(function() {
 Route::prefix('/admin')->group(function() {
 	Route::get('/dashboard', [AdminPagesController::class, 'dashboard'])->name('dashboard');
 	Route::get('/accountlist', [AdminPagesController::class, 'accountlist'])->name('accountlist');
+	Route::get('/accountlist/json', [AdminPagesController::class, 'accountlistJSON']);
+	Route::get('/accountlist/search/{request}', [AdminPagesController::class, 'searchAccount']);
+
 	Route::get('/addgirlfriend', [AdminPagesController::class, 'addgirlfriend'])->name('addgirlfriend');
 	Route::get('/girlfriendlist', [AdminPagesController::class, 'girlfriendlist'])->name('girlfriendlist');
 	Route::get('/girlfriendlist/json', [AdminPagesController::class, 'girlfriendlistJSON']);
+	Route::get('/girlfriend/find/{id}', [AdminPagesController::class, 'findGirlfriend']);
+	Route::get('/girlfriend/requests', [AdminPagesController::class, 'girlfriendrequests'])->name('girlfriendrequests');
+	Route::get('/girlfriend/requests/json', [AdminPagesController::class, 'girlfriendrequestsJSON']);
 	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseUser']);
 	Route::get('/search/{girlfriend}', [AdminPagesController::class, 'searchgirlfriend']);
-	Route::get('/girlfriend/find/{id}', [AdminPagesController::class, 'findGirlfriend']);
 
 	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
-	Route::post('/girlfriend/accept?id={id}', [GirlfriendController::class, 'acceptRequest']);
-	Route::post('/girlfriend/decline?id={id}', [GirlfriendController::class, 'declineRequest']);
+	Route::post('/girlfriend/accept/id={id}', [GirlfriendController::class, 'acceptRequest']);
+	Route::post('/girlfriend/decline/id={id}', [GirlfriendController::class, 'declineRequest']);
 	Route::post('/girlfriend/create/tag', [TagsController::class, 'create']);
+});
+
+Route::prefix('/rent')->group(function() {
+	Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend')->middleware('auth');
+
+	Route::post('/create', [RentController::class, 'create']);
 });

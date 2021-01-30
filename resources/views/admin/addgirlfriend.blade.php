@@ -4,7 +4,7 @@
 <div class="card dashboard-card">
   <div class="card-content">
   <h4>Add Girlfriend</h4>
-    <form id="add-girlfriend-form">
+    <form id="add-girlfriend-form" autocomplete="off">
     	{{ @csrf_field() }}
       <div class="row">
         <div class="input-field col s6">

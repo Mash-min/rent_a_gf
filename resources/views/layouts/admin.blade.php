@@ -21,11 +21,14 @@
       <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li>
-             <a href="{{ route('dashboard') }}"><i class="fa fa-home fa-3"></i> Dashboard</a>
+            <a href="{{ route('index') }}"><i class="fa fa-home fa-3"></i> Home</a>
+          </li>
+          <li>
+             <a href="{{ route('dashboard') }}"><i class="fa fa-list fa-3"></i> Dashboard</a>
           </li>
           <li class="bold">
             <a class="collapsible-header waves-effect waves-teal">
-              <i class="fa fa-sort-desc"></i>Accounts
+              <i class="fa fa-sort-desc"></i>Account
             </a>
             <div class="collapsible-body">
               <ul>
@@ -44,8 +47,8 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="{{ route('addgirlfriend') }}">Add Girlfriend <i class="fa fa-plus black-text"></i></a></li>
-                <li><a href="{{route('girlfriendlist')}}">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
-                <li><a href="grid.html">Girlfriend Requests <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="{{ route('girlfriendlist') }}">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="{{ route('girlfriendrequests') }}">Girlfriend Requests <i class="fa fa-list black-text"></i></a></li>
               </ul>
             </div>
           </li>
@@ -72,5 +75,6 @@
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.min.js"></script>
   <script src="/js/sweetalert.min.js"></script>
+  <script src="/js/admin.js"></script>
   @yield('scripts')
 </html>

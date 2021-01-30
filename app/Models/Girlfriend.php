@@ -33,4 +33,9 @@ class Girlfriend extends Model
       return $this->hasMany('App\Models\Tags', 'girlfriend_id');
     }
 
+    public function rents()
+    {
+      return $this->hasMany('App\Models\Rent', 'girlfriend_id');
+    }
+
 }

@@ -30,13 +30,42 @@ class User extends Authenticatable
 
     protected $attributes = [
       'image' => 'no-image.jpg',
-      'bio' => ' ~ ',
-      'role' => 'user'
+      'role' => 'user',
+      'bio' => ""
     ];
+
+    public function rents()
+    {
+      return $this->hasMany('App\Models\Rent', 'user_id');
+    }
 
     public function girlfriend()
     {
       return $this->hasOne('App\Models\Girlfriend', 'user_id'); 
+    }
+
+    public function alreadyRegisteredGirlfriend()
+    {
+      $girlfriend = $this->girlfriend()->get();
+      if ($girlfriend->count() >= 1) {
+        return true;
+      }else {
+        return false;
+      }
+    }
+
+    public function alreadyRented($girlfriend_id)
+    {
+      $rent = Rent::where([
+        ['user_id' , '=', $this->id],
+        ['girlfriend_id', '=', $girlfriend_id]
+      ])->get();
+
+      if ($rent->count() >= 1) {
+        return true;
+      }else {
+        return false;
+      };
     }
 
     /**

@@ -26,8 +26,7 @@ class UserUpdateValidation extends FormRequest
         return [
           'firstname' => 'required',
           'lastname' => 'required',
-          'email' => 'required',
-          'contact' => 'required'
+          'bio' => 'nullable'
         ];
     }
 

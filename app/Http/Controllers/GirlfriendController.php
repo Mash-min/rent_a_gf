@@ -5,17 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Girlfriend;
+use App\Http\Requests\GirlfriendRequestValidation;
 
 class GirlfriendController extends Controller
 {
-  public function create(Request $request)
+  public function create(GirlfriendRequestValidation $request)
   {
   	$user = User::find($request->user_id);
-  	$girlfriend = $user->girlfriend()->create($request->all());
-  	return response()->json([
+    $girlfriend = $user->girlfriend()->create($request->except('username') + [
+      'username' => str_replace(" ", "-", $request->username)
+    ]);
+    return response()->json([
+      'girlfriend' => $girlfriend
+    ]); 
+  }
+
+  public function applygirlfriend(Request $request)
+  {
+    $girlfriend = auth()->user()->girlfriend()->create($request->except('username') + [
+      'username' => str_replace(" ", "-", $request->username)
+    ]);
+    return response()->json([
       'girlfriend' => $girlfriend
     ]);
-  }
+  } 
 
   public function acceptRequest($id)
   {
