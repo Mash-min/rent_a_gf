@@ -40,9 +40,13 @@ class PagesController extends Controller
     $girlfriend = Girlfriend::where('username', '=', $username)
                               ->with('user')
                               ->get();
-    return view('pages.rentgirlfriend', [
-      'girlfriend' => $girlfriend
-    ]);
+    if ($girlfriend[0]->status != 'accepted') {
+      abort(404);
+    }else {
+      return view('pages.rentgirlfriend', [
+        'girlfriend' => $girlfriend
+      ]);  
+    }/* ========= CHECK IF GIRLFRIEND IS ACCPETED BEFORE RENTING ========== */
   }
 
   public function rent()
@@ -78,6 +82,7 @@ class PagesController extends Controller
   {
     $girlfriends = Girlfriend::orderBy('username', 'DESC')
                               ->where('availability','=',true)
+                              ->where('status','=','accepted')
                               ->with('user')
                               ->paginate(20);
     return response()->json([
