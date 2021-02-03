@@ -62,4 +62,5 @@ Route::prefix('/rent')->group(function() {
 	Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend')->middleware('auth');
 
 	Route::post('/create', [RentController::class, 'create']);
+	Route::delete('/delete/{id}', [RentController::class, 'delete'])->name('delete-rent');
 });

@@ -69,6 +69,18 @@ class User extends Authenticatable
       };
     }
 
+    public function alreadyHasRent()
+    {
+      $activeRent = $this->rents()->where('status','=','active')
+                                 ->orWhere('status','=','pending')
+                                 ->get();
+      if ($activeRent->count() >= 1) {
+        return true;
+      }else {
+        return false;
+      }
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

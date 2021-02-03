@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Girlfriend;
+use App\Models\Rent;
 
 class PagesController extends Controller
 {
@@ -24,7 +25,14 @@ class PagesController extends Controller
 
   public function girlfriend()
   {
-    return view('pages.girlfriend');
+    $girlfriend = auth()->user()->rents()->where('status','=','active')->get();
+    if($girlfriend->count() == 0) {
+      return view('pages.no_rent');
+    } else{
+      return view('pages.girlfriend',[
+        'girlfriend' => $girlfriend[0]
+      ]);  
+    }
   }
 
   public function rentgirlfriend($username)
