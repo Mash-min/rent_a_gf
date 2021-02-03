@@ -80,12 +80,18 @@ class Girlfriend {
   }
 
   girlfriendCard() {
+    let profileImage = "";
+    if (this.image == 'no-image.jpg') {
+      profileImage = `<img src="/images/avatar.jpg" class="profile-image">`;
+    }else {
+      profileImage = `<img src="/storage/images/profiles/${this.image}">`;
+    }
     return `
       <div class="col l3 s6 searched-card">
         <div class="card rent-card">
           <div class="card-content">
             <div class="rent-image">
-              <img src="/storage/images/profiles/${this.image}">
+              ${profileImage}
             </div>
             <span class="card-title rent-card-title">
               ${this.username} <br>

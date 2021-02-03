@@ -15,7 +15,7 @@
   <div class="col l4 m5 s10 offset-s1">
     <div class="profile-image-container">
       @if($girlfriend[0]->user->image == 'no-image.jpg')
-        <img src="images/avatar.jpg" class="profile-image">
+        <img src="/images/avatar.jpg" class="profile-image">
       @else
         <img src="/storage/images/profiles/{{ $girlfriend[0]->user->image }}" class="profile-image">
       @endif
