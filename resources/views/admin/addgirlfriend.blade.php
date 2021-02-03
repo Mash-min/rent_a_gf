@@ -44,4 +44,15 @@
   <script src="/js/tinymce.min.js"></script>
   <script src="/js/admin.js"></script>
   <script src="/js/admin/addgirlfriend.js"></script>
+  <script>
+    tinymce.init({
+      selector:'textarea',
+      height:250,
+      width:'100%',
+      theme:'modern',
+      resize:false,
+      plugins: "link image code fullscreen paste",
+    });
+  </script>
+
 @endsection

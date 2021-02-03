@@ -31,7 +31,8 @@ class User extends Authenticatable
     protected $attributes = [
       'image' => 'no-image.jpg',
       'role' => 'user',
-      'bio' => ""
+      'bio' => "",
+      'address' => 'not-set'
     ];
 
     public function rents()
