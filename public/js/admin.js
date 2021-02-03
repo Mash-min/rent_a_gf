@@ -1,3 +1,4 @@
+const url = location.protocol +'//'+location.host;
 function logout() {
   swal({
     title: "Are you sure ?",

@@ -56,7 +56,9 @@
               <li><a href="{{ route('tags') }}">Tags <i class="fa fa-tag black-text"></i></a></li>
               <li><a href="{{ route('search') }}">Search Girlfriend <i class="fa fa-search black-text"></i></a></li>
               @auth
-              <li><a href="{{ route('apply') }}">Apply as a girlfriend <i class="fa fa-sign-in"></i></a></li>
+                @if(!auth()->user()->alreadyRegisteredGirlfriend())
+                  <li><a href="{{ route('apply') }}">Apply as a girlfriend <i class="fa fa-sign-in"></i></a></li>
+                @endif
               @endauth
             </ul>
           </div>

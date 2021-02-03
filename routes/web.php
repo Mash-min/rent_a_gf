@@ -52,6 +52,9 @@ Route::prefix('/admin')->group(function() {
 	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseUser']);
 	Route::get('/search/{girlfriend}', [AdminPagesController::class, 'searchgirlfriend']);
 
+	Route::get('/active-rents', [AdminPagesController::class, 'activerents'])->name('activerents');
+	Route::get('/active-rents/json', [AdminPagesController::class, 'activerentsJSON']);
+
 	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
 	Route::post('/girlfriend/accept/id={id}', [GirlfriendController::class, 'acceptRequest']);
 	Route::post('/girlfriend/decline/id={id}', [GirlfriendController::class, 'declineRequest']);

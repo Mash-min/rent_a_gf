@@ -58,7 +58,7 @@
             </a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="color.html">Active rents <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="{{ route('activerents') }}">Active rents <i class="fa fa-list black-text"></i></a></li>
                 <li><a href="grid.html">Rent List<i class="fa fa-list black-text"></i></a></li>
               </ul>
             </div>

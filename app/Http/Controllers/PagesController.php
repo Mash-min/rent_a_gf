@@ -25,13 +25,13 @@ class PagesController extends Controller
 
   public function girlfriend()
   {
-    $girlfriend = auth()->user()->rents()->where('status','=','active')->get();
-    if($girlfriend->count() == 0) {
-      return view('pages.no_rent');
-    } else{
+    $girlfriend = auth()->user()->rents()->where('status', '=','pending')->get();
+    if(auth()->user()->alreadyHasRent()) {
       return view('pages.girlfriend',[
         'girlfriend' => $girlfriend[0]
-      ]);  
+      ]);
+    } else{
+      return view('pages.no_rent');
     }
   }
 
@@ -57,7 +57,7 @@ class PagesController extends Controller
     return view('pages.rent', [
       'girlfriends' => $girlfriends
     ]);
-  }
+  }/*=================== RENT VIEW ====================*/
 
   public function tags()
   {
@@ -67,7 +67,7 @@ class PagesController extends Controller
   public function search()
   {
   	return view('pages.search');
-  }
+  }/*=================== SEARCH GIRLFRIEND VIEW ====================*/
 
   public function apply()
   {
@@ -76,15 +76,19 @@ class PagesController extends Controller
     }else {
       return view('pages.apply');
     }
-  }
+  }/*=================== APPLY AS GIRLFRIEND VIEW ====================*/
 
+
+  /*===============================================================*/
+  /*+++++++++++++++++++++++  JSON REPONSES ++++++++++++++++++++++++*/
+  /*===============================================================*/
   public function rentgirlfriendJSON()
   {
     $girlfriends = Girlfriend::orderBy('username', 'DESC')
                               ->where('availability','=',true)
                               ->where('status','=','accepted')
                               ->with('user')
-                              ->paginate(20);
+                              ->paginate(8);
     return response()->json([
       'girlfriends' => $girlfriends
     ]);

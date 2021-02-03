@@ -17,7 +17,7 @@
       <div class="profile-image-container">
         <img src="images/avatar.jpg">
         {{ @csrf_field() }}
-        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('{{Crypt::encryptString($girlfriend->id)}}')">
+        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('{{ $girlfriend->id }}')">
           Cancel rent
         </button>
       </div>
@@ -43,27 +43,16 @@
   <div class="row">
     <ul class="collection with-header">
       <li class="collection-header"><h4 class="header-font">Previous Rents</h4></li>
-      <li class="collection-item avatar">
-        <img src="images/avatar.jpg" alt="" class="circle">
-        <span class="title"><b>Mashiyyat Delos Santos</b></span>
-        <p>Date: January 3, 2021<br>
-           Price: 100$
-        </p>
-        <a href="#!" class="secondary-content"><i class="fa fa-eye"></i></a>
-      </li>
-      <li class="collection-item avatar">
-        <img src="images/avatar.jpg" alt="" class="circle">
-        <span class="title"><b>Mashiyyat Delos Santos</b></span>
-        <p>Date: January 3, 2021<br>
-           Price: 100$
-        </p>
-        <a href="#!" class="secondary-content"><i class="fa fa-eye"></i></a>
-      </li>
-      <li class="collection-item">
-        <button class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light">
-          Load more
-        </button>
-      </li>
+      @foreach(auth()->user()->rents()->where('status','=','completed')->get() as $rent)
+        <li class="collection-item avatar">
+          <img src="images/avatar.jpg" alt="" class="circle">
+          <span class="title"><b>{{$rent->girlfriend->username}}</b></span>
+          <p>Date: {{$rent->created_at}}<br>
+             Price: ${{$rent->girlfriend->rate}}.00
+          </p>
+          <a href="#!" class="secondary-content"><i class="fa fa-eye"></i></a>
+        </li>
+      @endforeach
     </ul>
   </div>
 </div><!-- body-components-container -->

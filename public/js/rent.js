@@ -49,13 +49,7 @@ function deleteRent(id) {
 					_token: $('input[name=_token]').val()
 				}
 			}).done(res => {
-				Materialize.toast("Rent Canceled", 2000, 'red');
-				$('.change-profile-btn').remove();
-				$('#rent-btn-container').append(`
-					<button class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger" onclick="rentGirlfriend('${res.girlfriend_id}')">
-            Rent girlfriend
-          </button>
-				`);
+				window.location.assign('/rent')
 				console.log(res)
 			}).fail(err => {
 				console.log(err)
