@@ -21,9 +21,15 @@
       @endif
 
       <div id="rent-btn-container">
-        <button class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger" onclick="rentGirlfriend('{{ $girlfriend[0]->id }}')">
-          Rent girlfriend
-        </button>
+        @if(auth()->user()->alreadyRented($girlfriend[0]->id))
+          <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('{{ $girlfriend[0]->activeRentId() }}')">
+            Cancel rent
+          </button>
+        @else
+          <button class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger" onclick="rentGirlfriend('{{ $girlfriend[0]->id }}')">
+            Rent girlfriend
+          </button>
+        @endif  
       </div>
     </div>
     <hr>
