@@ -37,6 +37,7 @@ $(document).ready(function() {
 			$("#girlfriend").val("");
 			$("#user_id").val("");
 			$('.chip').remove();
+			$('.tag-chips').material_chip({ data:[] });
 			tinymce.activeEditor.setContent('');
 		}).fail(err => {
 			Materialize.Toast.removeAll();

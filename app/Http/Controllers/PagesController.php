@@ -44,7 +44,7 @@ class PagesController extends Controller
       abort(404);
     }else {
       return view('pages.rentgirlfriend', [
-        'girlfriend' => $girlfriend
+        'girlfriend' => $girlfriend[0]
       ]);  
     }/* ========= CHECK IF GIRLFRIEND IS ACCPETED BEFORE RENTING ========== */
   }
