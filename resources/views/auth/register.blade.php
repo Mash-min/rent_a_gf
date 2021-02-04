@@ -11,7 +11,7 @@
 
 <div class="row body-components-container">
   <div class="row center">
-    <div class="card col s12 l8 offset-l2 m12 form-container">
+    <div class="card col l6 offset-l3  m8 offset-m2 s12 form-container">
       <form method="POST" action="{{ route('register-user') }}" autocomplete="off">
         {{ @csrf_field() }}
         <div class="card-content">
@@ -32,10 +32,6 @@
             <div class="input-field col l6 m6 s12">
               <input id="email" type="email" class="validate" name="email">
               <label for="email">Email</label>
-            </div>
-            <div class="input-field col s12">
-            <input type="text" class="validate" name="address">
-              <label for="address">Address</label>
             </div>
             <div class="input-field col s12">
             <input type="text" class="datepicker" name="birthdate">

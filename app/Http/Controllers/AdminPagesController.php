@@ -14,11 +14,10 @@ class AdminPagesController extends Controller
 		$users = User::orderBy('created_at','DESC')->get();
 		$girlfriends = Girlfriend::orderBy('created_at', 'DESC')
 															->where('status','=','accepted')
-															->get();
+															->paginate(10);
 		$topGirlfriends = Girlfriend::orderBy('username','DESC')
 															->where('status','=','accepted')
-															->limit(10)
-															->get();
+															->paginate(10);
 		return view('admin.dashboard',[
 			'users' => $users,
 			'girlfriends' => $girlfriends,
@@ -54,6 +53,28 @@ class AdminPagesController extends Controller
 	/*===============================================================*/
 	/*+++++++++++++++++++++++ ADMIN JSON REPONSES +++++++++++++++++++*/
 	/*===============================================================*/
+
+	public function dashboardUsersJSON()
+	{
+		$users = User::orderBy('created_at','DESC')->get();
+		$rents = Rent::orderBy('created_at','DESC')->get();
+		$girlfriends = Girlfriend::orderBy('created_at','DESC')->where('status','=','accepted')->get();
+		return response()->json([
+			'count' => $users->count(),
+			'rent_count' => $rents->count(),
+			'girlfriends_count' => $girlfriends->count()
+		]);
+	}
+
+	public function dashboardTopGirlfriendsJSON()
+	{
+		$girlfriends = Girlfriend::orderBy('created_at', 'DESC')
+															->where('status','=','accepted')
+															->with('user')
+															->with('rents')
+															->paginate(10);
+		return response()->json(['girlfriends' => $girlfriends]);
+	}
 
 	public function accountlistJSON()
 	{

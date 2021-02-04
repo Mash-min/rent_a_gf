@@ -39,6 +39,8 @@ Route::prefix('/user')->group(function() {
 
 Route::prefix('/admin')->group(function() {
 	Route::get('/dashboard', [AdminPagesController::class, 'dashboard'])->name('dashboard');
+	Route::get('/dashboard/json/users', [AdminPagesController::class, 'dashboardUsersJSON']);
+	Route::get('/dashboard/json/top-girlfriends', [AdminPagesController::class, 'dashboardTopGirlfriendsJSON']);
 	Route::get('/accountlist', [AdminPagesController::class, 'accountlist'])->name('accountlist');
 	Route::get('/accountlist/json', [AdminPagesController::class, 'accountlistJSON']);
 	Route::get('/accountlist/search/{request}', [AdminPagesController::class, 'searchAccount']);

@@ -11,7 +11,7 @@
 
 <div class="row body-components-container">
   <div class="row center">
-    <div class="card col s6 offset-s3 form-container">
+    <div class="card col l6 offset-l3 m8 offset-m2 s12 form-container">
       <form method="POST" action="{{ route('login-user') }}">
          <div class="card-content">
           {{ @csrf_field() }}

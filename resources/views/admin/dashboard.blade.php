@@ -5,8 +5,18 @@
   <div class="col l4">
     <div class="card dashboard-card">
       <div class="card-content row">
-        <div class="col s6 user-count">
-          <span>{{ $users->count() }}</span> <br>Users
+        <div class="col s6 user-count" id="user-count">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col s6">
           <i class="fa fa-user fa-3x"></i>
@@ -17,8 +27,18 @@
   <div class="col l4">
     <div class="card dashboard-card">
       <div class="card-content row">
-        <div class="col s6 user-count">
-          <span>200</span> <br>Rents
+        <div class="col s6 user-count" id="rents-count">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col s6">
           <i class="fa fa-shopping-cart fa-3x"></i>
@@ -29,8 +49,18 @@
   <div class="col l4">
     <div class="card dashboard-card">
       <div class="card-content row">
-        <div class="col s6 user-count">
-          <span>{{ $girlfriends->count() }}</span> <br>Girlfriends
+        <div class="col s6 user-count" id="girlfriends-count">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col s6">
           <i class="fa fa-female fa-3x"></i>
@@ -43,14 +73,12 @@
       <div class="card-content row" style="padding:5px">
         <ul class="collection with-header">
           <li class="collection-header"><h4>Top Girlfriends</h4></li>
-          @foreach($topGirlfriends as $topGirlfriend)
-            <li class="collection-item">
-              <b>{{$topGirlfriend->username}}</b> - ({{ $topGirlfriend->user->firstname }} {{ $topGirlfriend->user->lastname }})
-              <span class="new badge blue lighten-1" data-badge-caption="rents">
-                {{ $topGirlfriend->rents->count() }}
-              </span>
-            </li>
-          @endforeach
+          <div id="top-girlfriend-container">
+            
+          </div>
+          <button class="btn btn-flat waves-light waves-effect blue white-text" style="width:100%" id="view-more-top-girlfriends-btn">
+            Load more
+          </button>
         </ul>
       </div>
     </div>
@@ -105,4 +133,8 @@
     <button class="btn btn-flat waves-effect waves-light blue lighten-1 white-text">View more</button>
   </div>
 </div>
+@endsection
+
+@section('scripts')
+  <script src="/js/admin/dashboard.js"></script>
 @endsection
