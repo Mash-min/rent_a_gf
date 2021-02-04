@@ -30,17 +30,58 @@ $(document).ready(function() {
 		})
 	})
 
-	$.ajax({
-		type:'GET',
-		url:'https://api.imgur.com/3/account/Mashiyyat',
-		header: {
-			Authorization: 'Client-ID 35a8af79d41733b'
-		}
-	}).done(res => {
-		console.log(res)
-	}).fail(err => {
-		console.log(err)
-	})
-
 });
+
+function resetPassword() {
+	swal({
+		content: {
+			element:"input",
+			attributes: {
+				placeholder: "Enter your current password",
+				type: "password"
+			}
+		}
+	}).then((value) => {
+			if(value) {
+				$.ajax({
+					type:'POST',
+					url:`${url}/user/settings/check-password`,
+					data: {
+						_token:$('input[name=_token]').val(),
+						password: value
+					}
+				}).done(res => {
+						swal({
+							content: {
+								element:"input",
+								attributes: {
+									placeholder: "Enter your new password",
+									type: "password"
+								}
+							}
+						}).then((password) => {
+							if(password) {
+								$.ajax({
+									type:'POST',
+									url:`${url}/user/settings/reset-password`,
+									data: {
+										_token:$('input[name=_token]').val(),
+										password: password
+									}
+								}).done(res => {
+									Materialize.toast("Password successfully changed",3000,'blue white-text');
+								}).fail(err => {
+									// console.log(err);
+								})/*===================== AJAX REQUEST RESETING PASSWORD ==================*/	
+							}else {}
+						})
+				}).fail(err => {
+					Materialize.toast(err.responseJSON.error,3000,'red white-text');
+				});/*===================== AJAX REQUEST CHECKING IF PASSWORD IS MATCHED ==================*/	
+			} else {
+
+			}
+	})/*================ SWEETALERT ASKING FOR CURRENT PASSWORD ====================*/
+	
+}
 

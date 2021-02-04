@@ -17,9 +17,12 @@
       @else
         <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
       @endif
-      <a class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger"  href="#edit-profile-image-modal">
+      <a class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger"  href="#edit-profile-image-modal">
         <i class="fa fa-camera"></i>
       </a>
+      <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="resetPassword()">
+        Reset password
+      </button>
     </div>
   </div>
 

@@ -63,4 +63,23 @@ class RegisterController extends Controller
     return response()->json($imageName);
   }
 
+  public function checkPassword(Request $request)
+  {
+    if (Hash::check($request->password, auth()->user()->password)) {
+      return true;
+    }else {
+      return response()->json(['error' => "Invalid Password"],404);
+    }
+  }
+
+  public function resetPassword(Request $request)
+  {
+    auth()->user()->update([
+      'password' => Hash::make($request->password)
+    ]);
+    return response()->json([
+      'message' => 'success'
+    ]);
+  }
+
 }

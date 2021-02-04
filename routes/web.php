@@ -35,6 +35,8 @@ Route::prefix('/user')->group(function() {
 
 	Route::post('/update', [RegisterController::class, 'update'])->name('update-user')->middleware('auth');
 	Route::post('/update/image', [RegisterController::class, 'updateImage'])->middleware('auth');
+  Route::post('/settings/check-password', [RegisterController::class, 'checkPassword'])->middleware('auth');
+  Route::post('/settings/reset-password', [RegisterController::class, 'resetPassword'])->middleware('auth');
 });
 
 Route::prefix('/admin')->group(function() {
