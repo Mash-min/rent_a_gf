@@ -1,8 +1,7 @@
 class Girlfriend {
   constructor(id, firstname, lastname, username, rate, email, contact, image, status, availability) {
     this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
+    this.fullname = firstname + " " + lastname;
     this.username = username;
     this.rate = rate;
     this.email = email;
@@ -15,9 +14,7 @@ class Girlfriend {
   girlfriendTableRow() {
     return `
       <tr class="girlfriend-table-row" id="tr-${this.id}">
-        <td><i>${this.username}</i></td>
-        <td>${this.firstname}</td>
-        <td>${this.lastname}</td>
+        <td><b>${this.username}</b> (${this.fullname})</td>
         <td>${this.email}</td>
         <td>${this.contact}</td>
         <td><b>$${this.rate}.00</b></td>
@@ -36,9 +33,7 @@ class Girlfriend {
   searchedGirlfriendTableRow() {
     return `
       <tr class="searched-girlfriend-table-row" id="tr-${this.id}">
-        <td><i>${this.username}</i></td>
-        <td>${this.firstname}</td>
-        <td>${this.lastname}</td>
+        <td><b>${this.username}</b> (${this.fullname})</td>
         <td>${this.email}</td>
         <td>${this.contact}</td>
         <td><b>$${this.rate}.00</b></td>
@@ -110,26 +105,14 @@ class Girlfriend {
 
 }
 
-class Pagination {
-  constructor(active, label, url) {
-    this.active = (active == true) ? "disabled" : "active";
-    this.label = label;
-    this.url = url;
-  }
-
-  paginationLinks() {
-    return `
-      <li class="waves-effect ${this.active}"><a href="#!">${this.label}</a></li>
-    `;
-  }
-}
-
+let girlfriendId = 0;
 function findGirlfriendData(id) {
   $.ajax({
     type:'GET',
     url:`${url}/admin/girlfriend/find/${id}`
   }).done(res => {
     console.log(res);
+    girlfriendId = res.girlfriend.id;
     $('#username').val(res.girlfriend.username);
     $('#rate').val(res.girlfriend.rate);
     $('#description').val(res.girlfriend.description);

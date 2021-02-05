@@ -60,9 +60,11 @@ Route::prefix('/admin')->group(function() {
 	Route::get('/active-rents/json', [AdminPagesController::class, 'activerentsJSON']);
 
 	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
+	Route::post('/girlfriend/update/id={id}',[GirlfriendController::class, 'update']);
 	Route::post('/girlfriend/accept/id={id}', [GirlfriendController::class, 'acceptRequest']);
 	Route::post('/girlfriend/decline/id={id}', [GirlfriendController::class, 'declineRequest']);
 	Route::post('/girlfriend/create/tag', [TagsController::class, 'create']);
+	Route::post('/girlfriend/update/tag/id={id}',[TagsController::class, 'update']);
 });
 
 Route::prefix('/rent')->group(function() {

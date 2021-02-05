@@ -20,6 +20,13 @@ class GirlfriendController extends Controller
     ]); 
   }
 
+  public function update(Request $request, $id)
+  {
+    $girlfriend = Girlfriend::findOrFail($id);
+    $girlfriend->update($request->all());
+    return response()->json(['girlfriend' => $girlfriend]);
+  }
+
   public function applygirlfriend(Request $request)
   {
     $girlfriend = auth()->user()->girlfriend()->create($request->except('username') + [

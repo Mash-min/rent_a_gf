@@ -17,19 +17,19 @@
         <div class="card-content">
           <h4 class="header-font">Register</h4>
           <div class="row">
-            <div class="input-field col l6  m6 s12">
+            <div class="input-field col s12">
               <input id="firstname" type="text" class="validate" name="firstname">
               <label for="firstname">Firstname</label>
             </div>
-            <div class="input-field col l6 m6 s12">
+            <div class="input-field col s12">
               <input id="lastname" type="text" class="validate" name="lastname">
               <label for="lastname">Lastname</label>
             </div>
-            <div class="input-field col l6 m6 s12">
+            <div class="input-field col s12">
               <input id="contact" type="number" class="validate" name="contact">
               <label for="contact">Contact #</label>
             </div>
-            <div class="input-field col l6 m6 s12">
+            <div class="input-field col s12">
               <input id="email" type="email" class="validate" name="email">
               <label for="email">Email</label>
             </div>

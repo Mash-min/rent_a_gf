@@ -10,12 +10,10 @@
   </div>
   <!-- ================= TABLE 1 =================== -->
   <div id="table1" class="col s12">
-    <table class="bordered striped centered highlight responsive-table" id="girlfriend-list-table">
+    <table class="centered highlight responsive-table" id="girlfriend-list-table">
       <thead>
         <tr>
           <th>Username</th>
-          <th>Firstname</th>
-          <th>Lastname</th>
           <th>Email</th>
           <th>Contact</th>
           <th>Rate</th>
@@ -45,12 +43,10 @@
       </button>  
     </form>
     
-    <table class="bordered striped centered highlight responsive-table" id="searched-girlfriend-list-table">
+    <table class="centered highlight responsive-table" id="searched-girlfriend-list-table">
       <thead>
         <tr>
           <th>Username</th>
-          <th>Firstname</th>
-          <th>Lastname</th>
           <th>Email</th>
           <th>Contact</th>
           <th>Rate</th>
@@ -73,6 +69,7 @@
   <div id="edit-gf-modal" class="modal modal-fixed-footer">
     <form id="edit-gf-form" autocomplete="off">
       <div class="modal-content">
+        {{ @csrf_field() }}
         <h4>Edit girlfriend</h4>
         <div class="row">
           <div class="input-field col s6">
@@ -96,7 +93,7 @@
           </div>
           <div class="input-field col s12">
             <label class="active">Tags</label>
-            <div class="chips tag-chips"></div> 
+            <div class="chips tag-chips edit-tag-chip"></div> 
           </div>
         </div>
       </div>
@@ -116,4 +113,5 @@
 <script src="/js/admin/girlfriend.js"></script>
 <script src="/js/admin/girlfriendlist.js"></script>
 <script src="/js/admin/addgirlfriend.js"></script>
+<script src="/js/admin/editgirlfriend.js"></script>
 @endsection

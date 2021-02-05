@@ -16,4 +16,21 @@ class TagsController extends Controller
   	]);
   	return response()->json($tag);
   }
+
+  public function update(Request $request, $id)
+  {
+  	$girlfriend = Girlfriend::findOrFail($id);
+  	// return response()->json($request->tags);
+  	if ($request->has('tags')) {
+  		$girlfriend->tags()->delete();
+  		foreach ($request->tags as $tag) {
+	  		$saveTags = Tags::create([
+	  			'tag' => $tag,
+	  			'girlfriend_id' => $id
+	  		]);
+	  	}
+  	}
+  	
+  }
+
 }
