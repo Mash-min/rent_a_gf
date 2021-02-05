@@ -13,12 +13,12 @@ class Girlfriend {
 
   girlfriendTableRow() {
     return `
-      <tr class="girlfriend-table-row" id="tr-${this.id}">
-        <td><b>${this.username}</b> (${this.fullname})</td>
-        <td>${this.email}</td>
-        <td>${this.contact}</td>
-        <td><b>$${this.rate}.00</b></td>
-        <td>
+      <tr class="girlfriend-table-row tr-${this.id}">
+        <td class="td-${this.id}"><b>${this.username}</b> (${this.fullname})</td>
+        <td class="td-${this.id}">${this.email}</td>
+        <td class="td-${this.id}">${this.contact}</td>
+        <td class="td-${this.id}"><b>$${this.rate}.00</b></td>
+        <td class="td-${this.id}">
           <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
             <i class="fa fa-pencil"></i>
           </button>
@@ -30,14 +30,31 @@ class Girlfriend {
     `
   }
 
+  girlfriendTableData() {
+    return `
+      <td class="td-${this.id}"><b>${this.username}</b> (${this.fullname})</td>
+      <td class="td-${this.id}">${this.email}</td>
+      <td class="td-${this.id}">${this.contact}</td>
+      <td class="td-${this.id}"><b>$${this.rate}.00</b></td>
+      <td class="td-${this.id}">
+        <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    `
+  }
+
   searchedGirlfriendTableRow() {
     return `
-      <tr class="searched-girlfriend-table-row" id="tr-${this.id}">
-        <td><b>${this.username}</b> (${this.fullname})</td>
-        <td>${this.email}</td>
-        <td>${this.contact}</td>
-        <td><b>$${this.rate}.00</b></td>
-        <td>
+      <tr class="searched-girlfriend-table-row tr-${this.id}">
+        <td class="td-${this.id}"><b>${this.username}</b> (${this.fullname})</td>
+        <td class="td-${this.id}">${this.email}</td>
+        <td class="td-${this.id}">${this.contact}</td>
+        <td class="td-${this.id}"><b>$${this.rate}.00</b></td>
+        <td class="td-${this.id}">
           <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
             <i class="fa fa-pencil"></i>
           </button>

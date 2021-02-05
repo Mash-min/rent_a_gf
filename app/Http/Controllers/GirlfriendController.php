@@ -23,8 +23,13 @@ class GirlfriendController extends Controller
   public function update(Request $request, $id)
   {
     $girlfriend = Girlfriend::findOrFail($id);
-    $girlfriend->update($request->all());
-    return response()->json(['girlfriend' => $girlfriend]);
+    $girlfriend->update($request->except('username') + [
+      'username' => str_replace(" ", "-", $request->username)
+    ]);
+    return response()->json([
+      'girlfriend' => $girlfriend,
+      'user' => $girlfriend->user()->first()
+    ]);
   }
 
   public function applygirlfriend(Request $request)
