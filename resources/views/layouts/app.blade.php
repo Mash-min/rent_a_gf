@@ -37,7 +37,7 @@
             <ul>
               <li><a href="{{ route('profile') }}">Profile <i class="fa fa-user black-text"></i></a></li>
               <li><a href="{{ route('settings') }}">Settings<i class="fa fa-gear black-text"></i></a></li>
-              <li><a href="{{ route('girlfriend') }}">My girlfriend <i class="fa fa-heart black-text"></i></a></li>
+              <li><a href="{{ route('girlfriend') }}">My Rent <i class="fa fa-money black-text"></i></a></li>
               <li><a href="#!" onclick="logout()">Logout <i class="fa fa-sign-out"></i></a></li>
               <form id="logout-form" action="{{ route('logout-user') }}" method="POST" style="display: none;">
                 @csrf
@@ -52,7 +52,7 @@
       		</a>
           <div class="collapsible-body">
             <ul>
-              <li><a href="{{ route('rent') }}">Rent <i class="fa fa-money black-text"></i></a></li>
+              <li><a href="{{ route('rent') }}">Rent a girlfriend<i class="fa fa-heart black-text"></i></a></li>
               <li><a href="{{ route('tags') }}">Tags <i class="fa fa-tag black-text"></i></a></li>
               <li><a href="{{ route('search') }}">Search Girlfriend <i class="fa fa-search black-text"></i></a></li>
               @auth

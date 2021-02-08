@@ -33,6 +33,7 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="{{ route('accountlist') }}">Account List <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="#">Archive <i class="fa fa-trash black-text"></i></a></li>
                 <li><a onclick="logout()" href="#!">Logout <i class="fa fa-sign-out"></i></a></li>
                 <form id="logout-form" action="{{ route('logout-user') }}" method="POST" style="display: none;">
                   @csrf
@@ -49,6 +50,7 @@
                 <li><a href="{{ route('addgirlfriend') }}">Add Girlfriend <i class="fa fa-plus black-text"></i></a></li>
                 <li><a href="{{ route('girlfriendlist') }}">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
                 <li><a href="{{ route('girlfriendrequests') }}">Girlfriend Requests <i class="fa fa-list black-text"></i></a></li>
+                <li><a href="#">Archive <i class="fa fa-trash black-text"></i></a></li>
               </ul>
             </div>
           </li>

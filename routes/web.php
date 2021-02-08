@@ -12,11 +12,12 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\RentController;
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
-Route::get('/rent', [PagesController::class, 'rent'])->name('rent');
+Route::get('/rent-a-girlfriend', [PagesController::class, 'rent'])->name('rent');
 Route::get('/rent/girlfriend/JSON', [PagesController::class, 'rentgirlfriendJSON']);
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
 Route::get('/profile', [PagesController::class, 'profile'])->name('profile')->middleware('auth');
+Route::get('/girlfriend-account', [PagesController::class, 'girlfriendAccount'])->name('girlfriend-account')->middleware('auth');
 Route::get('/settings', [PagesController::class, 'settings'])->name('settings')->middleware('auth');
 Route::get('/apply-as-girlfriend', [PagesController::class, 'apply'])->name('apply')->middleware('auth');
 Route::get('/girlfriend', [PagesController::class, 'girlfriend'])->name('girlfriend')->middleware('auth');
@@ -26,8 +27,8 @@ Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfrie
 Route::post('/apply-as-girlfriend-tags', [TagsController::class, 'create']);
 
 Route::prefix('/user')->group(function() {
-	Route::get('/login', [LoginController::class, 'index'])->name('login');
-	Route::get('/register', [RegisterController::class, 'index'])->name('register');
+	Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+	Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 
 	Route::post('/register', [RegisterController::class, 'create'])->name('register-user');
 	Route::post('/login', [LoginController::class, 'create'])->name('login-user');

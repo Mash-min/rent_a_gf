@@ -1,6 +1,9 @@
 body p{
 	font-family: 'Quicksand'!important;
 }
+body {
+	background-color: #363b4e;
+}
 .body-container {
   margin-left: 300px;	
 }
@@ -24,6 +27,9 @@ nav {
 	width: 100%;
 	border-radius: 10px;
 }
+.profile-image-collection {
+	padding: 0px!important;
+}
 .profile-bio {
 	font-family: 'Ebrima';
 	text-align: justify;
@@ -39,10 +45,6 @@ nav {
 }
 .profile-header {
 	font-family: 'Roboto'
-}
-.save-changes {
-	width: 100%;
-	text-align: center;
 }
 .change-profile-btn {
 	width: 100%!important;
@@ -92,6 +94,15 @@ nav {
 }
 .tabs .tab a, .tabs .tab a.active {
 	color: #000
+}
+.modal {
+	width: 100%!important;
+	height: 100%!important;
+	max-height: 100%!important;
+	top: 0!important;
+}
+.searched-card .card .card-action {
+	padding: 0px!important;
 }
 ::-webkit-scrollbar {
   width: 13px;

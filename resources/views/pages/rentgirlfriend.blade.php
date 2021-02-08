@@ -19,7 +19,6 @@
       @else
         <img src="/storage/images/profiles/{{ $girlfriend->user->image }}" class="profile-image">
       @endif
-
       <div id="rent-btn-container">
         <button class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger" onclick="rentGirlfriend('{{ $girlfriend->id }}')">
           Rent girlfriend
@@ -28,7 +27,7 @@
     </div>
     <hr>
     <p class="profile-bio">
-      "{{ $girlfriend->user->bio }}"
+      "{!! $girlfriend->description !!}"
     </p>
   </div>
   <div class="col l8 m7 s12">

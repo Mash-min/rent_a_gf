@@ -1,7 +1,9 @@
 $(document).ready(function() {
+	const image = $('#image');
 	$('#updateImageForm').on('submit', function(e) {
 		e.preventDefault();
 		let imageData = new FormData(this);
+		imageData.append("image",e.target.files)
 		swal("Updating profile...",{
 	    buttons:false,
 	    closeOnClickOutside:false,
@@ -28,7 +30,7 @@ $(document).ready(function() {
 		}).fail(err => {
 			console.log(err)
 		})
-	})
+	})/* ======= IMAGE FORM SUBMIT ========= */
 
 });
 

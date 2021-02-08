@@ -73,21 +73,21 @@
         <h4>Edit girlfriend</h4>
         <div class="row">
           <div class="input-field col s6">
-            <input id="username" type="text" class="validate active" name="username">
-            <label for="username" placeholder="Enter Username">Username</label>
+            <input id="username" type="text" class="validate active" name="username" placeholder="Enter Username">
+            <label for="username">Username</label>
           </div>
           <div class="input-field col s6">
-            <input id="rate" type="number" class="validate" name="rate">
+            <input id="rate" type="number" class="validate" name="rate" placeholder="Enter Rate $$">
             <label for="rate">Rate $$</label>
           </div>
           <label for="description">Girlfriend Description</label>
           <div class="input-field col s12">
             <textarea id="description" class="materialize-textarea" name="description"></textarea>
           </div>  
+          <input type="hidden" name="user_id" id="user_id" value="" placeholder="Search User">
           <div class="input-field col s12">
-            <input type="text" id="girlfriend">
-            <input type="hidden" name="user_id" id="user_id" value="">
-            <label for="girlfriend"><i class="fa fa-search"></i> Please search a User</label>
+            <input type="text" id="girlfriend" name="girlfriend" placeholder="Search User">
+            <label for="girlfriend" class="active"><i class="fa fa-search"></i> Please search a User</label>
           </div>
           <div class="collection" id="user-results">
           </div>
@@ -98,7 +98,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" style="width: 100%" type="submit">
+        <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text modal-close" type="button">
+          Cancel
+        </button>
+        <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" type="submit">
           Save
         </button>
       </div>  
@@ -114,4 +117,14 @@
 <script src="/js/admin/girlfriendlist.js"></script>
 <script src="/js/admin/addgirlfriend.js"></script>
 <script src="/js/admin/editgirlfriend.js"></script>
+<script>
+  tinymce.init({
+    selector:'textarea',
+    height:250,
+    width:'100%',
+    theme:'modern',
+    resize:false,
+    plugins: "link image code fullscreen paste",
+  });
+</script>
 @endsection

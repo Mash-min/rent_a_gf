@@ -1,8 +1,9 @@
 let pageNumnber = 1;
 $(document).ready(function() {
-	swal("Fetching data...",{
+	swal("Loading...",{
     buttons:false,
     closeOnClickOutside:false,
+    closeOnEsc: false,
     icon:"info"
   });
 	$.ajax({
@@ -11,7 +12,7 @@ $(document).ready(function() {
 	}).done(res => {
 		pageNumnber = pageNumnber + 1;
 		swal.close()
-		console.log(res)
+		// console.log(res)
 		for(var x in res.girlfriends.data){
 			let rentGirlfriend = new Girlfriend(
 	      res.girlfriends.data[x].id,
@@ -28,6 +29,9 @@ $(document).ready(function() {
 			$('#rent-girlfriend-container').append(rentGirlfriend.girlfriendCard());
 		}
 	}).fail(err => {
+		swal("Something is wrong",{
+			icon:'error'
+		});
 		console.log(err)
 	})
 });

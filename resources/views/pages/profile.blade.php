@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<nav class="red lighten-1">
+<nav class="blue lighten-1">
   <div class="nav-wrapper container">
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="fa fa-bars"></i>
@@ -11,20 +11,27 @@
 
 <div class="row body-components-container">
   <div class="col l4 m5 s10 offset-s1">
-    <div class="profile-image-container">
-      @if(auth()->user()->image == 'no-image.jpg')
-        <img src="images/avatar.jpg" class="profile-image">
-      @else
-        <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+    <ul class="collection with-header">
+      <li class="collection-item profile-image-collection">
+        <div class="profile-image-container">
+          @if(auth()->user()->image == 'no-image.jpg')
+            <img src="images/avatar.jpg" class="profile-image">
+          @else
+            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+          @endif
+        </div>
+      </li>
+      <li class="collection-item center">
+        <b>{!! auth()->user()->bio !!}</b>
+      </li>
+      @if(auth()->user()->alreadyRegisteredGirlfriend())
+        <li class="collection-item center">
+          <a href="{{route('girlfriend-account')}}" class="btn btn-flat waves-effect waves-light blue white-text" style="width: 100%">
+            <i class="fa fa-exchange fa-2x"></i> Girlfriend Account
+          </a>
+        </li>
       @endif
-      <a href="{{ route('settings') }}" class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light">
-        <i class="fa fa-gear"></i>
-      </a>
-    </div>
-    <hr>
-    <p class="profile-bio">
-      <i>"{{ auth()->user()->bio }}"</i>
-    </p>
+    </ul>
   </div>
   <div class="col l8 m7 s12">
     <ul class="collection with-header">
@@ -36,6 +43,11 @@
       <li class="collection-item">Email <br> <b>{{ auth()->user()->email }}</b></li>
       <li class="collection-item">Contact <br> <b>#{{ auth()->user()->contact }}</b></li>
       <li class="collection-item">Total Rents <br> <b>{{ auth()->user()->girlfriend()->count() }} rents</b></li>
+      <li>
+        <a href="{{ route('settings') }}" class="btn btn-flat green lighten-1 white-text waves-effect waves-light" style="width: 100%">
+          Account setting
+        </a>
+      </li>
     </ul>
   </div>
 </div><!-- body-components-container -->

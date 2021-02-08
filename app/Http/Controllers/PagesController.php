@@ -18,6 +18,18 @@ class PagesController extends Controller
     return view('pages.profile');
   }
 
+  public function girlfriendAccount()
+  {
+    $girlfriend = auth()->user()->girlfriend()->first();
+    if (auth()->user()->alreadyRegisteredGirlfriend()) {
+      return view('pages.girlfriend_account', [
+        'girlfriend' => $girlfriend
+      ]); 
+    }else {
+      abort(404); 
+    }
+  }
+
   public function settings()
   {
     return view('pages.settings');

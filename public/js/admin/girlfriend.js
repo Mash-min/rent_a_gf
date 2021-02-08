@@ -112,7 +112,7 @@ class Girlfriend {
           </div>
           <div class="card-action">
             <a href="rent/girlfriend/${this.username}" class="btn btn-flat blue lighten-1 waves-effect waves-light white-text view-rent-btn" target="_blank">
-              view
+              Rent
             </a>
           </div>
         </div>
@@ -132,7 +132,7 @@ function findGirlfriendData(id) {
     girlfriendId = res.girlfriend.id;
     $('#username').val(res.girlfriend.username);
     $('#rate').val(res.girlfriend.rate);
-    $('#description').val(res.girlfriend.description);
+    $('#description').prepend(res.girlfriend.description);
     $('#username').val(res.girlfriend.username);
     $('#girlfriend').val(res.user.firstname + " "+ res.user.lastname);
     $('#user_id').val(res.user.id);

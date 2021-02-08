@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<nav class="red lighten-1">
+<nav class="blue lighten-1">
   <div class="nav-wrapper container">
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="fa fa-bars"></i>
@@ -11,19 +11,28 @@
 
 <div class="row body-components-container">
   <div class="col l4 m5 s10 offset-s1">
-    <div class="profile-image-container">
-      @if(auth()->user()->image == 'no-image.jpg')
-        <img src="images/avatar.jpg" class="profile-image">
-      @else
-        <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
-      @endif
-      <a class="btn btn-flat green lighten-1 white-text change-profile-btn waves-effect waves-light modal-trigger"  href="#edit-profile-image-modal">
-        <i class="fa fa-camera"></i>
-      </a>
-      <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="resetPassword()">
-        Reset password
-      </button>
-    </div>
+    <ul class="collection with-header">
+      <li class="collection-item">
+        <div class="profile-image-container">
+          @if(auth()->user()->image == 'no-image.jpg')
+            <img src="images/avatar.jpg" class="profile-image">
+          @else
+            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+          @endif
+        </div>
+      </li>
+      <li class="collection-item">
+        <a class="btn btn-flat green lighten-1 white-text waves-effect waves-light modal-trigger"  href="#edit-profile-image-modal" style="width: 100%">
+          Change photo
+        </a>
+      </li>
+      <li class="collection-item center">
+        <i class="fa fa-lock fa-2x"></i><hr>
+        <button class="btn btn-flat blue lighten-1 white-text waves-effect waves-light" onclick="resetPassword()" style="width: 100%">
+          Reset password
+        </button>
+      </li>
+    </ul>
   </div>
 
   <div id="edit-profile-image-modal" class="modal modal-fixed-footer">
@@ -41,7 +50,7 @@
         <div class="file-field input-field">
           <div class="btn btn-flat waves-effect waves-light blue lighten-1 white-text">
             <span>Image</span>
-            <input type="file" name="image">
+            <input type="file" name="image" id="image">
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
@@ -49,7 +58,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="waves-effect waves-light btn-flat green white-text save-changes">
+        <button class="waves-effect waves-light btn-flat red white-text save-changes modal-close" type="button">
+          cancel
+        </button>
+        <button class="waves-effect waves-light btn-flat blue white-text save-changes" type="submit">
           Save changes
         </button>
       </div>  
@@ -60,8 +72,8 @@
     <form method="POST" action="{{ route('update-user') }}">
       {{ @csrf_field() }}
       <ul class="collection with-header">
-        <li class="collection-header">
-          <h4>Settings</h4>
+        <li class="collection-header center">
+          <h4>Account settings</h4>
         </li>
         <li class="collection-item">
           @error('firstname')
@@ -70,6 +82,7 @@
           </div>
           @enderror
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Firstname</label>
             <input type="text" name="firstname" value="{{ auth()->user()->firstname }}">
           </div>
@@ -81,6 +94,7 @@
           </div>
           @enderror
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Lastname</label>
             <input type="text" name="lastname" value="{{ auth()->user()->lastname }}">
           </div>
@@ -92,12 +106,14 @@
           </div>
           @enderror
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Email</label>
             <input type="email" name="email"  value="{{ auth()->user()->email }}">
           </div>
         </li>
         <li class="collection-item">
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <textarea id="bio" class="materialize-textarea" name="bio">{{ auth()->user()->bio }}</textarea>
             <label for="bio">Bio</label>
           </div>
@@ -109,6 +125,7 @@
           </div>
           @enderror
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Address</label>
             <input type="text" name="address" value="{{ auth()->user()->address }}">
           </div>
@@ -120,18 +137,20 @@
           </div>
           @enderror
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Contact</label>
             <input type="number" name="contact" value="{{ auth()->user()->contact }}">
           </div>
         </li>
         <li class="collection-item">
           <div class="input-field">
+            <i class="fa fa-pencil prefix"></i>
             <label>Birthdate</label>
             <input type="text" class="datepicker" value="{{ auth()->user()->birthdate }}" name="birthdate">
           </div>
         </li>
         <li>
-          <button class="btn btn-flat green white-text waves-effect waves-light save-changes" type="submit">
+          <button class="btn btn-flat blue white-text waves-effect waves-light save-changes" type="submit" style="width: 100%">
             save changes
           </button>
         </li>
