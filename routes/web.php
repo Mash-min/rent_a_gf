@@ -16,16 +16,21 @@ Route::get('/rent-a-girlfriend', [PagesController::class, 'rent'])->name('rent')
 Route::get('/rent/girlfriend/JSON', [PagesController::class, 'rentgirlfriendJSON']);
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
 Route::get('/search', [PagesController::class, 'search'])->name('search');
-Route::get('/profile', [PagesController::class, 'profile'])->name('profile')->middleware('auth');
-Route::get('/girlfriend-account', [PagesController::class, 'girlfriendAccount'])->name('girlfriend-account')->middleware('auth');
-Route::get('/settings', [PagesController::class, 'settings'])->name('settings')->middleware('auth');
-Route::get('/apply-as-girlfriend', [PagesController::class, 'apply'])->name('apply')->middleware('auth');
-Route::get('/girlfriend', [PagesController::class, 'girlfriend'])->name('girlfriend')->middleware('auth');
-Route::get('/girlfriend/json/{username}', [PagesController::class, 'searchgirlfriendJSON']);
 
+/* ================ PAGES FOR AUTHENTICATED USER ==========*/
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
+  Route::get('/girlfriend-account', [PagesController::class, 'girlfriendAccount'])->name('girlfriend-account');
+  Route::get('/settings', [PagesController::class, 'settings'])->name('settings');
+  Route::get('/apply-as-girlfriend', [PagesController::class, 'apply'])->name('apply');
+  Route::get('/girlfriend', [PagesController::class, 'girlfriend'])->name('girlfriend');
+});
+
+Route::get('/girlfriend/json/{username}', [PagesController::class, 'searchgirlfriendJSON']);
 Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfriend']);
 Route::post('/apply-as-girlfriend-tags', [TagsController::class, 'create']);
 
+/*========== USER MODEL ROUTES ==========*/
 Route::prefix('/user')->group(function() {
 	Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 	Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
@@ -34,43 +39,55 @@ Route::prefix('/user')->group(function() {
 	Route::post('/login', [LoginController::class, 'create'])->name('login-user');
 	Route::post('/logout', [LogoutController::class, 'create'])->name('logout-user');
 
-	Route::post('/update', [RegisterController::class, 'update'])->name('update-user')->middleware('auth');
-	Route::post('/update/image', [RegisterController::class, 'updateImage'])->middleware('auth');
-  Route::post('/settings/check-password', [RegisterController::class, 'checkPassword'])->middleware('auth');
-  Route::post('/settings/reset-password', [RegisterController::class, 'resetPassword'])->middleware('auth');
+	/* =============== USER ACCOUNT SETTING ROUTES ==================*/
+	Route::group(['middleware' => 'auth'], function() {
+	  Route::post('/update', [RegisterController::class, 'update'])->name('update-user');
+		Route::post('/update/image', [RegisterController::class, 'updateImage']);
+	  Route::post('/settings/check-password', [RegisterController::class, 'checkPassword']);
+	  Route::post('/settings/reset-password', [RegisterController::class, 'resetPassword']);
+	});
+
 });
 
-Route::prefix('/admin')->group(function() {
+/* ================= ROUTES FOR ADMIN ===============*/
+Route::group(['middleware' => 'CheckAdmin', 'prefix' => 'admin'], function() {
+	/*============ DASHBOARD ROUTES ===============*/
 	Route::get('/dashboard', [AdminPagesController::class, 'dashboard'])->name('dashboard');
 	Route::get('/dashboard/json/users', [AdminPagesController::class, 'dashboardUsersJSON']);
 	Route::get('/dashboard/json/top-girlfriends', [AdminPagesController::class, 'dashboardTopGirlfriendsJSON']);
+
+	/*============ ACCOUNT LIST ROUTES ===============*/
 	Route::get('/accountlist', [AdminPagesController::class, 'accountlist'])->name('accountlist');
 	Route::get('/accountlist/json', [AdminPagesController::class, 'accountlistJSON']);
 	Route::get('/accountlist/search/{request}', [AdminPagesController::class, 'searchAccount']);
 
+	/*============ ADD GIRLFRIENDLIST ROUTES ===============*/
 	Route::get('/addgirlfriend', [AdminPagesController::class, 'addgirlfriend'])->name('addgirlfriend');
+	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseUser']);
 	Route::get('/girlfriendlist', [AdminPagesController::class, 'girlfriendlist'])->name('girlfriendlist');
 	Route::get('/girlfriendlist/json', [AdminPagesController::class, 'girlfriendlistJSON']);
 	Route::get('/girlfriend/find/{id}', [AdminPagesController::class, 'findGirlfriend']);
 	Route::get('/girlfriend/requests', [AdminPagesController::class, 'girlfriendrequests'])->name('girlfriendrequests');
 	Route::get('/girlfriend/requests/json', [AdminPagesController::class, 'girlfriendrequestsJSON']);
-	Route::get('/chooseuser/{user}', [AdminPagesController::class, 'chooseUser']);
 	Route::get('/search/{girlfriend}', [AdminPagesController::class, 'searchgirlfriend']);
-
 	Route::get('/active-rents', [AdminPagesController::class, 'activerents'])->name('activerents');
 	Route::get('/active-rents/json', [AdminPagesController::class, 'activerentsJSON']);
 
-	Route::post('/girlfriend/create', [GirlfriendController::class, 'create']);
-	Route::post('/girlfriend/update/id={id}',[GirlfriendController::class, 'update']);
-	Route::post('/girlfriend/accept/id={id}', [GirlfriendController::class, 'acceptRequest']);
-	Route::post('/girlfriend/decline/id={id}', [GirlfriendController::class, 'declineRequest']);
-	Route::post('/girlfriend/create/tag', [TagsController::class, 'create']);
-	Route::post('/girlfriend/update/tag/id={id}',[TagsController::class, 'update']);
+	/*============ GIRLFRIEND MODEL ROUTES ==============*/
+	Route::group(['prefix' => 'girlfriend'], function() {
+	  Route::post('/create', [GirlfriendController::class, 'create']);
+		Route::post('/update/id={id}',[GirlfriendController::class, 'update']);
+		Route::post('/accept/id={id}', [GirlfriendController::class, 'acceptRequest']);
+		Route::post('/decline/id={id}', [GirlfriendController::class, 'declineRequest']);
+		Route::post('/create/tag', [TagsController::class, 'create']);
+		Route::post('/update/tag/id={id}',[TagsController::class, 'update']);
+	});
 });
 
-Route::prefix('/rent')->group(function() {
-	Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend')->middleware('auth');
-
+/* =============== RENT MODEL ROUTES ==============*/
+Route::group(['middleware' => 'auth', 'prefix' => 'rent'], function() {
+	Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend');
 	Route::post('/create', [RentController::class, 'create']);
 	Route::delete('/delete/{id}', [RentController::class, 'delete'])->name('delete-rent');
 });
+

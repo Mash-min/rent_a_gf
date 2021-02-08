@@ -16,10 +16,9 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-      if($request->role == 'user') {
-        abort(404);
-      } else {
-        return $next($request);
+      if(auth()->user()->role != 'admin') {
+        abort(403);
       }
+      return $next($request);
     }
 }
