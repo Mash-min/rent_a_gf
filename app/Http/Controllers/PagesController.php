@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Girlfriend;
 use App\Models\Rent;
+use Auth;
 
 class PagesController extends Controller
 {
   public function index() 
   {
-  	return view('pages.index');
+    if (Auth::user()) {
+      return redirect()->route('profile');
+    }else {
+      return view('pages.index');
+    }
   }
 
   public function profile()

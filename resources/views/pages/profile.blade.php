@@ -3,6 +3,7 @@
 @section('content')
 <nav class="blue lighten-1">
   <div class="nav-wrapper container">
+    <a href="#!" class="brand-logo center">Rent a Girlfriend</a>
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="fa fa-bars"></i>
     </a>
@@ -43,8 +44,8 @@
       <li class="collection-item">Email <br> <b>{{ auth()->user()->email }}</b></li>
       <li class="collection-item">Contact <br> <b>#{{ auth()->user()->contact }}</b></li>
       <li class="collection-item">Total Rents <br> <b>{{ auth()->user()->girlfriend()->count() }} rents</b></li>
-      <li>
-        <a href="{{ route('settings') }}" class="btn btn-flat green lighten-1 white-text waves-effect waves-light" style="width: 100%">
+      <li class="collection-item">
+        <a href="{{ route('settings') }}" class="btn btn-flat blue lighten-1 white-text waves-effect waves-light" style="width: 100%">
           Account setting
         </a>
       </li>

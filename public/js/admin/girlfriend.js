@@ -136,6 +136,7 @@ function findGirlfriendData(id) {
     $('#username').val(res.girlfriend.username);
     $('#girlfriend').val(res.user.firstname + " "+ res.user.lastname);
     $('#user_id').val(res.user.id);
+    $(tinymce.get('description').getBody()).html(res.girlfriend.description);
     var tagsArray = [];
     for(var x in res.tags) {
       tagsArray.push({

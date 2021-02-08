@@ -13,6 +13,44 @@ body {
 nav {
 	box-shadow: none;
 }
+nav a{
+	border-radius: 25px;
+	font-family: "Quicksand"
+}
+.page-title {
+	font-family: Tw Cen MT;
+}
+.index-logo {
+	font-family: 'Tw Cen MT';
+}
+.cover {
+  background-image: url(/images/rent-gf-svg.svg);
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 76%;
+}
+.index-nav {
+	background-color: #ffffff00;
+	color: black;
+	padding-top:25px;
+	margin-bottom: 100px;
+}
+.get-started-container {
+	position: relative;
+	margin-bottom: 250px;
+}
+.get-started-container a {
+	border-radius: 30px;
+	width: 70%;
+}
+.dummy-text-container {
+	position: relative;
+	margin-bottom: 150px;
+}
+.index-footer {
+	position: relative;
+}
 .side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
   padding: 0 23.5px 0 45px!important;
 }
@@ -104,13 +142,27 @@ nav {
 .searched-card .card .card-action {
 	padding: 0px!important;
 }
-::-webkit-scrollbar {
-  width: 13px;
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
 }
-::-webkit-scrollbar-thumb {
-  background: #afa7a7  ;
-  transition: .5s;
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
 }
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #004d40;
+}
+
 
 @media (max-width: 992px) { 
 	.body-container {

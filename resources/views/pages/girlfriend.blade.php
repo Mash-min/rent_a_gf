@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<nav class="red lighten-1">
+<nav class="blue lighten-1">
   <div class="nav-wrapper container">
-    <a href="#!" class="brand-logo right">Username</a>
+    <a href="#!" class="brand-logo center">Rent a Girlfriend</a>
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="fa fa-bars"></i>
     </a>

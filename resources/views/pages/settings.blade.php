@@ -3,6 +3,7 @@
 @section('content')
 <nav class="blue lighten-1">
   <div class="nav-wrapper container">
+    <a href="#!" class="brand-logo center">Rent a Girlfriend</a>
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="fa fa-bars"></i>
     </a>
