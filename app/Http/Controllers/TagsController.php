@@ -20,7 +20,6 @@ class TagsController extends Controller
   public function update(Request $request, $id)
   {
   	$girlfriend = Girlfriend::findOrFail($id);
-  	// return response()->json($request->tags);
   	if ($request->has('tags')) {
   		$girlfriend->tags()->delete();
   		foreach ($request->tags as $tag) {
@@ -30,7 +29,6 @@ class TagsController extends Controller
 	  		]);
 	  	}
   	}
-  	
   }
 
 }

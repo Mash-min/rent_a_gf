@@ -1,5 +1,6 @@
 class Account {
-	constructor(firstname, lastname, birthdate ,contact,email ,image, bio, role, address) {
+	constructor(id, firstname, lastname, birthdate ,contact,email ,image, bio, role, address) {
+    this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birthdate = birthdate;
@@ -10,7 +11,6 @@ class Account {
 		this.role = role;
 		this.address = address;
 	}
-
 	accountTableRow() {
     return `
       <tr class="account-table-row" id="tr-${this.id}">
@@ -19,17 +19,13 @@ class Account {
         <td>${this.email}</td>
         <td>${this.contact}</td>
         <td>
-          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="">
+          <a class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-account-modal" onclick="findAccount('${this.id}')">
             <i class="fa fa-pencil"></i>
-          </button>
-          <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
-            <i class="fa fa-trash"></i>
-          </button>
+          </a>
         </td>
       </tr>
     `
   }
-
   searchedAccountTableRow() {
     return `
       <tr class="searched-account-table-row" id="tr-${this.id}">
@@ -38,12 +34,9 @@ class Account {
         <td>${this.email}</td>
         <td>${this.contact}</td>
         <td>
-          <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="">
+          <a class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-account-modal" onclick="findAccount('${this.id}')">
             <i class="fa fa-pencil"></i>
-          </button>
-          <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
-            <i class="fa fa-trash"></i>
-          </button>
+          </a>
         </td>
       </tr>
     `

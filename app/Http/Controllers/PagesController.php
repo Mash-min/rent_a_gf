@@ -55,8 +55,8 @@ class PagesController extends Controller
   public function rentgirlfriend($username)
   {
     $girlfriend = Girlfriend::where('username', '=', $username)
-                              ->with('user')
-                              ->get();
+                            ->with('user')
+                            ->get();
     if ($girlfriend[0]->status != 'accepted') {
       abort(404);
     }else {
@@ -114,10 +114,10 @@ class PagesController extends Controller
   public function searchgirlfriendJSON($username)
   {
     $girlfriend = Girlfriend::where('username', 'like','%'.$username.'%')
-                              ->where('status','=','accepted')
-                              ->orderBy('username','DESC')
-                              ->with('user')
-                              ->get();
+                            ->where('status','=','accepted')
+                            ->orderBy('username','DESC')
+                            ->with('user')
+                            ->get();
     return response()->json([
       'girlfriend' => $girlfriend
     ]);

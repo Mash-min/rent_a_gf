@@ -7,29 +7,29 @@ function rentGirlfriend(gid) {
   }).then((willRent) => {
     if (willRent) {
       $.ajax({
-				type: 'POST',
-				url:`${url}/rent/create`,
-				data: {
-					_token: $('input[name=_token]').val(),
-					girlfriend_id:gid
-				}
-			}).done(res => {
-				if (res.message) {
-					Materialize.toast(res.message, 3000, 'red');
-				}else {
-					Materialize.toast("Rent request sent", 2000, 'blue');
-					$('.change-profile-btn').remove();
-					$('#rent-btn-container').append(`
-						<button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('${res.id}')">
-	            Cancel rent
-	          </button>
-					`);	
-				}
-				
-				console.log(res)
-			}).fail(err => {
-				console.log(err)
-			})
+		type: 'POST',
+		url:`${url}/rent/create`,
+		data: {
+			_token: $('input[name=_token]').val(),
+			girlfriend_id:gid
+		}
+		}).done(res => {
+			if (res.message) {
+				Materialize.toast(res.message, 3000, 'red');
+			}else {
+				Materialize.toast("Rent request sent", 2000, 'blue');
+				$('.change-profile-btn').remove();
+				$('#rent-btn-container').append(`
+					<button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('${res.id}')">
+			Cancel rent
+			</button>
+				`);	
+			}
+		
+			console.log(res)
+		}).fail(err => {
+			console.log(err)
+		})
     }/* if user clicks ok */
   });
 }
@@ -42,18 +42,18 @@ function deleteRent(id) {
     dangerMode: true
   }).then((willRent) => {
     if (willRent) {
-      $.ajax({
-				type: 'DELETE',
-				url:`${url}/rent/delete/${id}`,
-				data: {
-					_token: $('input[name=_token]').val()
-				}
-			}).done(res => {
-				window.location.assign('/rent')
-				console.log(res)
-			}).fail(err => {
-				console.log(err)
-			})
+		$.ajax({
+			type: 'DELETE',
+			url:`${url}/rent/delete/${id}`,
+			data: {
+				_token: $('input[name=_token]').val()
+			}
+		}).done(res => {
+			window.location.assign('/rent-a-girlfriend')
+			console.log(res)
+		}).fail(err => {
+			console.log(err)
+		})
     }/* if user clicks ok */
   });
 }

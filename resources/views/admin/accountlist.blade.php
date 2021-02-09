@@ -8,6 +8,48 @@
       <li class="tab col s5"><a href="#table2"><i class="fa fa-search"></i> Search Account</a></li>
     </ul>
   </div>
+  <div id="edit-account-modal" class="modal modal-fixed-footer">
+    <form id="edit-account-form" autocomplete="off">
+      <div class="modal-content">
+        {{ @csrf_field() }}
+        <h4 class="center">Edit Account</h4>
+        <div class="row">
+          <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
+            <input id="firstname" type="text" class="validate active" name="firstname" placeholder="Enter firstname">
+            <label for="username"><i class="fa fa-pencil"></i> Firstname</label>
+          </div>
+          <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
+            <input id="lastname" type="text" class="validate active" name="firstname" placeholder="Enter lastname">
+            <label for="lastname"><i class="fa fa-pencil"></i> Lastname</label>
+          </div>
+          <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
+            <input id="address" type="text" class="validate active" name="firstname" placeholder="Enter address">
+            <label for="address"><i class="fa fa-pencil"></i> Address</label>
+          </div>
+          <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
+            <input id="email" type="email" class="validate active" name="email" placeholder="Enter email">
+            <label for="email"><i class="fa fa-pencil"></i> Email</label>
+          </div>
+          <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
+            <input id="contact" type="text" class="validate active" name="contact" placeholder="Enter contact">
+            <label for="contact"><i class="fa fa-pencil"></i> Contact</label>
+          </div>
+          <div class="input-fiel col l6 offset-l3 m8 offset-m2 s12">
+            <label for="birthdate"><i class="fa fa-pencil"></i> Birthdate</label>
+            <input type="text" class="datepicker" id="birthdate" name="birthdate" placeholder="Select your birthdate">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text modal-close" type="button">
+          Cancel
+        </button>
+        <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" type="submit">
+          Save
+        </button>
+      </div>  
+    </form>
+  </div>
   <!-- ================= TABLE 1 =================== -->
   <div id="table1" class="col s12">
     <table class="bordered striped centered highlight responsive-table" id="account-list-table">
@@ -17,7 +59,7 @@
           <th>Lastname</th>
           <th>Email</th>
           <th>Contact</th>
-          <th>Options</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody id="account-tb">
@@ -70,4 +112,14 @@
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/admin/account.js"></script>
 <script type="text/javascript" src="/js/admin/accountlist.js"></script>
+<script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 60, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    format: 'yyyy-mm-dd',
+    clear: 'Clear',
+    close: 'Ok',
+  });
+</script>
 @endsection

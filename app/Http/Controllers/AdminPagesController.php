@@ -13,11 +13,11 @@ class AdminPagesController extends Controller
 	{
 		$users = User::orderBy('created_at','DESC')->get();
 		$girlfriends = Girlfriend::orderBy('created_at', 'DESC')
-															->where('status','=','accepted')
-															->paginate(10);
+								 ->where('status','=','accepted')
+								 ->paginate(10);
 		$topGirlfriends = Girlfriend::orderBy('username','DESC')
-															->where('status','=','accepted')
-															->paginate(10);
+								->where('status','=','accepted')
+								->paginate(10);
 		return view('admin.dashboard',[
 			'users' => $users,
 			'girlfriends' => $girlfriends,
@@ -58,7 +58,9 @@ class AdminPagesController extends Controller
 	{
 		$users = User::orderBy('created_at','DESC')->get();
 		$rents = Rent::orderBy('created_at','DESC')->get();
-		$girlfriends = Girlfriend::orderBy('created_at','DESC')->where('status','=','accepted')->get();
+		$girlfriends = Girlfriend::orderBy('created_at','DESC')
+								 ->where('status','=','accepted')
+								 ->get();
 		return response()->json([
 			'count' => $users->count(),
 			'rent_count' => $rents->count(),
@@ -69,10 +71,10 @@ class AdminPagesController extends Controller
 	public function dashboardTopGirlfriendsJSON()
 	{
 		$girlfriends = Girlfriend::orderBy('created_at', 'DESC')
-															->where('status','=','accepted')
-															->with('user')
-															->with('rents')
-															->paginate(10);
+								 ->where('status','=','accepted')
+								 ->with('user')
+								 ->with('rents')
+								 ->paginate(10);
 		return response()->json(['girlfriends' => $girlfriends]);
 	}
 
@@ -84,14 +86,20 @@ class AdminPagesController extends Controller
 		]);
 	}/*=================== JSON FOR ACCOUNT LISTS ====================*/
 
+	public function findAccount($id)
+	{
+	  $user = User::find($id);
+	  return response()->json(['user' => $user]);
+	}
+
 	public function searchAccount($request)
 	{
 		$user = User::orderBy('firstname','ASC')
-								->where('firstname','like','%'.$request.'%')
-								->orWhere('lastname','like','%'.$request.'%')
-								->orWhere('email','like','%'.$request.'%')
-								->orWhere('contact','like','%'.$request.'%')
-								->paginate(10);
+					->where('firstname','like','%'.$request.'%')
+					->orWhere('lastname','like','%'.$request.'%')
+					->orWhere('email','like','%'.$request.'%')
+					->orWhere('contact','like','%'.$request.'%')
+					->paginate(10);
 		return response()->json([
 			'user' => $user
 		]);
@@ -100,20 +108,20 @@ class AdminPagesController extends Controller
 	public function girlfriendrequestsJSON()
 	{
 		$girlfriends = Girlfriend::orderBy('username', 'DESC')
-															->where('status', '=', 'pending')
-															->with('user')
-															->paginate(20);
-		return response()->json([
-			'girlfriends' => $girlfriends
+								  ->where('status', '=', 'pending')
+								  ->with('user')
+								  ->paginate(20);
+	    return response()->json([
+		  'girlfriends' => $girlfriends
 		]);
 	}/*=================== JSON FOR GIRLFRIEND REQUESTS ====================*/
 
 	public function girlfriendlistJSON()
 	{
 		$girlfriends = Girlfriend::orderBy('username','DESC')
-															->where('status', '=', 'accepted')
-															->with('user')
-															->paginate(20);
+								 ->where('status', '=', 'accepted')
+								 ->with('user')
+								 ->paginate(20);
 		return response()->json([
 			'girlfriends' => $girlfriends
 		]);
@@ -122,9 +130,9 @@ class AdminPagesController extends Controller
 	public function searchGirlfriend($girlfriend)
   {
   	$girlfriend = Girlfriend::where('username', 'like', '%'.$girlfriend.'%')
-															->where('status', '=', 'accepted')
-  														->with('user')
-    													->paginate(20);
+							->where('status', '=', 'accepted')
+							->with('user')
+							->paginate(20);
   	return response()->json([
   		'girlfriends' => $girlfriend
   	]);
@@ -143,9 +151,9 @@ class AdminPagesController extends Controller
 	public function chooseUser($user)
   {
     $user = User::where('firstname', 'like', '%'.$user.'%')
-    							->orWhere('lastname', 'like', '%'.$user.'%')
-    							->orWhere('email', 'like', '%'.$user.'%')
-    							->paginate(20);
+				->orWhere('lastname', 'like', '%'.$user.'%')
+				->orWhere('email', 'like', '%'.$user.'%')
+				->paginate(20);
     return response()->json([
       'user' => $user
     ]);
@@ -153,10 +161,11 @@ class AdminPagesController extends Controller
 
   public function activerentsJSON()
   {
-  	$rents = Rent::orderBy('created_at','ASC')->where('status','=','active')
-  																						->with('user')
-  																						->with('girlfriend')
-  																						->paginate(20);
+	  $rents = Rent::orderBy('created_at','ASC')
+	  				->where('status','=','active')
+					->with('user')
+					->with('girlfriend')
+					->paginate(20);
   	return response()->json([
   		'rents' => $rents
   	]);
