@@ -26,3 +26,12 @@ function logout() {
     }/* if user clicks delete */
   });
 }
+
+function loader() {
+  swal({
+		text: "Loading....",
+		button:false,
+		closeOnEsc: false,
+		closeOnClickOutside: false
+	});
+}

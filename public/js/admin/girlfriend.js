@@ -111,7 +111,7 @@ class Girlfriend {
             </span>
           </div>
           <div class="card-action">
-            <a href="rent/girlfriend/${this.username}" class="btn btn-flat blue lighten-1 waves-effect waves-light white-text view-rent-btn" target="_blank">
+            <a href="rent/girlfriend/${this.username}" class="btn btn-flat blue lighten-1 waves-effect waves-light white-text view-rent-btn">
               Rent
             </a>
           </div>

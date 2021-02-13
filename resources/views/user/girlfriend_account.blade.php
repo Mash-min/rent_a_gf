@@ -11,7 +11,7 @@
 </nav><!-- navbar -->
 
 <div class="row body-components-container">
-  <div class="col l4 m5 s10 offset-s1">
+  <div class="col l4 m4 s10 offset-s1">
     <ul class="collection with-header">
       <li class="collection-item profile-image-collection">
         <div class="profile-image-container">
@@ -79,7 +79,7 @@
             <h4 class="profile-header">{{ $girlfriend->username }}</h4>
           </li>
           <li class="collection-item">Rate <br> <b>${{ $girlfriend->rate }}.00</b></li>
-          <li class="collection-item">Description <br> <b>{!! $girlfriend->description !!}</b></li>
+          <li class="collection-item">Description <br> {!! $girlfriend->description !!}</li>
         </ul>
       </div>
       <div id="test2" class="col s12">
@@ -87,25 +87,12 @@
           <li class="collection-header">
             <h4>Requests</h4><br>
           </li>
-          @foreach($girlfriend->rents()->get() as $rent)
-            <li class="collection-item avatar">
-              <img src="images/avatar.png" alt="" class="circle">
-              <span class="title"><b>{{ $rent->user->firstname }} {{ $rent->user->lastname }}</b></span>
-              <p>{{ $rent->user->email }}<br>
-              </p>
-              <div class="secondary-content">
-                <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text">
-                  <i class="fa fa-check"></i>
-                </button>
-                <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text">
-                  <i class="fa fa-times"></i>
-                </button>
-              </div>
-            </li>
-          @endforeach
+          <div id="rent-request-container">
+            <!-- ============== APPEND HERE ================ -->
+          </div>
           <li>
-            <button class="btn btn-flat blue lighten-1 waves-effect waves-light white-text" style="width:100%">
-              Load more
+            <button class="btn btn-flat blue lighten-1 waves-effect waves-light white-text max-width" id="view-more-request-btn">
+              <i class="fa fa-chevron-down"></i>
             </button>
           </li>
         </ul>
@@ -130,5 +117,7 @@
       plugins: "link image code fullscreen paste",
     });
   </script>
-  <script src="/js/admin/edit-gf-account.js"></script>
+  <script src="/js/admin/account_edit_girlfriend.js"></script>
+  <script src='/js/user/rent.js'></script>
+  <script src="/js/user/rent_requests.js"></script>
 @endsection

@@ -114,9 +114,7 @@
 @section('scripts')
 <script src="/js/tinymce.min.js"></script>
 <script src="/js/admin/girlfriend.js"></script>
-<script src="/js/admin/girlfriendlist.js"></script>
-<script src="/js/admin/addgirlfriend.js"></script>
-<script src="/js/admin/editgirlfriend.js"></script>
+<script src="/js/admin/girlfriend_list.js"></script>
 <script>
   tinymce.init({
     selector:'textarea',

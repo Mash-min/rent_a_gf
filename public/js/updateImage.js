@@ -11,7 +11,7 @@ $(document).ready(function() {
 	  });
 		$.ajax({
 			type:'POST',
-			url:`http://localhost:8000/user/update/image`,
+			url:`${url}/user/update/image`,
 			data: imageData,
 			processData: false,
 			cache:false,

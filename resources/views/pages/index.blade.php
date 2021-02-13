@@ -11,7 +11,7 @@
   </div>
   <nav class="index-nav">
     <div class="nav-wrapper container">
-      <a href="{{ route('index') }}" class="brand-logo index-logo">Rent a Girlfriend</a>
+      <a href="{{ route('index') }}" class="brand-logo">Rent a Girlfriend</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars"></i></a>
       <ul class="right hide-on-med-and-down">
         @auth

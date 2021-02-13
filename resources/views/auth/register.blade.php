@@ -16,7 +16,7 @@
       <form method="POST" action="{{ route('register-user') }}" autocomplete="off">
         {{ @csrf_field() }}
         <ul class="collection with-header">
-          <li class="collection-header"><h4>Login</h4></li>
+          <li class="collection-header"><h4>Register</h4></li>
           @error('firstname')
             <li class="collection-item red white-text">
              {{ $message }}

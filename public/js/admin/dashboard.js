@@ -17,16 +17,9 @@ class TopGirlfriend {
 		`;
 	}
 }
-// ===================== CLASS TOP-GIRLFRIEND ========================
 
 $(document).ready(function() {
-
-	swal("Fetching data...",{
-		buttons:false,
-		closeOnClickOutside:false,
-		icon:"info"
-	});
-
+	getTopGirlfriends();
 	$.ajax({
 		type:'GET',
 		url:`${url}/admin/dashboard/json/users`
@@ -38,61 +31,35 @@ $(document).ready(function() {
 	}).fail(err => {
 		console.log(err)
 	})
-	// ===================== GET request for TOP GIRLFRIEND LIST ========================
-	let pageNumber = 1;
-	$.ajax({
-		type:'GET',
-		url:`${url}/admin/dashboard/json/top-girlfriends?page=${pageNumber}`
-	}).done(res => {
-		swal.close()
-		pageNumber = pageNumber + 1;
-		console.log(res);
-		for(var x in res.girlfriends.data) {
-			let girlfriend1 = new TopGirlfriend(
-				res.girlfriends.data[x].id,
-				res.girlfriends.data[x].username,
-				res.girlfriends.data[x].user.firstname,
-				res.girlfriends.data[x].user.lastname,
-				res.girlfriends.data[x].rents.length,
-			);
-			$('#top-girlfriend-container').append(girlfriend1.girlfriendCollection());
-		}
-	}).fail(err => {
-		console.log(err);
-	})
-	// ===================== GET request for TOP GIRLFRIEND LIST ========================
-
-	// ===================== GET request for VIEW MORE TOP GIRLFRIEND LIST ========================
-	$('#view-more-top-girlfriends-btn').on('click', function() {
-		swal("Fetching data",{
-		buttons:false,
-		closeOnClickOutside:false,
-		icon:"info"
-		});
-		$.ajax({
-			type:'GET',
-			url:`${url}/admin/dashboard/json/top-girlfriends?page=${pageNumber}`
-		}).done(res => {
-			swal.close()
-			if (res.girlfriends.data.length == 0) {
-			$('#view-more-top-girlfriends-btn').remove();
-			Materialize.toast("All data are loaded", 3000);
-		}
-		pageNumber = pageNumber + 1;
-		console.log(res);
-		for(var x in res.girlfriends.data) {
-			let girlfriend2 = new TopGirlfriend(
-				res.girlfriends.data[x].id,
-				res.girlfriends.data[x].username,
-				res.girlfriends.data[x].user.firstname,
-				res.girlfriends.data[x].user.lastname,
-				res.girlfriends.data[x].rents.length,
-			);
-			$('#top-girlfriend-container').append(girlfriend2.girlfriendCollection());
-		}
-		}).fail(err => {
-			console.log(err);
-		})
-	})
-	// ===================== GET request for VIEW MORE TOP GIRLFRIEND LIST ========================
 });
+$('#view-more-top-girlfriends-btn').on('click', function() {
+  getTopGirlfriends();
+})
+
+let topGirlfriendUrl = `${url}/admin/dashboard/json/top-girlfriends?page=1`;
+function getTopGirlfriends() {
+  loader();
+  $.ajax({
+	type:'GET',
+	url:topGirlfriendUrl
+  }).done(res => {
+	swal.close()
+	topGirlfriendUrl = res.girlfriends.next_page_url
+	if(res.girlfriends.next_page_url == null) {
+		$('#view-more-top-girlfriends-btn').remove()
+	}
+	console.log(res);
+	for(var x in res.girlfriends.data) {
+		let girlfriend1 = new TopGirlfriend(
+			res.girlfriends.data[x].id,
+			res.girlfriends.data[x].username,
+			res.girlfriends.data[x].user.firstname,
+			res.girlfriends.data[x].user.lastname,
+			res.girlfriends.data[x].rents.length,
+		);
+		$('#top-girlfriend-container').append(girlfriend1.girlfriendCollection());
+	}
+  }).fail(err => {
+	console.log(err);
+  });
+}

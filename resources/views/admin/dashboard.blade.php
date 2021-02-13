@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-  <div class="col l4">
+  <div class="col l4 m4 s6">
     <div class="card dashboard-card">
       <div class="card-content row">
         <div class="col s6 user-count" id="user-count">
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="col l4">
+  <div class="col l4 m4 s6">
     <div class="card dashboard-card">
       <div class="card-content row">
         <div class="col s6 user-count" id="rents-count">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="col l4">
+  <div class="col l4 m4 s12">
     <div class="card dashboard-card">
       <div class="card-content row">
         <div class="col s6 user-count" id="girlfriends-count">
@@ -68,7 +68,7 @@
       </div>
     </div>
   </div>
-  <div class="col l12">
+  <div class="col l12 s12">
     <div class="card top-girlfriend">
       <div class="card-content row" style="padding:5px">
         <ul class="collection with-header">
@@ -76,8 +76,8 @@
           <div id="top-girlfriend-container">
             
           </div>
-          <button class="btn btn-flat waves-light waves-effect blue white-text" style="width:100%" id="view-more-top-girlfriends-btn">
-            Load more
+          <button class="btn btn-flat waves-light waves-effect blue lighten-1 white-text" style="width:100%" id="view-more-top-girlfriends-btn">
+          <i class="fa fa-chevron-down"></i>
           </button>
         </ul>
       </div>
@@ -130,7 +130,9 @@
     </tbody>
   </table>
   <div class="view-more-btn-container">
-    <button class="btn btn-flat waves-effect waves-light blue lighten-1 white-text">View more</button>
+    <button class="btn btn-flat waves-effect waves-light blue lighten-1 white-text">
+      <i class="fa fa-chevron-down"></i>
+    </button>
   </div>
 </div>
 @endsection

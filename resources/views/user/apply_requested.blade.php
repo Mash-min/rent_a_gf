@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="row body-components-container">
-  <h4 class="header-font">Your girlfriend application has been sent. Please wait for approval.</h4>  
-</div>
+  <div class="row body-components-container center">
+    <h4 class="header-font">Your girlfriend application has been sent. Please wait for approval.</h4>  
+  </div>
 @endsection
 
 @section('scripts')

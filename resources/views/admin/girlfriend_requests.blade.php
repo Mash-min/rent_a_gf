@@ -32,6 +32,6 @@
   <script src="/js/tinymce.min.js"></script>
   <script src="/js/admin.js"></script>
   <script src="/js/admin/girlfriend.js"></script>
-  <script src="/js/admin/girlfriendrequests.js"></script>
-  <script src="/js/admin/addgirlfriend.js"></script>
+  <script src="/js/admin/girlfriend_requests.js"></script>
+  <script src="/js/admin/girlfriend_add.js"></script>
 @endsection

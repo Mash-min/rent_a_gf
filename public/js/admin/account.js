@@ -14,11 +14,11 @@ class Account {
 	accountTableRow() {
     return `
       <tr class="account-table-row" id="tr-${this.id}">
-        <td>${this.firstname}</td>
-        <td>${this.lastname}</td>
-        <td>${this.email}</td>
-        <td>${this.contact}</td>
-        <td>
+        <td class="td-${this.id}">${this.firstname}</td>
+        <td class="td-${this.id}">${this.lastname}</td>
+        <td class="td-${this.id}">${this.email}</td>
+        <td class="td-${this.id}">${this.contact}</td>
+        <td class="td-${this.id}">
           <a class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-account-modal" onclick="findAccount('${this.id}')">
             <i class="fa fa-pencil"></i>
           </a>
@@ -26,14 +26,29 @@ class Account {
       </tr>
     `
   }
+
+    accountTableData() {
+      return `
+        <td class="td-${this.id}">${this.firstname}</td>
+        <td class="td-${this.id}">${this.lastname}</td>
+        <td class="td-${this.id}">${this.email}</td>
+        <td class="td-${this.id}">${this.contact}</td>
+        <td class="td-${this.id}">
+          <a class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-account-modal" onclick="findAccount('${this.id}')">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </td>
+      `
+    }
+
   searchedAccountTableRow() {
     return `
       <tr class="searched-account-table-row" id="tr-${this.id}">
-        <td>${this.firstname}</td>
-        <td>${this.lastname}</td>
-        <td>${this.email}</td>
-        <td>${this.contact}</td>
-        <td>
+        <td class="td-${this.id}">${this.firstname}</td>
+        <td class="td-${this.id}">${this.lastname}</td>
+        <td class="td-${this.id}">${this.email}</td>
+        <td class="td-${this.id}">${this.contact}</td>
+        <td class="td-${this.id}">
           <a class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-account-modal" onclick="findAccount('${this.id}')">
             <i class="fa fa-pencil"></i>
           </a>

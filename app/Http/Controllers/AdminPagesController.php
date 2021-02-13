@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Girlfriend;
 use App\Models\Rent;
+use Illuminate\Validation\Rule;
 
 class AdminPagesController extends Controller
 {
@@ -27,22 +28,22 @@ class AdminPagesController extends Controller
 
 	public function accountlist()
 	{
-		return view('admin.accountlist');
+		return view('admin.account_list');
 	}
 
 	public function addgirlfriend()
 	{
-		return view('admin.addgirlfriend');
+		return view('admin.girlfriend_add');
 	}
 
 	public function girlfriendlist()
 	{
-		return view('admin.girlfriendlist');
+		return view('admin.girlfriend_list');
 	}
 
 	public function girlfriendrequests()
 	{
-		return view('admin.girlfriendrequests');
+		return view('admin.girlfriend_requests');
 	}
 
 	public function activerents()
@@ -50,125 +51,16 @@ class AdminPagesController extends Controller
 		return view('admin.activerents');
 	}
 
-	/*===============================================================*/
-	/*+++++++++++++++++++++++ ADMIN JSON REPONSES +++++++++++++++++++*/
-	/*===============================================================*/
-
-	public function dashboardUsersJSON()
+	public function activerentsJSON()
 	{
-		$users = User::orderBy('created_at','DESC')->get();
-		$rents = Rent::orderBy('created_at','DESC')->get();
-		$girlfriends = Girlfriend::orderBy('created_at','DESC')
-								 ->where('status','=','accepted')
-								 ->get();
+		$rents = Rent::orderBy('created_at','ASC')
+						->where('status','=','active')
+						->with('user')
+						->with('girlfriend')
+						->paginate(20);
 		return response()->json([
-			'count' => $users->count(),
-			'rent_count' => $rents->count(),
-			'girlfriends_count' => $girlfriends->count()
+			'rents' => $rents
 		]);
-	}
-
-	public function dashboardTopGirlfriendsJSON()
-	{
-		$girlfriends = Girlfriend::orderBy('created_at', 'DESC')
-								 ->where('status','=','accepted')
-								 ->with('user')
-								 ->with('rents')
-								 ->paginate(10);
-		return response()->json(['girlfriends' => $girlfriends]);
-	}
-
-	public function accountlistJSON()
-	{
-		$users = User::orderBy('firstname', 'ASC')->paginate(10);
-		return response()->json([
-			'users' => $users
-		]);
-	}/*=================== JSON FOR ACCOUNT LISTS ====================*/
-
-	public function findAccount($id)
-	{
-	  $user = User::find($id);
-	  return response()->json(['user' => $user]);
-	}
-
-	public function searchAccount($request)
-	{
-		$user = User::orderBy('firstname','ASC')
-					->where('firstname','like','%'.$request.'%')
-					->orWhere('lastname','like','%'.$request.'%')
-					->orWhere('email','like','%'.$request.'%')
-					->orWhere('contact','like','%'.$request.'%')
-					->paginate(10);
-		return response()->json([
-			'user' => $user
-		]);
-	}/*=================== JSON FOR ACCOUNT SEARCH ====================*/
-
-	public function girlfriendrequestsJSON()
-	{
-		$girlfriends = Girlfriend::orderBy('username', 'DESC')
-								  ->where('status', '=', 'pending')
-								  ->with('user')
-								  ->paginate(20);
-	    return response()->json([
-		  'girlfriends' => $girlfriends
-		]);
-	}/*=================== JSON FOR GIRLFRIEND REQUESTS ====================*/
-
-	public function girlfriendlistJSON()
-	{
-		$girlfriends = Girlfriend::orderBy('username','DESC')
-								 ->where('status', '=', 'accepted')
-								 ->with('user')
-								 ->paginate(20);
-		return response()->json([
-			'girlfriends' => $girlfriends
-		]);
-	}/*=================== JSON FOR GIRLFRIEND LIST ====================*/
-
-	public function searchGirlfriend($girlfriend)
-  {
-  	$girlfriend = Girlfriend::where('username', 'like', '%'.$girlfriend.'%')
-							->where('status', '=', 'accepted')
-							->with('user')
-							->paginate(20);
-  	return response()->json([
-  		'girlfriends' => $girlfriend
-  	]);
-  }/*=================== JSON FOR SEARCH GIRLFRIEND ====================*/
-
-  public function findGirlfriend($id)
-  {
-  	$girlfriend = Girlfriend::find($id);
-  	return response()->json([
-  		'girlfriend' => $girlfriend,
-  		'user' => $girlfriend->user,
-  		'tags' => $girlfriend->tags
-  	]);
-  }/*=================== JSON FOR FINDING GIRLFRIEND ====================*/
-
-	public function chooseUser($user)
-  {
-    $user = User::where('firstname', 'like', '%'.$user.'%')
-				->orWhere('lastname', 'like', '%'.$user.'%')
-				->orWhere('email', 'like', '%'.$user.'%')
-				->paginate(20);
-    return response()->json([
-      'user' => $user
-    ]);
-  }/*=================== JSON FOR CHOOSING GIRLFRIEND IN ADDING GIRLFRIEND FORM ====================*/
-
-  public function activerentsJSON()
-  {
-	  $rents = Rent::orderBy('created_at','ASC')
-	  				->where('status','=','active')
-					->with('user')
-					->with('girlfriend')
-					->paginate(20);
-  	return response()->json([
-  		'rents' => $rents
-  	]);
-  }/*=================== JSON FOR ACTIVE RENTS ====================*/
+	}/*=================== JSON FOR ACTIVE RENTS ====================*/
 
 }

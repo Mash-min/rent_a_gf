@@ -1,8 +1,7 @@
 $(document).ready(function() {
-	$('.modal').modal();
-// ===================== GET request for Account list ========================
+  $('.modal').modal();
+  // ===================== GET request for Account list ========================
 	let pageNumber1 = 1;
-	let userId = '';
 	swal("Fetching data",{
 		buttons:false,
 		closeOnClickOutside:false,
@@ -33,9 +32,9 @@ $(document).ready(function() {
 	}).fail(err => {
 		console.log(err)
 	})
-// ===================== GET request for Account list ========================
+  // ===================== GET request for Account list ========================
 
-// ===================== GET request for Viewmore Account list ===============
+  // ===================== GET request for Viewmore Account list ===============
 	$('#view-more-account-btn').on('click', function() {
 		swal("Fetching data",{
 			buttons:false,
@@ -72,9 +71,9 @@ $(document).ready(function() {
 			console.log(err)
 		})
 	})
-// ===================== GET request for Viewmore Account list ===============
+  // ===================== GET request for Viewmore Account list ===============
 
-// ===================== GET request for Search Account list =================
+  // ===================== GET request for Search Account list =================
 	$('#search-account-form').on('submit', function(e) {
 		e.preventDefault();
 		let accountData = $('#search-account-input').val()
@@ -109,9 +108,47 @@ $(document).ready(function() {
 			console.log(err)
 		})
 	});
-// ===================== GET request for Search Account list =================
+ // ===================== GET request for Search Account list =================
+  $('#edit-account-form').on('submit', function(e) {
+	e.preventDefault();
+	let accountData = new FormData(this);
+	swal("Updating account...",{
+	  buttons:false,
+	  closeOnClickOutside:false,
+	  icon:"info"
+	});
+	$.ajax({
+	  type:'post',
+	  url:`${url}/admin/accoutlist/update/${userId}`,
+	  data: accountData,
+	  processData:false,
+	  cache:false,
+	  contentType:false
+	}).done(res => {
+		swal.close();
+		$(`.td-${res.user.id}`).remove();  
+		let account1 = new Account(
+		  res.user.id,
+		  res.user.firstname,
+		  res.user.lastname,
+		  res.user.birthdate,
+		  res.user.contact,
+		  res.user.email,
+		  res.user.image,
+		  res.user.bio,
+		  res.user.role,
+		  res.user.address
+		)
+		$(`#tr-${res.user.id}`).append(account1.accountTableData());
+		$('#edit-account-modal').modal('close');
+		Materialize.toast("Account updated", 3000);
+	}).fail(err => {
+		console.log(err)
+	});
+  })
 });
 
+let userId = '';
 function findAccount(id) {
   $.ajax({
 	type:'get',

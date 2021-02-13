@@ -20,14 +20,14 @@ class PagesController extends Controller
 
   public function profile()
   {
-    return view('pages.profile');
+    return view('user.profile');
   }
 
   public function girlfriendAccount()
   {
     $girlfriend = auth()->user()->girlfriend()->first();
     if (auth()->user()->alreadyRegisteredGirlfriend()) {
-      return view('pages.girlfriend_account', [
+      return view('user.girlfriend_account', [
         'girlfriend' => $girlfriend
       ]); 
     }else {
@@ -37,18 +37,18 @@ class PagesController extends Controller
 
   public function settings()
   {
-    return view('pages.settings');
+    return view('user.settings');
   }
 
-  public function girlfriend()
+  public function myRent()
   {
-    $girlfriend = auth()->user()->rents()->where('status', '=','pending')->get();
+    $girlfriend = auth()->user()->rents()->where('status', '=','pending')->first();
     if(auth()->user()->alreadyHasRent()) {
-      return view('pages.girlfriend',[
-        'girlfriend' => $girlfriend[0]
+      return view('user.my_rent',[
+        'girlfriend' => $girlfriend->girlfriend
       ]);
     } else{
-      return view('pages.no_rent');
+      return view('user.no_rent');
     }
   }
 
@@ -56,22 +56,20 @@ class PagesController extends Controller
   {
     $girlfriend = Girlfriend::where('username', '=', $username)
                             ->with('user')
-                            ->get();
-    if ($girlfriend[0]->status != 'accepted') {
+                            ->first();
+    if ($girlfriend->status != 'accepted') {
       abort(404);
     }else {
-      return view('pages.rentgirlfriend', [
-        'girlfriend' => $girlfriend[0]
+      return view('pages.rent_account', [
+        'girlfriend' => $girlfriend
       ]);  
     }/* ========= CHECK IF GIRLFRIEND IS ACCPETED BEFORE RENTING ========== */
   }
 
   public function rent()
   {
-    $girlfriends = Girlfriend::orderBy('username', 'DESC')
-                              ->where('availability','=',true)
-                              ->paginate(20);
-    return view('pages.rent', [
+    $girlfriends = Girlfriend::count();
+    return view('pages.rent_list', [
       'girlfriends' => $girlfriends
     ]);
   }/*=================== RENT VIEW ====================*/
@@ -89,37 +87,9 @@ class PagesController extends Controller
   public function apply()
   {
     if(auth()->user()->alreadyRegisteredGirlfriend()){
-      return view('pages.apply_request');
+      return view('user.apply_requested');
     }else {
-      return view('pages.apply');
+      return view('user.apply_form');
     }
   }/*=================== APPLY AS GIRLFRIEND VIEW ====================*/
-
-
-  /*===============================================================*/
-  /*+++++++++++++++++++++++  JSON REPONSES ++++++++++++++++++++++++*/
-  /*===============================================================*/
-  public function rentgirlfriendJSON()
-  {
-    $girlfriends = Girlfriend::orderBy('username', 'DESC')
-                              ->where('availability','=',true)
-                              ->where('status','=','accepted')
-                              ->with('user')
-                              ->paginate(8);
-    return response()->json([
-      'girlfriends' => $girlfriends
-    ]);
-  }
-
-  public function searchgirlfriendJSON($username)
-  {
-    $girlfriend = Girlfriend::where('username', 'like','%'.$username.'%')
-                            ->where('status','=','accepted')
-                            ->orderBy('username','DESC')
-                            ->with('user')
-                            ->get();
-    return response()->json([
-      'girlfriend' => $girlfriend
-    ]);
-  }
 }

@@ -55,20 +55,6 @@ class User extends Authenticatable
       }
     }
 
-    public function alreadyRented($girlfriend_id)
-    {
-      $rent = Rent::where([
-        ['user_id' , '=', $this->id],
-        ['girlfriend_id', '=', $girlfriend_id]
-      ])->get();
-
-      if ($rent->count() >= 1) {
-        return true;
-      }else {
-        return false;
-      };
-    }
-
     public function alreadyHasRent()
     {
       $activeRent = $this->rents()
@@ -82,19 +68,14 @@ class User extends Authenticatable
       }
     }
 
-    public function alreadyInMyRent($girlfriend_id)
-    { 
-      $rent = $this->rents()
-                   ->where('user_id','=',$this->id,'&&','status','=', 'active','&&','girlfriend_id','=',$girlfriend_id)
-                   ->orWhere('user_id','=',$this->id,'&&','status','=', 'pending','&&','girlfriend_id','=',$girlfriend_id)
-                   ->first();
-      if ($rent->count() >= 1) {
+    public function alreadyRentThisGirlfriend($girlfriend_id)
+    {
+      $rent = $this->rents()->where('girlfriend_id',$girlfriend_id)
+                            ->where('status','=', 'active','||','status','=', 'pending');
+      if($rent->exists()){
         return true;
-      }else {
-        return false;
       }
     }
-
     /**
      * The attributes that should be hidden for arrays.
      *

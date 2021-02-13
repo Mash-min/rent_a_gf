@@ -18,15 +18,13 @@ function rentGirlfriend(gid) {
 				Materialize.toast(res.message, 3000, 'red');
 			}else {
 				Materialize.toast("Rent request sent", 2000, 'blue');
-				$('.change-profile-btn').remove();
-				$('#rent-btn-container').append(`
-					<button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('${res.id}')">
-			Cancel rent
-			</button>
-				`);	
+				let rent1 = new RentButton(
+                    res.id,
+                    res.girlfriend_id,
+                    res.user_id
+                );
+                $('#rent-btn-container').append(rent1.cancelRentButton());
 			}
-		
-			console.log(res)
 		}).fail(err => {
 			console.log(err)
 		})
@@ -49,8 +47,13 @@ function deleteRent(id) {
 				_token: $('input[name=_token]').val()
 			}
 		}).done(res => {
-			window.location.assign('/rent-a-girlfriend')
-			console.log(res)
+			Materialize.toast("Rent Canceled", 2000, 'red');
+            let rent1 = new RentButton(
+                res.id,
+                res.girlfriend_id,
+                res.user_id
+            );
+            $('#rent-btn-container').append(rent1.rentButton());
 		}).fail(err => {
 			console.log(err)
 		})

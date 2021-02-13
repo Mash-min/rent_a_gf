@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
 <div class="row dashboard-card-table">
   <div class="col s12 ">
     <ul class="tabs center">
@@ -19,11 +20,11 @@
             <label for="username"><i class="fa fa-pencil"></i> Firstname</label>
           </div>
           <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
-            <input id="lastname" type="text" class="validate active" name="firstname" placeholder="Enter lastname">
+            <input id="lastname" type="text" class="validate active" name="lastname" placeholder="Enter lastname">
             <label for="lastname"><i class="fa fa-pencil"></i> Lastname</label>
           </div>
           <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
-            <input id="address" type="text" class="validate active" name="firstname" placeholder="Enter address">
+            <input id="address" type="text" class="validate active" name="address" placeholder="Enter address">
             <label for="address"><i class="fa fa-pencil"></i> Address</label>
           </div>
           <div class="input-field col l6 offset-l3 m8 offset-m2 s12">
@@ -109,9 +110,8 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/admin/account.js"></script>
-<script type="text/javascript" src="/js/admin/accountlist.js"></script>
+<script type="text/javascript" src="/js/admin/account_list.js"></script>
 <script>
   $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month

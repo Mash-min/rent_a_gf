@@ -33,7 +33,7 @@
             <div class="collapsible-body">
               <ul>
                 <li><a href="{{ route('accountlist') }}">Account List <i class="fa fa-list black-text"></i></a></li>
-                <li><a href="#">Archive <i class="fa fa-trash black-text"></i></a></li>
+                <!-- <li><a href="#">Archive <i class="fa fa-trash black-text"></i></a></li> -->
                 <li><a onclick="logout()" href="#!">Logout <i class="fa fa-sign-out"></i></a></li>
                 <form id="logout-form" action="{{ route('logout-user') }}" method="POST" style="display: none;">
                   @csrf
@@ -68,8 +68,15 @@
         </ul>
       </li>
     </ul><!-- sidenav -->
-   
     <div class="body-container">
+      <nav>
+        <div class="nav-wrapper container">
+          <a href="{{ route('dashboard') }}" class="brand-logo right">Admin Panel</a>
+          <a href="#" data-activates="slide-out" class="button-collapse">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+      </nav><!-- navbar -->
       @yield('content')
     </div>
 
@@ -77,6 +84,6 @@
   <script src="/js/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.min.js"></script>
   <script src="/js/sweetalert.min.js"></script>
-  <script src="/js/admin.js"></script>
+  <script src="/js/app.js"></script>
   @yield('scripts')
 </html>

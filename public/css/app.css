@@ -36,6 +36,9 @@ nav a{
 	padding-top:25px;
 	margin-bottom: 100px;
 }
+.max-width {
+	width:100%;
+}
 .get-started-container {
 	position: relative;
 	margin-bottom: 250px;
@@ -141,6 +144,10 @@ nav a{
 }
 .searched-card .card .card-action {
 	padding: 0px!important;
+}
+.girlfriend-info-container {
+	padding-top: 10px;
+	background-color: white!important;
 }
 
 ::-webkit-scrollbar-track

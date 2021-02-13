@@ -40,8 +40,8 @@ class Girlfriend extends Model
 
     public function activeRentId()
     {
-      $rentId = $this->rents()->where('user_id','=',auth()->user()->id,'&&','status','active')->get();
-      return $rentId[0]->id;
+      $rentId = $this->rents()->where('user_id','=',auth()->user()->id,'&&','status','active')->first();
+      return $rentId->id;
     }
 
 }

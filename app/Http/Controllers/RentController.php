@@ -30,10 +30,13 @@ class RentController extends Controller
   public function delete($id)
   {
     $rent = Rent::find($id);
+    $response = [
+      'girlfriend_id' => $rent->girlfriend->id,
+      'user_id' => $rent->user->id,
+      'id' => $rent->id
+    ];
     $rent->delete();
-    return response()->json([
-      'girlfriend_id' => $rent->girlfriend->id
-    ]);
+    return response()->json($response);
   }
 
 }
