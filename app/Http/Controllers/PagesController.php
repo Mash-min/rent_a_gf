@@ -79,7 +79,7 @@ class PagesController extends Controller
         'girlfriend' => $girlfriend
       ]);
     }else {
-      if($girlfriend->user_id == auth()->user()->id) { abort(404); }
+      // if($girlfriend->user_id == auth()->user()->id) { abort(404); }
       return view('pages.rent_account', [
         'girlfriend' => $girlfriend
       ]);  
