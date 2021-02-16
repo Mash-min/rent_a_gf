@@ -17,10 +17,10 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
       DB::table('users')->insert([
-      	'firstname' => 'Admin-Firstname',
-      	'lastname' => 'Admin-Lastname',
+      	'firstname' => 'Mashiyyat',
+      	'lastname' => 'Delos Santos',
         'image' => 'no-image.jpg',
-      	'email' => 'adminemail@gmail.com',
+      	'email' => 'delossantos.mash@gmail.com',
         'contact' => '09270118376',
         'address' => 'City of San Jose del Monte Bulacan',
         'bio' => 'NO BIO',

@@ -12,13 +12,13 @@ class Rent {
 
     rentRequest() {
         return `
-            <li class="collection-item avatar">
+            <li class="collection-item avatar rent-collection" id="request-${this.id}">
                 <img src="images/avatar.png" alt="" class="circle">
                 <span class="title"><b>${this.user_fname} ${this.user_lname}</b></span>
                 <p>${this.user_email}<br>
                 </p>
                 <div class="secondary-content">
-                <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text">
+                <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" onclick="acceptRequest('${this.id}')">
                     <i class="fa fa-check"></i>
                 </button>
                 <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text">

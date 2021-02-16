@@ -1,6 +1,6 @@
 $(document).ready(() => { getRentRequests() });
 
-let rentRequestsUrl = `${url}/girlfriend/rent/requests`;
+let rentRequestsUrl = `${url}/rent/requests`;
 function getRentRequests() {
     loader();
     $.ajax({
@@ -30,3 +30,29 @@ function getRentRequests() {
 }
 
 $('#view-more-request-btn').click(() => { getRentRequests() });
+
+function acceptRequest(id) {
+    swal({
+        title: "Accept request?", 
+        text: 'Accepting the selected request will ignore the ones!',
+        dangerMode: true,
+        buttons: true,
+    }).then((willAccept) => {
+        if(willAccept) {
+            $.ajax({
+                type:'post',
+                url:`${url}/rent/accept/${id}`,
+                data: {
+                    _token:$('input[name=_token]').val()
+                }
+            }).done((res) => {
+                console.log(res);
+                $('.rent-collection').remove()
+                Materialize.toast("Request Accepted",3000,'blue lighten-1');
+            }).fail((err) => {
+                console.log(err);
+            })
+        } //============== IF USER ACCEPT ============
+    });
+    
+}

@@ -71,7 +71,9 @@ class User extends Authenticatable
     public function alreadyRentThisGirlfriend($girlfriend_id)
     {
       $rent = $this->rents()->where('girlfriend_id',$girlfriend_id)
-                            ->where('status','=', 'active','||','status','=', 'pending');
+                            ->where('status','=', 'active')
+                            ->orWhere('status','=', 'pending')
+                            ->orWhere('status','=', 'accepted');
       if($rent->exists()){
         return true;
       }

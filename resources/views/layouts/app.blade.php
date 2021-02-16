@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/app.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 	<ul id="slide-out" class="side-nav fixed">
@@ -13,7 +14,13 @@
 	      <div class="background">
 	        <img src="/images/cover1.jpg">
 	      </div>
-	      <a href="/"><img class="circle" src="/images/avatar.png"></a>
+        @auth
+          @if(Auth::user()->image == 'no-image.jpg')
+	          <a href="/"><img class="circle" src="/images/avatar.png"></a>
+          @else
+	          <a href="/"><img class="circle" src="/storage/images/profiles/{{ Auth::user()->image }}"></a>
+          @endif
+        @endauth
 	      <a><span class="white-text name">Rent A girlfriend</span></a>
 	      <a><span class="white-text email">Join us and rent your girlfriend now</span></a>
     	</div>

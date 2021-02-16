@@ -25,7 +25,7 @@ class GirlfriendRequestValidation extends FormRequest
     {
         return [
           'username' => 'required|unique:girlfriends,username',
-          'description' => 'required|max:500',
+          'description' => 'required',
           'rate' => 'required|numeric',
           'user_id' => 'required|unique:girlfriends,user_id'
         ];
@@ -37,7 +37,6 @@ class GirlfriendRequestValidation extends FormRequest
         'username.required' => 'Username field is required',
         'username.unique' => 'Username is not available',
         'description.required' => 'Description field is required',
-        'description.max' => 'Maximum of 500 characters',
         'rate.required' => 'Rate field is required',
         'rate.numeric' => 'Rate field must be a number',
         'user_id.required' => 'User is required',

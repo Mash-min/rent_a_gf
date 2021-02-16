@@ -10,11 +10,20 @@
   </div>
 </nav><!-- navbar -->
 
-<div class="body-components-container">
-  <h4 class="header-font">{{ $girlfriend->username }}</h4>
+<div class="row body-components-container">
+  <div class="col l8 offset-l2 m7 s12">
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <h4>Notifications</h4>
+      </li>
+      <div class="notification-container">
+        <!-- ======= APPEND HERE ========= -->
+      </div>
+    </ul>
+  </div>
 </div><!-- body-components-container -->
 @endsection
 
 @section('scripts')
-  <script type="text/javascript" src="/js/rent.js"></script>
+  <script src="/js/user/notification.js"></script>
 @endsection

@@ -18,19 +18,11 @@
       @else
         <img src="/storage/images/profiles/{{ $girlfriend->user->image }}" class="max-width">
       @endif
-      @if(!auth()->user()->alreadyRentThisGirlfriend($girlfriend->id))
       <div id="rent-btn-container">
-        <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="rentGirlfriend('{{ $girlfriend->id }}')">
-					Rent Girlfriend
-				</button>
-      </div>
-      @else
-      <div id="rent-btn-container">
-        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('{{ $girlfriend->activeRentId() }}')">
-           Cancel rent
+        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" disabled>
+           Not Available
         </button>
       </div>
-      @endif
     </div>
     <div class="col l8">
       <ul class="collection with-header">

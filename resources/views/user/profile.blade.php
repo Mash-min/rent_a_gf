@@ -22,8 +22,8 @@
           @endif
         </div>
       </li>
-      <li class="collection-item center">
-        <b>{!! auth()->user()->bio !!}</b>
+      <li class="collection-item center" style="text-align:justify">
+        <p>{{ Auth::user()->bio }}</p>
       </li>
       @if(auth()->user()->alreadyRegisteredGirlfriend())
         <li class="collection-item center">
@@ -40,6 +40,13 @@
         <h4 class="profile-header">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</h4>
       </li>
       <li class="collection-item">Address <br> <b>{{ auth()->user()->address }}</b></li>
+      <li class="collection-item"><b>Notifications </b>
+        <a href="{{ route('notifications') }}" class="secondary-content">
+          <span class="red badge white-text new">
+            {{ auth()->user()->unreadNotifications->count() }} 
+          </span>
+        </a>
+      </li>
       <li class="collection-item">Age <br> <b>22 Years Old</b></li>
       <li class="collection-item">Email <br> <b>{{ auth()->user()->email }}</b></li>
       <li class="collection-item">Contact <br> <b>#{{ auth()->user()->contact }}</b></li>

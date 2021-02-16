@@ -77,14 +77,4 @@ class GirlfriendJsonController extends Controller
       return response()->json(['girlfriends' => $girlfriend]);
     }/*=================== JSON FOR SEARCH GIRLFRIEND (GIRLFRIEND_LIST_PAGE) ====================*/
 
-    public function rentRequestsJSON()
-    {
-      $girlfriend = auth()->user()->girlfriend()->first();
-      $requests = $girlfriend->rents()->orderBy('created_at','DESC')
-                                         ->where('status','pending')
-                                         ->with('user')
-                                         ->with('girlfriend')
-                                         ->paginate(2);
-      return response()->json(['requests' => $requests]);
-    }/*=================== JSON FOR GIRLFRIEND RENT REQUESTS  (GIRLFRIEND_ACCOUNT_PAGE)====================*/
 }

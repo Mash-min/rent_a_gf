@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Models\Girlfriend;
 use App\Models\Rent;
@@ -38,5 +40,45 @@ class RentController extends Controller
     $rent->delete();
     return response()->json($response);
   }
+
+  public function rentRequestsJSON()
+  {
+    $girlfriend = auth()->user()->girlfriend()->first();
+    $requests = $girlfriend->rents()->orderBy('created_at','DESC')
+                                        ->where('status','pending')
+                                        ->with('user')
+                                        ->with('girlfriend')
+                                        ->paginate(2);
+    return response()->json(['requests' => $requests]);
+  }/*=================== JSON FOR GIRLFRIEND RENT REQUESTS  (GIRLFRIEND_ACCOUNT_PAGE)====================*/
+
+  public function acceptRequest($id) {
+    $girlfriend = auth()->user()->girlfriend()->first();
+
+    $acceptRent = Rent::find($id);
+    $acceptRent->update(['status' => 'accepted']);
+    $girlfriend->update(['availability' => false]);
+
+    $ignoreRents = $girlfriend->rents()
+                              ->where(['status' => 'pending'])
+                              ->where('id', '!=' , $id)
+                              ->get();
+
+    $message = $girlfriend->username." accepted your rent request";
+    $user = User::find($acceptRent->user_id);
+    $user->notify(new UserNotification($message));
+
+    if($ignoreRents->isNotEmpty()) {
+      foreach($ignoreRents as $ignore) {
+        $ignore->delete();
+      }
+    }
+    
+    return response()->json([
+      'rent' => $acceptRent,
+      'user' => $acceptRent->user
+    ]);
+  }
+
 
 }

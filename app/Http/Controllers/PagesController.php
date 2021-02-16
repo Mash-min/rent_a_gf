@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use App\Models\Girlfriend;
 use App\Models\Rent;
+use App\Models\Tags;
 use Auth;
 
 class PagesController extends Controller
@@ -42,14 +44,29 @@ class PagesController extends Controller
 
   public function myRent()
   {
-    $girlfriend = auth()->user()->rents()->where('status', '=','pending')->first();
-    if(auth()->user()->alreadyHasRent()) {
-      return view('user.my_rent',[
-        'girlfriend' => $girlfriend->girlfriend
+    $rent = auth()->user()->rents()->where('status', '=','pending')
+                                   ->orWhere('status', '=', 'accepted')
+                                   ->first();
+    if($rent == null) { 
+      return view('rent.rent_none'); 
+    } elseif($rent->status == 'pending') {
+      $girlfriend = $rent->girlfriend()->first(); 
+      return view('rent.rent_pending',[
+        'girlfriend' => $girlfriend,
+        'rent' => $rent
+      ]); 
+    } elseif($rent->status == 'accepted') {
+      $girlfriend = $rent->girlfriend()->first(); 
+      return view('rent.rent_accepted',[
+        'girlfriend' => $girlfriend,
+        'rent' => $rent
       ]);
-    } else{
-      return view('user.no_rent');
     }
+  }/* ============= CHECK RENT PAGE DEPENDS ON RENT STATUS ================*/
+
+  public function notifications()
+  {
+    return view('user.notifications');
   }
 
   public function rentgirlfriend($username)
@@ -57,9 +74,12 @@ class PagesController extends Controller
     $girlfriend = Girlfriend::where('username', '=', $username)
                             ->with('user')
                             ->first();
-    if ($girlfriend->status != 'accepted') {
-      abort(404);
+    if ($girlfriend->status == 'pending' or $girlfriend->availability == false) {
+      return view('redirects.girlfriend_not_available', [
+        'girlfriend' => $girlfriend
+      ]);
     }else {
+      if($girlfriend->user_id == auth()->user()->id) { abort(404); }
       return view('pages.rent_account', [
         'girlfriend' => $girlfriend
       ]);  
@@ -76,7 +96,10 @@ class PagesController extends Controller
 
   public function tags()
   {
-  	
+    $tags = Tags::orderBy('tag', 'ASC')->get();
+  	return view('pages.tags', [
+      'tags' => $tags
+    ]);
   }
 
   public function search()
@@ -87,7 +110,7 @@ class PagesController extends Controller
   public function apply()
   {
     if(auth()->user()->alreadyRegisteredGirlfriend()){
-      return view('user.apply_requested');
+      return view('redirects.apply_requested');
     }else {
       return view('user.apply_form');
     }

@@ -8,11 +8,10 @@
     <thead>
       <tr>
         <th>View</th>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Contact</th>
         <th>Username</th>
+        <th>Email</th>
+        <th>Rate</th>
+        <th>Contact</th>
         <th>Options</th>
       </tr>
     </thead>

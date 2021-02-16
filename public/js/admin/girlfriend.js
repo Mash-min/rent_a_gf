@@ -74,11 +74,10 @@ class Girlfriend {
             <i class="fa fa-eye"></i>
           </button>
         </td>
-        <td>${this.firstname}</td>
-        <td>${this.lastname}</td>
-        <td>${this.email}</td>
-        <td>#${this.contact}</td>
         <td>${this.username}</td>
+        <td>${this.email}</td>
+        <td>$${this.rate}.00</td>
+        <td>#${this.contact}</td>
         <td>
           <button class="btn btn-flat green lighten-1 waves-light waves-effect white-text" onclick="acceptRequest('${this.id}')">
             <i class="fa fa-check"></i>

@@ -31,4 +31,10 @@ class TagsController extends Controller
   	}
   }
 
+  public function selectTagsJSON($tag)
+  {
+	$tags = Tags::where('tag', '=', $tag)->with('girlfriend')->get();
+	return response()->json(['tags' => $tags]);
+  }
+
 }

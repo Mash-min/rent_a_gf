@@ -10,12 +10,14 @@ use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\GirlfriendController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\GirlfriendJsonController;
 use App\Http\Controllers\Admin\UserJsonController;
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/rent-a-girlfriend', [PagesController::class, 'rent'])->name('rent');
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
+Route::get('/tags/select/{tag}',[TagsController::class, 'selectTagsJSON']);
 Route::get('/search', [PagesController::class, 'search'])->name('search');
 /* =========================== PAGES FOR AUTHENTICATED USER ===========================*/
 Route::group(['middleware' => 'auth'], function() {
@@ -24,6 +26,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/settings', [PagesController::class, 'settings'])->name('settings');
   Route::get('/apply-as-girlfriend', [PagesController::class, 'apply'])->name('apply');
   Route::get('/my-rent', [PagesController::class, 'myRent'])->name('my-rent');
+  Route::get('/notifications', [PagesController::class , 'notifications'])->name('notifications');
+  Route::get('/notifications/json', [NotificationController::class, 'notificationJSON']);
 });
 
 Route::get('/girlfriend/json/{username}', [GirlfriendJsonController::class, 'searchgirlfriendJSON']);
@@ -85,12 +89,9 @@ Route::group(['middleware' => ['CheckAdmin','auth'], 'prefix' => 'admin'], funct
 });
 /* =========================== RENT MODEL ROUTES =========================== */
 Route::group(['middleware' => 'auth', 'prefix' => 'rent'], function() {
+  Route::get('/requests', [RentController::class, 'rentRequestsJSON']);
   Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend');
+  Route::post('/accept/{id}', [RentController::class, 'acceptRequest']);
   Route::post('/create', [RentController::class, 'create']);
   Route::delete('/delete/{id}', [RentController::class, 'delete'])->name('delete-rent');
 });
-
-Route::group(['middleware' => 'auth','prefix' => 'girlfriend'], function() {
-  Route::get('/rent/requests', [GirlfriendJsonController::class, 'rentRequestsJSON']);
-});
-

@@ -18,7 +18,7 @@ nav a{
 	font-family: "Quicksand"
 }
 .page-title {
-	font-family: Tw Cen MT;
+	font-family: 'Sen Regular';
 }
 .index-logo {
 	font-family: 'Tw Cen MT';
@@ -35,6 +35,37 @@ nav a{
 	color: black;
 	padding-top:25px;
 	margin-bottom: 100px;
+}
+.message-container {
+	position: sticky;
+    width: 100%;
+    bottom: 0%;
+	text-align: -webkit-right!important;
+}
+.message {
+	padding:7px;
+	margin:5px;
+	border-radius: 10px;
+	font-family: 'Quicksand';
+	text-align: justify;
+	/* text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden; */
+}
+.message-profile {
+	width: 30px;
+	border-radius:30px;
+}
+.coversation-container {
+	padding:10px 10px 1px 10px!important;
+}
+.sender {
+	text-align: right;
+	padding-left:50px;
+}
+.reciever {
+	text-align: left!important;
+	padding-right:50px;
 }
 .max-width {
 	width:100%;
