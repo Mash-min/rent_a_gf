@@ -29,7 +29,7 @@ class PagesController extends Controller
   {
     $girlfriend = auth()->user()->girlfriend()->first();
     if (auth()->user()->alreadyRegisteredGirlfriend()) {
-      return view('user.girlfriend_account', [
+      return view('girlfriend.girlfriend_account', [
         'girlfriend' => $girlfriend
       ]); 
     }else {

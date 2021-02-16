@@ -1,3 +1,31 @@
+function checkGirlfriendRent(girlfriend_id) {
+  loader();
+  $.ajax({
+	type:'get',
+	url:`${url}/girlfriend/check_rent/json/${girlfriend_id}`
+  }).done((res) => {
+	swal.close();
+	console.log(res);
+	if(res.user_rent === null) {
+	  let rent1 = new RentButton(
+		null,
+		girlfriend_id,
+		null
+	  );
+	  $('#rent-btn-container').append(rent1.rentButton());
+	}else {
+	  let rent1 = new RentButton(
+		res.user_rent.id,
+		res.user_rent.girlfriend_id,
+		res.user_rent.user_id
+	  );
+	  $('#rent-btn-container').append(rent1.cancelRentButton());
+	}
+  }).fail((err) => {
+	console.log(err);
+  })
+}
+
 function rentGirlfriend(gid) {
 	swal({
     title: "Rent selected Girlfriend?",
@@ -15,7 +43,10 @@ function rentGirlfriend(gid) {
 		}
 		}).done(res => {
 			if (res.message) {
-				Materialize.toast(res.message, 3000, 'red');
+				swal({
+					title:"Ooofff...!",
+					text:res.message
+				});
 			}else {
 				Materialize.toast("Rent request sent", 2000, 'blue');
 				let rent1 = new RentButton(
@@ -60,3 +91,4 @@ function deleteRent(id) {
     }/* if user clicks ok */
   });
 }
+

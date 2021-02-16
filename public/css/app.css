@@ -4,6 +4,11 @@ body p{
 body {
 	background-color: #363b4e;
 }
+
+.side-nav {
+	font-family: 'Sen';
+}
+
 .body-container {
   margin-left: 300px;	
 }
@@ -91,38 +96,18 @@ nav a{
 .image-activator {
 	height: 50%;
 }
-.profile-image-container {
-	padding: 10px;
-	margin-bottom: 20px;
-}
-.profile-image-container img {
-	width: 100%;
-	border-radius: 10px;
-}
-.profile-image-collection {
-	padding: 0px!important;
-}
-.profile-bio {
-	font-family: 'Ebrima';
-	text-align: justify;
-}
-.profile-tag {
-	margin-top: 0px;
-}
-.profile-images-container {
-	margin-top: 20px;
-}
-.profile-images-container img {
-	width: 100%;
-}
+
 .profile-header {
-	font-family: 'Roboto'
+	margin-top: 10px;
+	background-color: white;
+	padding: 20px!important;
+	border-radius: 5px;
 }
-.change-profile-btn {
-	width: 100%!important;
-	margin: 5px;
-	border-radius: 10px;
+
+.profile-details {
+	font-family: 'Sen Regular';
 }
+
 .collapsible-header {
 	padding-left: 30px!important;
 }
@@ -176,9 +161,12 @@ nav a{
 .searched-card .card .card-action {
 	padding: 0px!important;
 }
-.girlfriend-info-container {
-	padding-top: 10px;
-	background-color: white!important;
+.read a {
+	text-decoration: line-through;
+}
+.collection .collection-item.active {
+    background-color: #eaeaea;
+    color: #eafaf9;
 }
 
 ::-webkit-scrollbar-track
@@ -198,7 +186,7 @@ nav a{
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #004d40;
+	background-color: #696969;
 }
 
 

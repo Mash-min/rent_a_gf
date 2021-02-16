@@ -77,4 +77,16 @@ class GirlfriendJsonController extends Controller
       return response()->json(['girlfriends' => $girlfriend]);
     }/*=================== JSON FOR SEARCH GIRLFRIEND (GIRLFRIEND_LIST_PAGE) ====================*/
 
+    public function checkGirlfriendRentJSON($id)
+    {
+      $girlfriend = Girlfriend::find($id);
+      $rent = auth()->user()->rents()->where('girlfriend_id', $girlfriend->id)
+                                          ->where('status', 'pending')
+                                          ->first();
+      return response()->json([
+        'girlfriend' => $girlfriend,
+        'user_rent' => $rent
+      ]);
+    }
+
 }

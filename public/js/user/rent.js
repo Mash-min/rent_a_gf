@@ -21,7 +21,7 @@ class Rent {
                 <button class="btn btn-flat green lighten-1 waves-effect waves-light white-text" onclick="acceptRequest('${this.id}')">
                     <i class="fa fa-check"></i>
                 </button>
-                <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text">
+                <button class="btn btn-flat red lighten-1 waves-effect waves-light white-text" onclick="declineRequest('${this.id}')">
                     <i class="fa fa-times"></i>
                 </button>
                 </div>
@@ -40,8 +40,8 @@ class RentButton {
     cancelRentButton() {
         $('.change-profile-btn').remove();
         return `
-        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('${this.id}')">
-            Cancel rent
+        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light max-width" onclick="deleteRent('${this.id}')">
+            Cancel request
         </button>
         `;
     }
@@ -49,7 +49,7 @@ class RentButton {
     rentButton() {
         $('.change-profile-btn').remove();
         return `
-        <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="rentGirlfriend('${this.girlfriend_id}')">
+        <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light max-width" onclick="rentGirlfriend('${this.girlfriend_id}')">
             Rent Girlfriend
         </button>
         `;

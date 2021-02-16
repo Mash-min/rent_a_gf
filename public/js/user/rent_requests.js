@@ -39,6 +39,7 @@ function acceptRequest(id) {
         buttons: true,
     }).then((willAccept) => {
         if(willAccept) {
+            loader();
             $.ajax({
                 type:'post',
                 url:`${url}/rent/accept/${id}`,
@@ -46,6 +47,7 @@ function acceptRequest(id) {
                     _token:$('input[name=_token]').val()
                 }
             }).done((res) => {
+                swal.close();
                 console.log(res);
                 $('.rent-collection').remove()
                 Materialize.toast("Request Accepted",3000,'blue lighten-1');
@@ -53,6 +55,31 @@ function acceptRequest(id) {
                 console.log(err);
             })
         } //============== IF USER ACCEPT ============
+    });   
+}
+
+function declineRequest(id) {
+    swal({
+        title: "Decline request?", 
+        text: 'The selected request will be declined.',
+        dangerMode: true,
+        buttons: true,
+    }).then((willDecline) => {
+        if(willDecline) {
+            loader();
+            $.ajax({
+                type:'post',
+                url:`${url}/rent/decline/${id}`,
+                data: {
+                    _token:$('input[name=_token]').val()
+                }
+            }).done((res) => {
+                swal.close()
+                $(`#request-${id}`).remove();
+                Materialize.toast("Request Declined",3000,'red lighten-1');
+            }).fail((err) => {
+                console.log(err);
+            })
+        } //============== IF USER ACCEPT ============
     });
-    
 }

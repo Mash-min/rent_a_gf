@@ -65,8 +65,10 @@ class RentController extends Controller
                               ->get();
 
     $message = $girlfriend->username." accepted your rent request";
+    $status = "accepted";
+
     $user = User::find($acceptRent->user_id);
-    $user->notify(new UserNotification($message));
+    $user->notify(new UserNotification($message, $status));
 
     if($ignoreRents->isNotEmpty()) {
       foreach($ignoreRents as $ignore) {
@@ -80,5 +82,16 @@ class RentController extends Controller
     ]);
   }
 
+  public function declineRequest($id) {
+    $rent = Rent::find($id);
+    $rent->update(['status' => 'declined']);
+
+    $girlfriend = auth()->user()->girlfriend()->first();
+    $message = $girlfriend->username." declined your request LoL";
+    $status = "declined";
+
+    $user = User::find($rent->user_id);
+    $user->notify(new UserNotification($message, $status));
+  }
 
 }

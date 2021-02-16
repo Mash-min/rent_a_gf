@@ -11,60 +11,48 @@
 </nav><!-- navbar -->
 
 <div class="row body-components-container">
-  <div class="row girlfriend-info-container">
-    <div class="col l4">
-      @if($girlfriend->image == 'no-image.jpg')
-        <img src="{{ asset('images/avatar.png') }}" class="max-width">
+  <div class="row profile-header">
+    <div class="profile-cover col l3 m4 offset-m4 s6 offset-s3">
+      @if($girlfriend->user->image == 'no-image.jpg')
+        <img src="{{ asset('images/avatar.png') }}" alt="" class="max-width circle">
       @else
-        <img src="/storage/images/profiles/{{ $girlfriend->user->image }}" class="max-width">
-      @endif
-      @if(!auth()->user()->alreadyRentThisGirlfriend($girlfriend->id))
-      <div id="rent-btn-container">
-        <button class="btn btn-flat blue lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="rentGirlfriend('{{ $girlfriend->id }}')">
-					Rent Girlfriend
-				</button>
-      </div>
-      @else
-      <div id="rent-btn-container">
-        <button class="btn btn-flat red lighten-1 white-text change-profile-btn waves-effect waves-light" onclick="deleteRent('{{ $girlfriend->activeRentId() }}')">
-           Cancel rent
-        </button>
-      </div>
+        <img src="/storage/images/profiles/{{ $girlfriend->user->image }}" alt="" class="max-width circle">
       @endif
     </div>
-    <div class="col l8">
-      <ul class="collection with-header">
-        <li class="collection-header">
-          <h5>{{ $girlfriend->username }}</h5>
+    <div class="col l9 m10 offset-m1 profile-details">
+      <h4>{{ $girlfriend->username }}</h4>
+      <b><i class="fa fa-map-marker"></i> {{$girlfriend->user->address }}</b><br>
+      <ul class="collection">
+        <li class="collection-item">
+          <i class="fa fa-envelope"></i> Email: {{ $girlfriend->user->email }}
         </li>
         <li class="collection-item">
-          @foreach($girlfriend->tags()->get() as $tag)
-          <div class="chip grey darken-2">
-            <a href="" class="white-text">{{ $tag->tag }}</a>
-          </div>
+          @foreach($girlfriend->tags as $tag)
+            <div class="chip grey darken-2 white-text"><i class="fa fa-tag"></i> {{ $tag->tag }}</div>
           @endforeach
         </li>
-        @if($girlfriend->availability == true)
-          <li class="collection-item"><i class="fa fa-circle green-text"></i> Available</li>
-        @else
-          <li class="collection-item"><i class="fa fa-circle grey-text"></i> Not available</li>
-        @endif
         <li class="collection-item">
-          <b>Rate:</b> ${{ $girlfriend->rate }}.00
+          <i class="fa fa-pencil"></i> Description: {!! $girlfriend->description !!}
         </li>
-        <li class="collection-item"><b>Description:</b> 
-          {!! $girlfriend->description !!}
+        <li class="collection-item">
+          <i class="fa fa-list"></i> Total Rents: {{  $girlfriend->rents()->where('status','completed')->count() }}
         </li>
-        <li class="collection-item"><b>Total Rents:</b>
-          {{ $girlfriend->rents->where('status','completed')->count() }}
+        <li id="rent-btn-container">
+          <!-- ============= APPEND BUTTON HERE ============ -->
         </li>
       </ul>
-    </div>
+    </div>  
   </div>
+  
 </div><!-- body-components-container -->
 @endsection
 
 @section('scripts')
   <script src="/js/user/rent.js"></script>
   <script type="text/javascript" src="/js/user/rent_girlfriend.js"></script>
+  <script>
+    $(document).ready(() => {
+      checkGirlfriendRent('{{ $girlfriend->id }}');
+    });
+  </script>
 @endsection

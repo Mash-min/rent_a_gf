@@ -22,10 +22,10 @@ $(document).ready(function() {
 			Materialize.toast("Profile Image Updated", 2000);
 			$('.profile-image').remove();
 			$('.edit-image-container').append(`
-				<img src="/storage/images/profiles/${res}" class="profile-image">
+				<img src="/storage/images/profiles/${res}" class="max-width circle">
 			`);
 			$('.profile-image-container').prepend(`
-				<img src="/storage/images/profiles/${res}" class="profile-image">
+				<img src="/storage/images/profiles/${res}" class="max-width circle">
 			`);
 		}).fail(err => {
 			console.log(err)

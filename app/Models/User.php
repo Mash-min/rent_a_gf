@@ -58,10 +58,10 @@ class User extends Authenticatable
     public function alreadyHasRent()
     {
       $activeRent = $this->rents()
-                         ->where('user_id','=',$this->id,'&&','status','=', 'active')
-                         ->orWhere('user_id','=',$this->id,'&&','status','=', 'pending')
-                         ->get();
-      if ($activeRent->count() >= 1) {
+                         ->where('status','=', 'active')
+                         ->orWhere('status','=', 'pending')
+                         ->exists();
+      if ($activeRent) {
         return true;
       }else {
         return false;

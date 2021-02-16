@@ -28,9 +28,11 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/my-rent', [PagesController::class, 'myRent'])->name('my-rent');
   Route::get('/notifications', [PagesController::class , 'notifications'])->name('notifications');
   Route::get('/notifications/json', [NotificationController::class, 'notificationJSON']);
+  Route::post('/notification/read/{id}', [NotificationController::class, 'markAsRead']);
 });
 
 Route::get('/girlfriend/json/{username}', [GirlfriendJsonController::class, 'searchgirlfriendJSON']);
+Route::get('/girlfriend/check_rent/json/{id}', [GirlfriendJsonController::class, 'checkGirlfriendRentJSON']);
 Route::get('/rent/girlfriend/JSON', [GirlfriendJsonController::class, 'rentgirlfriendJSON']);
 
 Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfriend']);
@@ -92,6 +94,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'rent'], function() {
   Route::get('/requests', [RentController::class, 'rentRequestsJSON']);
   Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend');
   Route::post('/accept/{id}', [RentController::class, 'acceptRequest']);
+  Route::post('/decline/{id}', [RentController::class, 'declineRequest']);
   Route::post('/create', [RentController::class, 'create']);
   Route::delete('/delete/{id}', [RentController::class, 'delete'])->name('delete-rent');
 });

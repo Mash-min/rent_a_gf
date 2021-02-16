@@ -16,9 +16,9 @@
       <li class="collection-item">
         <div class="profile-image-container">
           @if(auth()->user()->image == 'no-image.jpg')
-            <img src="images/avatar.jpg" class="profile-image">
+            <img src="images/avatar.jpg" class="max-width circle">
           @else
-            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="max-width circle">
           @endif
         </div>
       </li>
@@ -28,7 +28,6 @@
         </a>
       </li>
       <li class="collection-item center">
-        <i class="fa fa-lock fa-2x"></i><hr>
         <button class="btn btn-flat blue lighten-1 white-text waves-effect waves-light" onclick="resetPassword()" style="width: 100%">
           Reset password
         </button>
@@ -43,9 +42,9 @@
         <h4 class="center">Change profile image</h4>
         <div class="edit-image-container center">
           @if(auth()->user()->image == 'no-image.jpg')
-            <img src="images/avatar.jpg" class="profile-image">
+            <img src="images/avatar.jpg" class="max-width">
           @else
-            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="profile-image">
+            <img src="/storage/images/profiles/{{ auth()->user()->image }}" class="max-width">
           @endif
         </div>
         <div class="file-field input-field">

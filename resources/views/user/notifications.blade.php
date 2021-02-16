@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{ @csrf_field() }}
 <nav class="blue lighten-1">
   <div class="nav-wrapper container">
     <a href="#!" class="brand-logo center">Rent a Girlfriend</a>
@@ -11,7 +12,7 @@
 </nav><!-- navbar -->
 
 <div class="row body-components-container">
-  <div class="col l8 offset-l2 m7 s12">
+  <div class="col s12">
     <ul class="collection with-header">
       <li class="collection-header">
         <h4>Notifications</h4>

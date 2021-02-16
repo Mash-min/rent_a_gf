@@ -2,6 +2,7 @@ const url = location.protocol +'//'+location.host;
 
 $(document).ready(function() {
   $(".button-collapse").sideNav();
+  $('.tooltipped').tooltip({delay: 50});
   $('.modal').modal();
   $('.collapsible').collapsible();
   $('.datepicker').pickadate({

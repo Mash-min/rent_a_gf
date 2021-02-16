@@ -43,6 +43,13 @@
           <div class="collapsible-body">
             <ul>
               <li><a href="{{ route('profile') }}">Profile <i class="fa fa-user black-text"></i></a></li>
+              @if(auth()->user()->alreadyRegisteredGirlfriend())
+              <li>
+                <a href="{{ route('girlfriend-account') }}">
+                  Girlfriend Account <i class="fa fa-user-o black-text"></i>
+                </a>
+              </li>
+              @endif
               <li><a href="{{ route('my-rent') }}">My Rent <i class="fa fa-heart black-text"></i></a></li>
               <li><a href="#!" onclick="logout()">Logout <i class="fa fa-sign-out"></i></a></li>
               <form id="logout-form" action="{{ route('logout-user') }}" method="POST" style="display: none;">
@@ -50,6 +57,14 @@
               </form>
             </ul>
           </div>
+        </li>
+        <li>
+          <a href="{{ route('notifications') }}">
+            Notifications <i class="fa fa-bell black-text"></i>
+            <span class="badge white-text red new">
+              {{ auth()->user()->unreadNotifications->count() }} 
+            </span>
+          </a>
         </li>
         @endauth
 

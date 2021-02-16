@@ -16,10 +16,10 @@ class UserNotification extends Notification
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $status)
     {
       $this->message = $message;
-    //   $this->slug = $slug;
+      $this->status = $status;
     }
 
     /**
@@ -57,7 +57,7 @@ class UserNotification extends Notification
     {
         return [
             'message' => $this->message,
-            // 'slug' => $this->slug
+            'status' => $this->status
         ];
     }
 }
