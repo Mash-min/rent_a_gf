@@ -45,6 +45,7 @@ function resetPassword() {
 		}
 	}).then((value) => {
 			if(value) {
+				loader();
 				$.ajax({
 					type:'POST',
 					url:`${url}/user/settings/check-password`,
@@ -63,6 +64,7 @@ function resetPassword() {
 							}
 						}).then((password) => {
 							if(password) {
+								loader();
 								$.ajax({
 									type:'POST',
 									url:`${url}/user/settings/reset-password`,
@@ -71,6 +73,7 @@ function resetPassword() {
 										password: password
 									}
 								}).done(res => {
+									swal.close()
 									Materialize.toast("Password successfully changed",3000,'blue white-text');
 								}).fail(err => {
 									// console.log(err);

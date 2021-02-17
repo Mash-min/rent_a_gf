@@ -82,8 +82,7 @@
           </div>
           @enderror
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Firstname</label>
+            <label><i class="fa fa-pencil"></i> Firstname</label>
             <input type="text" name="firstname" value="{{ auth()->user()->firstname }}">
           </div>
         </li>
@@ -94,8 +93,7 @@
           </div>
           @enderror
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Lastname</label>
+            <label><i class="fa fa-pencil"></i> Lastname</label>
             <input type="text" name="lastname" value="{{ auth()->user()->lastname }}">
           </div>
         </li>
@@ -106,16 +104,14 @@
           </div>
           @enderror
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Email</label>
+            <label><i class="fa fa-pencil"></i> Email</label>
             <input type="email" name="email"  value="{{ auth()->user()->email }}">
           </div>
         </li>
         <li class="collection-item">
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
+            <label><i class="fa fa-pencil"></i> Bio</label>
             <textarea id="bio" class="materialize-textarea" name="bio">{{ auth()->user()->bio }}</textarea>
-            <label for="bio">Bio</label>
           </div>
         </li>
         <li class="collection-item">
@@ -125,8 +121,7 @@
           </div>
           @enderror
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Address</label>
+            <label><i class="fa fa-pencil"></i> Address</label>
             <input type="text" name="address" value="{{ auth()->user()->address }}">
           </div>
         </li>
@@ -137,21 +132,19 @@
           </div>
           @enderror
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Contact</label>
+            <label><i class="fa fa-pencil"></i> Contact</label>
             <input type="number" name="contact" value="{{ auth()->user()->contact }}">
           </div>
         </li>
         <li class="collection-item">
           <div class="input-field">
-            <i class="fa fa-pencil prefix"></i>
-            <label>Birthdate</label>
+            <label><i class="fa fa-pencil"></i> Birthdate</label>
             <input type="text" class="datepicker" value="{{ auth()->user()->birthdate }}" name="birthdate">
           </div>
         </li>
-        <li>
+        <li class="collection-item">
           <button class="btn btn-flat blue white-text waves-effect waves-light save-changes" type="submit" style="width: 100%">
-            save changes
+            save
           </button>
         </li>
       </ul>  
@@ -161,5 +154,5 @@
 @endsection
 
 @section('scripts')
-  <script type="text/javascript" src="{{ asset('js/updateImage.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/user/user_update.js') }}"></script>
 @endsection

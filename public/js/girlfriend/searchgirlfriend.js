@@ -8,7 +8,7 @@ $('#search-girlfriend-form').on('submit', function(e) {
   });
 	$.ajax({
 		type:'GET',
-		url:`${url}/girlfriend/json/${searchGirlfriend}`
+		url:`${url}/search/girlfriend/json/${searchGirlfriend}`
 	}).done(res => {
 		swal.close()
 		if (res.girlfriend.length == 0) {

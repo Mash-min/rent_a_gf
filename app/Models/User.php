@@ -45,6 +45,11 @@ class User extends Authenticatable
       return $this->hasOne('App\Models\Girlfriend', 'user_id'); 
     }
 
+    public function feedbacks()
+    {
+      return $this->hasMany('App\Models\Feedback', 'user_id');
+    }
+
     public function alreadyRegisteredGirlfriend()
     {
       $girlfriend = $this->girlfriend()->where('user_id','=',$this->id)->get();
@@ -57,14 +62,10 @@ class User extends Authenticatable
 
     public function alreadyHasRent()
     {
-      $activeRent = $this->rents()
-                         ->where('status','=', 'active')
-                         ->orWhere('status','=', 'pending')
-                         ->exists();
-      if ($activeRent) {
+      $activeRent = $this->rents()->where('status','pending')
+                                  ->orWhere('status','accepted');
+      if ($activeRent->exists()) {
         return true;
-      }else {
-        return false;
       }
     }
 

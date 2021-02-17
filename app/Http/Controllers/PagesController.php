@@ -44,10 +44,8 @@ class PagesController extends Controller
 
   public function myRent()
   {
-    $rent = auth()->user()->rents()->where('status', '=','pending')
-                                   ->orWhere('status', '=', 'accepted')
-                                   ->first();
-    if($rent == null) { 
+    $rent = auth()->user()->rents()->first();
+    if($rent == null or $rent->status == 'declined') { 
       return view('rent.rent_none'); 
     } elseif($rent->status == 'pending') {
       $girlfriend = $rent->girlfriend()->first(); 

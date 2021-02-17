@@ -38,6 +38,11 @@ class Girlfriend extends Model
       return $this->hasMany('App\Models\Rent', 'girlfriend_id');
     }
 
+    public function feedbacks()
+    {
+      return $this->hasMany('App\Models\Feedback', 'girlfriend_id');
+    }
+
     public function activeRentId()
     {
       $rentId = $this->rents()->where('user_id',auth()->user()->id)

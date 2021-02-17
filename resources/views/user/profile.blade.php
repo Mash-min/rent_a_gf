@@ -12,16 +12,18 @@
 
 <div class="row body-components-container">
   <div class="col s12 profile-header">
-    <div class="profile-cover col l3 m4 offset-m4 s6 offset-s3">
+    <div class="profile-cover col l4 offset-l4 m4 offset-m4 s6 offset-s3">
       @if(Auth::user()->image == 'no-image.jpg')
         <img src="{{ asset('images/avatar.png') }}" alt="" class="max-width circle">
       @else
         <img src="/storage/images/profiles/{{ Auth::user()->image }}" alt="" class="max-width circle">
       @endif
     </div>
-    <div class="col l9 m10 offset-m1 profile-details">
-      <h4>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
-      <b><i class="fa fa-map-marker"></i> {{ Auth::user()->address }}</b><br>
+    <div class="col s12 m10 offset-m1 profile-details">
+      <div class="center">
+        <h4>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
+        <b><i class="fa fa-map-marker"></i> {{ Auth::user()->address }}</b>
+      </div>
       <ul class="collection">
         <li class="collection-item">
           <i class="fa fa-envelope"></i> Email: {{ Auth::user()->email }}

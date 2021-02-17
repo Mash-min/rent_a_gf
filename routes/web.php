@@ -13,12 +13,17 @@ use App\Http\Controllers\RentController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\GirlfriendJsonController;
 use App\Http\Controllers\Admin\UserJsonController;
+use App\Http\Controllers\FeedbackController;
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::get('/rent-a-girlfriend', [PagesController::class, 'rent'])->name('rent');
 Route::get('/tags', [PagesController::class, 'tags'])->name('tags');
 Route::get('/tags/select/{tag}',[TagsController::class, 'selectTagsJSON']);
 Route::get('/search', [PagesController::class, 'search'])->name('search');
+Route::get('/search/girlfriend/json/{username}', [GirlfriendJsonController::class, 'searchgirlfriendJSON']);
+Route::get('/girlfriend/check_rent/json/{id}', [GirlfriendJsonController::class, 'checkGirlfriendRentJSON']);
+Route::get('/rent/girlfriend/JSON', [GirlfriendJsonController::class, 'rentgirlfriendJSON']);
+
 /* =========================== PAGES FOR AUTHENTICATED USER ===========================*/
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
@@ -28,20 +33,17 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/my-rent', [PagesController::class, 'myRent'])->name('my-rent');
   Route::get('/notifications', [PagesController::class , 'notifications'])->name('notifications');
   Route::get('/notifications/json', [NotificationController::class, 'notificationJSON']);
+
   Route::post('/notification/read/{id}', [NotificationController::class, 'markAsRead']);
+  Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfriend']);
+  Route::post('/apply-as-girlfriend-tags', [TagsController::class, 'create']);
 });
-
-Route::get('/girlfriend/json/{username}', [GirlfriendJsonController::class, 'searchgirlfriendJSON']);
-Route::get('/girlfriend/check_rent/json/{id}', [GirlfriendJsonController::class, 'checkGirlfriendRentJSON']);
-Route::get('/rent/girlfriend/JSON', [GirlfriendJsonController::class, 'rentgirlfriendJSON']);
-
-Route::post('/apply-as-girlfriend', [GirlfriendController::class, 'applygirlfriend']);
-Route::post('/apply-as-girlfriend-tags', [TagsController::class, 'create']);
 
 Route::group(['prefix' => 'user'], function() {
   Route::group(['middleware' => 'guest'] ,function() {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
     Route::post('/register', [RegisterController::class, 'create'])->name('register-user');
     Route::post('/login', [LoginController::class, 'create'])->name('login-user');
   });/*=========================== USER GUEST ROUTES===========================*/
@@ -68,8 +70,8 @@ Route::group(['middleware' => ['CheckAdmin','auth'], 'prefix' => 'admin'], funct
   Route::get('/accountlist/json', [UserJsonController::class, 'accountlistJSON']);
   Route::get('/accountlist/search/{request}', [UserJsonController::class, 'searchAccount']);
   Route::get('/accountlist/find/{id}', [UserJsonController::class, 'findAccount']);
-  Route::post('/accoutlist/update/{id}', [UserJsonController::class, 'updateAccount']);
   Route::get('/chooseuser/{user}', [UserJsonController::class, 'chooseUser']);
+  Route::post('/accoutlist/update/{id}', [UserJsonController::class, 'updateAccount']);
 
   /* =========================== GIRLFRIEND API =========================== */
   Route::get('/dashboard/json/top-girlfriends', [GirlfriendJsonController::class, 'dashboardTopGirlfriendsJSON']);
@@ -89,12 +91,19 @@ Route::group(['middleware' => ['CheckAdmin','auth'], 'prefix' => 'admin'], funct
     Route::post('/update/tag/id={id}',[TagsController::class, 'update']);
   });
 });
+
 /* =========================== RENT MODEL ROUTES =========================== */
 Route::group(['middleware' => 'auth', 'prefix' => 'rent'], function() {
   Route::get('/requests', [RentController::class, 'rentRequestsJSON']);
   Route::get('/girlfriend/{username}', [PagesController::class, 'rentgirlfriend'])->name('rentgirlfriend');
+  
   Route::post('/accept/{id}', [RentController::class, 'acceptRequest']);
   Route::post('/decline/{id}', [RentController::class, 'declineRequest']);
   Route::post('/create', [RentController::class, 'create']);
   Route::delete('/delete/{id}', [RentController::class, 'delete'])->name('delete-rent');
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'feedback'], function() {
+  Route::post('/create', [FeedbackController::class, 'create']);
+  Route::get('/json/{girlfriend_id}', [FeedbackController::class, 'girlfriendFeedbackJSON']);
 });

@@ -15,8 +15,11 @@ class RentController extends Controller
 {
   public function create(Request $request)
   {
-  	$girlfriend = Girlfriend::find($request->girlfriend_id);
-    if (auth()->user()->alreadyHasRent()) {
+    $girlfriend = Girlfriend::find($request->girlfriend_id);
+    
+    if($girlfriend->user_id == auth()->user()->id) {
+      return response()->json(['message' => "You cant rent yourself LoL..."]);
+    }elseif (auth()->user()->alreadyHasRent()) {
       return response()->json(['message' => "You already have pending or active Rent."]);
     }else {
       $rent = auth()->user()->rents()->create($request->except('girlfriend_id') + [
