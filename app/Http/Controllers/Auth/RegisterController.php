@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {

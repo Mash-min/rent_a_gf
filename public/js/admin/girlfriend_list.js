@@ -1,5 +1,3 @@
-$('.modal').modal();
-
 $(document).ready(function() {
   getGirlfriendList();
 });

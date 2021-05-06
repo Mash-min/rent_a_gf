@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Side nav</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
     <link rel="stylesheet" href="/css/materialize.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/app.css">
@@ -50,21 +51,21 @@
                 <li><a href="{{ route('addgirlfriend') }}">Add Girlfriend <i class="fa fa-plus black-text"></i></a></li>
                 <li><a href="{{ route('girlfriendlist') }}">Girlfriend List <i class="fa fa-list black-text"></i></a></li>
                 <li><a href="{{ route('girlfriendrequests') }}">Girlfriend Requests <i class="fa fa-list black-text"></i></a></li>
-                <li><a href="#">Archive <i class="fa fa-trash black-text"></i></a></li>
+                <li><a href="{{ route('girlfriendarchive') }}">Archive <i class="fa fa-trash black-text"></i></a></li>
               </ul>
             </div>
           </li>
-          <li class="bold">
-            <a class="collapsible-header waves-effect waves-teal">
-              <i class="fa fa-sort-desc"></i>Rents
-            </a>
-            <div class="collapsible-body">
-              <ul>
-                <li><a href="{{ route('activerents') }}">Active rents <i class="fa fa-list black-text"></i></a></li>
-                <li><a href="grid.html">Rent List<i class="fa fa-list black-text"></i></a></li>
-              </ul>
-            </div>
-          </li>
+            <!-- <li class="bold">
+              <a class="collapsible-header waves-effect waves-teal">
+                <i class="fa fa-sort-desc"></i>Rents
+              </a>
+              <div class="collapsible-body">
+                <ul>
+                  <li><a href="{{ route('activerents') }}">Active rents <i class="fa fa-list black-text"></i></a></li>
+                  <li><a href="grid.html">Rent List<i class="fa fa-list black-text"></i></a></li>
+                </ul>
+              </div>
+            </li> -->
         </ul>
       </li>
     </ul><!-- sidenav -->

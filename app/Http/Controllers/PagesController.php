@@ -29,9 +29,19 @@ class PagesController extends Controller
   {
     $girlfriend = auth()->user()->girlfriend()->first();
     if (auth()->user()->alreadyRegisteredGirlfriend()) {
-      return view('girlfriend.girlfriend_account', [
-        'girlfriend' => $girlfriend
-      ]); 
+
+      $rent = $girlfriend->rents()->where('status','accepted')->first();
+      if ($rent) {
+        return view('girlfriend.accepted_request', [
+          'girlfriend' => $girlfriend,
+          'rent' => $rent
+        ]); 
+      } else {
+        return view('girlfriend.girlfriend_account', [
+          'girlfriend' => $girlfriend
+        ]); 
+      }
+      
     }else {
       abort(404); 
     }
@@ -107,10 +117,29 @@ class PagesController extends Controller
 
   public function apply()
   {
-    if(auth()->user()->alreadyRegisteredGirlfriend()){
-      return view('redirects.apply_requested');
-    }else {
-      return view('user.apply_form');
+    $girlfriend = auth()->user()->girlfriend()->first();
+    
+    if(!$girlfriend || $girlfriend->status == 'declined') {
+      
+        /*=================== RETURN USER IF DECLINED OR DOESNT EXIST ==============*/
+        return view('user.apply_form');
+
+    } elseif($girlfriend->status == 'pending') {
+        /*=================== RETURN USER IF STATUS IS PENDING =====================*/
+        return view('redirects.girlfriend_pending',[
+          'girlfriend' => $girlfriend
+        ]);
+
+    } elseif($girlfriend->status == 'archived') {
+        /*=================== RETURN USER IF STATUS IS ARCHIVED ====================*/
+        return view('redirects.girlfriend_archived',[
+          'girlfriend' => $girlfriend
+        ]);
+
+    } elseif($girlfriend->status == 'accepted') {
+        /*=================== RETURN USER IF STATUS IS ACCEPTED ====================*/
+        return redirect()->route('girlfriend-account');
     }
   }/*=================== APPLY AS GIRLFRIEND VIEW ====================*/
+
 }

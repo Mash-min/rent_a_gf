@@ -46,6 +46,11 @@ class AdminPagesController extends Controller
 		return view('admin.girlfriend_requests');
 	}
 
+	public function girlfriendArchive()
+	{
+		return view('admin.girlfriend_archive');
+	}
+
 	public function activerents()
 	{
 		return view('admin.activerents');

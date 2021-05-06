@@ -26,13 +26,6 @@
       </div>
       <ul class="collection">
         <li class="collection-item">
-          @if($girlfriend->availability == true)
-            <i class="fa fa-circle green-text"></i> Available
-          @else
-            <i class="fa fa-circle grey-text"></i> Not Available
-          @endif
-        </li>
-        <li class="collection-item">
           <i class="fa fa-envelope"></i> Email: {{ $girlfriend->user->email }}
         </li>
         <li class="collection-item">
@@ -45,12 +38,9 @@
         <li class="collection-item">
           <i class="fa fa-pencil"></i> Description: {!! $girlfriend->description !!}
         </li>
-        <li class="collection-item">
-          <i class="fa fa-list"></i> Total Rents: {{  $girlfriend->rents()->where('status','completed')->count() }}
-        </li>
-        <li class="collection-item" id="rent-btn-container">
-          <button class="btn btn-flat blue lighten-1 waves-effect waves-light max-width white-text disabled">
-            not available
+        <li class="collection-item grey lighten-4">
+          <button class="btn btn-flat disabled max-width white-text">
+            <i class="fa fa-warning"></i> Account was archived
           </button>
         </li>
       </ul>

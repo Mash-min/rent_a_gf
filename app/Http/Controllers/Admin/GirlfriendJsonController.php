@@ -68,6 +68,15 @@ class GirlfriendJsonController extends Controller
         return response()->json(['girlfriends' => $girlfriends]);
     }/*=================== JSON FOR GIRLFRIEND REQUESTS (GIRLFRIEND_REQUESTS_PAGE) ====================*/
 
+    public function girlfriendArchiveJSON() 
+    {
+      $girlfriends = Girlfriend::orderBy('created_at','DESC')
+                              ->where('status','archived')
+                              ->with('user')
+                              ->paginate(2);
+      return response()->json(['girlfriends' => $girlfriends]);
+    }
+
     public function searchGirlfriend($girlfriend)
     {
       $girlfriend = Girlfriend::where('username', 'like', '%'.$girlfriend.'%')

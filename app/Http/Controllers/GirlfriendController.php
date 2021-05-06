@@ -32,6 +32,24 @@ class GirlfriendController extends Controller
     ]);
   }
 
+  public function archive($id) {
+    $girlfriend = Girlfriend::find($id);
+    $girlfriend->update([
+      'status' => 'archived',
+      'availability' => false
+    ]);
+  }
+
+  public function removeArchive($id) 
+  {
+    $girlfriend = Girlfriend::find($id);
+    $girlfriend = Girlfriend::find($id);
+    $girlfriend->update([
+      'status' => 'accepted',
+      'availability' => 1
+    ]);
+  }
+
   public function applygirlfriend(Request $request)
   {
     $girlfriend = auth()->user()->girlfriend()->create($request->except('username') + [
@@ -58,4 +76,5 @@ class GirlfriendController extends Controller
   		'status' => 'declined'
   	]);
   }
+  
 }

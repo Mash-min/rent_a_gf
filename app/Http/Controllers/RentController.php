@@ -27,6 +27,12 @@ class RentController extends Controller
         'price' => $girlfriend->rate,
         'schedule' => now()
       ]);
+
+      $girlfriend_user = $girlfriend->user()->first();
+      $message = auth()->user()->firstname." ".auth()->user()->lastname." sent you a rent request";
+      $status = "request";
+      $girlfriend_user->notify(new UserNotification($message, $status));
+
       return response()->json($rent);  
     }
   	

@@ -115,6 +115,7 @@
 <script src="/js/tinymce.min.js"></script>
 <script src="/js/admin/girlfriend.js"></script>
 <script src="/js/admin/girlfriend_list.js"></script>
+<script src="/js/admin/girlfriend_archive.js"></script>
 <script>
   tinymce.init({
     selector:'textarea',

@@ -22,7 +22,7 @@ class Girlfriend {
           <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
             <i class="fa fa-pencil"></i>
           </button>
-          <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
+          <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text" onclick="archiveGirlfriend(${this.id})">
             <i class="fa fa-trash"></i>
           </button>
         </td>
@@ -40,7 +40,7 @@ class Girlfriend {
         <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text modal-trigger" href="#edit-gf-modal" onclick="findGirlfriendData(${this.id})">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text">
+        <button class="btn btn-flat waves-effect waves-light red lighten-1 white-text" onclick="archiveGirlfriend(${this.id})">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -90,6 +90,22 @@ class Girlfriend {
     `
   }
 
+  girlfriendArchiveRow() {
+    return `
+    <tr class="girlfriend-table-row tr-${this.id}">
+      <td class="td-${this.id}"><b>${this.username}</b> (${this.fullname})</td>
+      <td class="td-${this.id}">${this.email}</td>
+      <td class="td-${this.id}">${this.contact}</td>
+      <td class="td-${this.id}"><b>$${this.rate}.00</b></td>
+      <td class="td-${this.id}">
+        <button class="btn btn-flat waves-effect waves-light green lighten-1 white-text" onclick="removeArchive(${this.id})">
+          <i class="fa fa-check"></i>
+        </button>
+      </td>
+    </tr>
+    `;
+  }
+
   girlfriendCard() {
     let profileImage = "";
     if (this.image == 'no-image.jpg') {
@@ -118,7 +134,6 @@ class Girlfriend {
       </div> 
     `
   }
-
 }
 
 let girlfriendId = 0;
@@ -148,4 +163,33 @@ function findGirlfriendData(id) {
   }).fail(err => {  
     console.log(err)
   })
+}
+
+function archiveGirlfriend(id) {
+  loader();
+  swal({
+    text: "Archive selected Girlfriend..?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then((willArchive) => {
+    loader();
+    if(willArchive) {
+      $.ajax({
+        type:'post',
+        url:`${url}/admin/girlfriend/archive/${id}`,
+        data: {
+          _token:$('input[name=_token]').val()
+        }
+      }).done((res) => {
+        swal({
+          icon: 'success',
+          text:"Girlfriend sent to archive"
+        });
+        $(`.tr-${id}`).remove();
+      }).fail((err) => {
+        console.log(err);
+      });
+    }
+  });
 }

@@ -72,7 +72,7 @@
     <div class="card top-girlfriend">
       <div class="card-content row" style="padding:5px">
         <ul class="collection with-header">
-          <li class="collection-header"><h4>Top Girlfriends</h4></li>
+          <li class="collection-header"><h4>Girlfriends</h4></li>
           <div id="top-girlfriend-container">
             
           </div>

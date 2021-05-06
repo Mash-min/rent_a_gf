@@ -52,7 +52,9 @@ class User extends Authenticatable
 
     public function alreadyRegisteredGirlfriend()
     {
-      $girlfriend = $this->girlfriend()->where('user_id','=',$this->id)->get();
+      $girlfriend = $this->girlfriend()->where('user_id','=',$this->id)
+                                       ->where('status','accepted')
+                                       ->get();
       if ($girlfriend->count() >= 1) {
         return true;
       }else {

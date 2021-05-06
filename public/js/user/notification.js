@@ -14,8 +14,8 @@ class Notification {
         <li class="collection-item notification-item ${this.read_at}">
           <a><i class="fa fa-chevron-right black-text"></i> </a>
           <a class="black-text">${this.message}</a>
-          <a href="#" class="secondary-content" onclick="markAsRead('${this.id}')">
-            <i class="fa fa-circle-o black-text"></i>
+          <a href="javascript:void(0)" class="secondary-content" onclick="markAsRead('${this.id}')">
+            <i class="fa fa-check green-text"></i>
           </a>
         </li>
       `;
@@ -30,16 +30,13 @@ class Notification {
         </li>
       `;
     }
-    
-  }
+  }/* =========== NOTIFICATION ITEM =============*/
 
-}
-
-$(document).ready(() => {
-    getNotification();
-})
+}/* =========== NOTIFICATION CLASSS =============*/
 
 let notificationUrl = `${url}/notifications/json`;
+$(document).ready(() => {  getNotification() });
+
 function getNotification() {
   loader();
   $.ajax({
@@ -61,7 +58,7 @@ function getNotification() {
   }).fail((err) => {
     console.log(err);
   });
-}
+}/* =========== GET NOTIFICAION AJAX =============*/
 
 function markAsRead(id) {
   $.ajax({
@@ -78,4 +75,4 @@ function markAsRead(id) {
   }).fail((err) => {
     console.log(err);
   });
-}
+}/* =========== MARK AS READ NOTIFIACION =============*/
