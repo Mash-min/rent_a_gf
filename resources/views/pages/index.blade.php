@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Rent a Girlfriend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
   <link rel="stylesheet" type="text/css" href="/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/css/app.css">
